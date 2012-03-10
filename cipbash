@@ -1,0 +1,19 @@
+# Bash knows 3 different shells: normal shell, interactive shell, login shell.
+# ~/.bashrc is read for interactive shells and ~/.bash_profile is read for
+# login shells. We let ~/.bash_profile also read ~/.bashrc so things added here
+# will also effect login shells!
+
+export SHAREDENV=~/.ENV
+
+#
+# Source global setup
+#
+if [ -r ${SHAREDENV}/bashrc ]
+then
+    . ${SHAREDENV}/bashrc
+else
+    echo "Can't access ${SHAREDENV}/bashrc."
+fi
+
+
+#xset b off
