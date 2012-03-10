@@ -70,3 +70,6 @@ source ~/.bashprompt
  
 
 
+if [ $HOSTNAME == faui0* ]; then
+	source ~/.cipbash
+fi
