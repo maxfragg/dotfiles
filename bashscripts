@@ -1,0 +1,100 @@
+#!/bin/bash
+
+
+##################################################
+##	added scripts and comfort-functions          #
+##################################################
+ 
+
+
+##################################################
+############# Fun stuff        ###################
+##################################################
+
+alias matrix='echo -e "\e[32m"; while :; do for i in {1..16}; do r="$(($RANDOM % 2))"; if [[ $(($RANDOM % 5)) == 1 ]]; then if [[ $(($RANDOM % 4)) == 1 ]]; then v+="\e[1m $r   "; else v+="\e[2m $r   "; fi; else v+="     "; fi; done; echo -e "$v"; v=""; done'
+alias matrix2='echo -e "\e[31m"; while $t; do for i in `seq 1 30`;do r="$[($RANDOM % 2)]";h="$[($RANDOM % 4)]";if [ $h -eq 1 ]; then v="\e[1m $r";else v="\e[2m $r";fi;v2="$v2 $v";done;echo -e $v2;v2="";done;'
+alias matrix3='COL=$(( $(tput cols) / 2 )); clear; tput setaf 2; while :; do tput cup $((RANDOM%COL)) $((RANDOM%COL)); printf "%$((RANDOM%COL))s" $((RANDOM%2)); done'
+alias matrix4='echo -ne "\e[32m" ; while true ; do echo -ne "\e[$(($RANDOM % 2 + 1))m" ; tr -c "[:print:]" " " < /dev/urandom | dd count=1 bs=50 2> /dev/null ; done'
+alias matrix5='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=lcase,unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
+alias roulette='[ $[ $RANDOM % 6 ] == 0 ] && echo Die || echo Live'				# command line Russian roulette
+alias starwars='telnet towel.blinkenlights.nl'							# the famous starwars ASCII version from telnet
+
+alias futurama='curl -Is slashdot.org | sed -n '5p' | sed 's/^X-//''				# get Futurama quotations from slashdot.org servers
+
+##################################################
+# Swap 2 filenames around			 #
+##################################################
+
+###### from Uzi's bashrc
+function swap()
+{
+    local TMPFILE=tmp.$$
+    [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
+    [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
+    [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+
+
+##################################################
+# Network/Internet -oriented stuff		 #
+##################################################
+
+alias appson="netstat -lantp | grep -i stab | awk -F/ '{print $2}' | sort | uniq"	# view only the process name using an internet connection
+alias bandwidth='dd if=/dev/zero of=/dev/null bs=1M count=32768'			# processor / memory bandwidthd? in GB/s
+alias browse_bonjour='dns-sd -B'							# browse services advertised via Bonjour
+alias dbdumpcp='scp -P 1234 username@12.34.56.78:$HOME/Backup/www/data/someSite/db.sql $HOME/Backup/data/db.sql'	# copy remote db to local
+alias dns='cat /etc/resolv.conf'							# view DNS numbers
+alias domain2ban='~/.scripts/Domain2Ban.sh'
+alias estab='ss -p | grep STA' 								# view only established sockets (fails if "ss" is screensaver alias)
+alias finchsync='java -jar ~/finchsync/finchsync.jar'					# start FinchSync Admin
+alias hdinfo='hdparm -i[I] /dev/sda'							# hard disk information - model/serial no.
+alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
+alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
+alias http_trace='pkt_trace port 80'							# to show all HTTP packets
+alias iftop='sudo iftop -i eth0' 							# start "iftop" program (sudo apt-get install iftop)
+alias ip4grep="grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'"					# look for IPv4 address in files
+alias ip='curl www.whatismyip.org'
+alias ip_info='ipconfig getpacket en1'							# info on DHCP server, router, DNS server, etc (for en0 or en1)
+alias ipt80='sudo iptstate -D 80'							# check out only iptables state of http port 80 (requires iptstate)
+alias ip_trace='pkt_trace ip'								# to show all IP packets
+alias ipttrans='sudo iptstate -D 51413'							# iptables state of Transmission-Daemon port (requires iptstate)
+alias listen='sudo netstat -pnutl' 							# lists all listening ports together with PID of associated process
+alias lsock='sudo /usr/sbin/lsof -i -P'							# to display open sockets ( -P option to lsof disables port names)
+alias netapps="lsof -P -i -n | cut -f 1 -d ' '| uniq | tail -n +2"
+alias nethogs='sudo nethogs eth0' 							# start "nethogs" program (sudo apt-get install nethogs)
+alias netl='sudo nmap -sT -O localhost'
+alias netscan='sudo iwlist wlan0 scan'							# to scan your environment for available networks, do the following
+alias netstats='sudo iwspy wlan0'							# if card supports it, you can collect wireless statistics by using
+alias network='sudo lshw -C network' 							# view network device info
+alias networkdump='sudo tcpdump not port 22' 						# dump all the network activity except ssh stuff
+alias nsl='netstat -f inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'		# show all programs connected or listening on a network port
+alias ns='netstat -alnp --protocol=inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'
+alias openports='sudo netstat -nape --inet' 						# view open ports
+alias pkt_trace='sudo tcpflow -i `active_net_iface` -c'
+alias ports='lsof -i -n -P' 								# view programs using an internet connection
+alias portstats='sudo netstat -s' 							# show statistics for all ports
+alias ramvalue='sudo dd if=/dev/mem | cat | strings'					# will show you all the string (plain text) values in ram
+alias randommac='python -c "from itertools import imap; from random import randint; print ':'.join(['%02x'%x for x in imap(lambda x:randint(0,255), range(6))])"'										# generate random valid mac addresses
+alias remote='ssh -p 1234 12.34.56.78'							# access some remote host
+alias restartnet='sudo /etc/rc.d/network restart;sudo /etc/rc.d/wicd restart'
+alias rssup='php /srv/http/rssupdate.php'
+alias setessid='sudo iwconfig wlan0 essid network-essid'				# set the essid, which identifies the network access point you want
+alias smtp_trace='pkt_trace port smtp'							# to show all SMTP packets
+alias tcpstats='sudo netstat -st' 							# show statistics for tcp ports
+alias tcp_='sudo netstat -atp' 								# list all TCP ports
+alias tcp_trace='pkt_trace tcp'								# to show all TCP packets
+alias topsites='curl -s -O http://s3.amazonaws.com/alexa-static/top-1m.csv.zip ; unzip -q -o top-1m.csv.zip top-1m.csv ; head -1000 top-1m.csv | cut -d, -f2 | cut -d/ -f1 > topsites.txt'							# get a list of top 1000 sites from alexa
+alias tproxy='ssh -ND 8118 user@server&; export LD_PRELOAD="/usr/lib/libtsocks.so"'	# creates a proxy based on tsocks
+alias udpstats='sudo netstat -su' 							# show statistics for udp ports
+alias udp='sudo netstat -aup' 								# list all UDP ports
+alias udp_trace='pkt_trace udp'								# to show all UDP packets
+alias website_dl='wget --random-wait -r -p -e robots=off -U mozilla "$1"'		# download an entire website
+alias website_images='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg" "$1"'	# download all images from a site
+alias whois='whois -H'
+alias wscan='iwlist scan'								# terminal network scan for wireless signals
+alias wwwmirror2='wget -k -r -l ${2} ${1}'						# wwwmirror2 usage: wwwmirror2 [level] [site_url]
+alias wwwmirror='wget -ErkK -np ${1}'
