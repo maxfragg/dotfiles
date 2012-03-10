@@ -1,0 +1,74 @@
+Host unik
+	HostName faui06f.informatik.uni-erlangen.de
+	User el79irih
+	IdentityFile ~/.ssh/mykey
+	
+Host uni
+	HostName faui06f.informatik.uni-erlangen.de
+	User el79irih	
+
+Host huber
+	HostName faui04b.informatik.uni-erlangen.de
+	User el79irih
+
+Host uni5k
+	HostName faui05.informatik.uni-erlangen.de
+	User el79irih
+	IdentityFile ~/.ssh/mykey
+	
+Host uni5
+	HostName faui05.informatik.uni-erlangen.de
+	User el79irih
+
+Host cell
+	HostName faui36d.informatik.uni-erlangen.de
+	User el79irih
+	
+Host cell2
+	HostName faui36e.informatik.uni-erlangen.de
+	User el79irih
+
+Host fermi
+	HostName faui36i.informatik.uni-erlangen.de
+	User el79irih
+	
+Host faui36a
+	HostName faui36a.informatik.uni-erlangen.de
+	User el79irih
+
+Host baronk
+	HostName dev-baron.de
+	User max
+	IdentityFile ~/.ssh/mykey
+	
+Host baron
+	HostName dev-baron.de
+	User max
+	
+Host ls4
+	HostName faui49man3.informatik.uni-erlangen.de
+ 	User el79irih
+
+Host man4
+	HostName faui49man4.informatik.uni-erlangen.de
+
+
+Host scalar
+	HostName 131.188.33.176
+	User el79irih
+
+Host ls3
+	HostName faui30w.informatik.uni-erlangen.de
+	User el79irih
+
+Host shellz
+	HostName ssh.newshell.bshellz.net
+	User maxfragg
+
+Host uber
+	HostName taurus.uberspace.de
+	User maxfragg
+
+host faui32h
+	HostName faui32h.informatik.uni-erlangen.de
+	User el79irih

@@ -1,0 +1,10 @@
+case $@ in
+	default)
+    export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+	setxkbmap -option '' 'us international' ',phonetic'
+	setxkbmap -option terminate:ctrl_alt_bksp
+	ssh-agent herbstluftwm -c ~/.config/herbstluftwm/autostart
+	;;
+
+	*)
+esac

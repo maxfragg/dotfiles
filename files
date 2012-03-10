@@ -1,1 +1,3 @@
 bash_aliases  bashprompt  bashrc  bashscripts  cipbash config/herbstluftwm
+ssh/config
+config/utf8db xsessionrc

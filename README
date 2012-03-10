@@ -1,0 +1,5 @@
+
+Dotfiles GIT including installscript, based onthoughtbot/dotfiles for github, tweaked to accept a 
+selected list of files/dirs, stored in files, to make adding easy by appending a path to the file
+
+currently syncing bash and herbstluftwm, ssh/config
