@@ -74,17 +74,17 @@
         ;;
     taurus.uberspace.de)
         UC=$Y
-        HC=$R
+        HC=$EMR
         HOST_S="uber"
         ;;
     faui49man*)
         UC=$B
-        HC=$B
+        HC=$EMB
         HOST_S="manlobby"
         ;;
     faui0*)
         UC=$C
-        HC=$M
+        HC=$EMM
         HOST_S="$HOSTNAME"
         ;;
 
@@ -94,7 +94,7 @@
 
                     
     [ $UID -eq "0" ] && UC=$C   # root's color
-    PS1="$TITLEBAR${EMK}${UC}\u${W} ${HC}$HOST_S${EMK} ${EMB}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
+    PS1="$TITLEBAR${EMK}${UC}\u${W} ${HC}$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
  }
