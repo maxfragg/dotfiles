@@ -3,6 +3,11 @@ bashprompt
 bashrc
 bashscripts
 cipbash
+xsessionrc
+xinitrc
+wmlist
 ssh/config
 config/utf8db xsessionrc
 config/herbstluftwm
+config/utf8db 
+
