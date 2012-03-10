@@ -79,13 +79,18 @@
         ;;
     faui49man*)
         UC=$B
-        HC=$EMB
+        HC=$EMM
         HOST_S="manlobby"
         ;;
     faui0*)
         UC=$C
-        HC=$EMM
+        HC=$EMG
         HOST_S="$HOSTNAME"
+        ;;
+    faui3*)
+        UC=$M
+        HC=$EMG
+        HOST_S="ls3"
         ;;
 
     *)
