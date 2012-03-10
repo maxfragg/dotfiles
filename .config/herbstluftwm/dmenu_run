@@ -1,0 +1,4 @@
+#!/bin/bash
+source ~/.config/herbstluftwm/colors.sh
+
+exe=`dmenu_path | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG ${1+"$@"}` && exec $exe

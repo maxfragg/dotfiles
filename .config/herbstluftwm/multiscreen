@@ -1,0 +1,3 @@
+maxfragg: mirror a part of the screen (xrandr --output VGA1 --auto # or something like that) and then: move_monitor 0 1024x768+0+0 ; 
+                   add_monitor $((mywidth-1024))x$((myheight))+1024+0 $randomtag
+                   

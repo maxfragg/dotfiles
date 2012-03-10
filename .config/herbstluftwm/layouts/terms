@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# layout
+LAYOUT='
+(split horizontal:0.450000:1
+  (split vertical:0.500000:0
+    (split vertical:0.500000:1
+	  (clients vertical:0 )
+	  (clients vertical:0 ))
+   	(clients horizontal:0 ))
+  (split vertical:0.550000:0
+    (clients vertical:0 )
+   	(clients vertical:0 )))'
+
+# rules
+
+RULES=( 'instance="newsbeuter" tag=terms index=000'
+		'instance="mutt" tag=terms index=001'
+		'instance="irssi" tag=terms index=10'
+		'instance="ncmpcpp" tag=terms index=01'
+		'instance="wyrd" tag=terms index=11' )
+
+# autostart applications
+AUTOSTARTS=( 'pgrep newsbeuter >/dev/null || urxvtc -name newsbeuter -e newsbeuter &'
+'pgrep mutt >/dev/null || urxvtc -name mutt -e mutt &'
+'pgrep ncmpcpp >/dev/null || urxvtc -name ncmpcpp -e ncmpcpp &'
+'screen -ls | grep "irssi[[:space:]]*(Attached)" >/dev/null || urxvtc -name irssi -e screen -S irssi -xR irssi &'
+'pgrep wyrd >/dev/null || urxvtc -name wyrd -e wyrd &' )

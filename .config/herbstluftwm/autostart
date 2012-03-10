@@ -1,0 +1,170 @@
+#!/bin/bash
+
+# this is a simple config for herbstluftwm
+
+function hc() {
+    herbstclient "$@"
+}
+
+#xsetroot -solid '#5A8E3A'
+
+
+# keybindings
+Mod=Mod4
+hc keybind $Mod-Control-q quit
+hc keybind $Mod-Shift-r reload
+hc keybind $Mod-Shift-c close
+hc keybind $Mod-Return spawn roxterm
+hc keybind $Mod-Control-o spawn opera-next
+
+#script centering mouse
+FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
+
+# tags
+#TAG_NAMES=( {1..9} )
+#TAG_KEYS=( {1..9} 0 )
+
+#TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
+TAG_NAMES=(irc term web ed im video pdf fm music mail )
+TAG_KEYS=( {1..9} 0 )
+
+hc rename default "${TAG_NAMES[0]}" || true
+for i in ${!TAG_NAMES[@]} ; do
+    hc add "${TAG_NAMES[$i]}"
+    key="${TAG_KEYS[$i]}"
+    if ! [ -z "$key" ] ; then
+        hc keybind "$Mod-$key" 			spawn $FCMOUSE use_index "$i"
+        hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
+    fi
+done
+
+#default layouts for some tags
+hc load video '(clients max:0)'
+hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
+hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
+
+# layouting
+hc keybind $Mod-r remove
+hc keybind $Mod-space cycle_layout 1
+hc keybind $Mod-u split vertical 0.5
+hc keybind $Mod-y split vertical 0.7
+hc keybind $Mod-o split horizontal 0.5
+hc keybind $Mod-i split horizontal 0.7
+hc keybind $Mod-s floating toggle
+hc keybind $Mod-f fullscreen toggle
+hc keybind $Mod-p pseudotile toggle
+
+# resizing
+RESIZESTEP=0.05
+hc keybind $Mod-Control-Left resize left +$RESIZESTEP
+hc keybind $Mod-Control-Down resize down +$RESIZESTEP
+hc keybind $Mod-Control-Up resize up +$RESIZESTEP
+hc keybind $Mod-Control-Right resize right +$RESIZESTEP
+
+# mouse
+hc mousebind $Mod-Button1 move
+hc mousebind $Mod-Button2 resize
+hc mousebind $Mod-Button3 zoom
+
+# focus
+hc keybind $Mod-BackSpace 	spawn $FCMOUSE cycle_monitor
+hc keybind $Mod-Tab         spawn $FCMOUSE cycle_all +1
+hc keybind $Mod-Shift-Tab   spawn $FCMOUSE cycle_all -1
+hc keybind $Mod-c			spawn $FCMOUSE cycle
+hc keybind $Mod-Left		spawn $FCMOUSE focus left
+hc keybind $Mod-Down 		spawn $FCMOUSE focus down
+hc keybind $Mod-Up			spawn $FCMOUSE focus up
+hc keybind $Mod-Right		spawn $FCMOUSE focus right
+hc keybind $Mod-Shift-Left	spawn $FCMOUSE shift left
+hc keybind $Mod-Shift-Down	spawn $FCMOUSE shift down
+hc keybind $Mod-Shift-Up 	spawn $FCMOUSE shift up
+hc keybind $Mod-Shift-Right spawn $FCMOUSE shift right
+
+#colortheme-support
+
+source ~/.config/herbstluftwm/colors.sh
+
+# colors
+hc set frame_border_active_color $COLOR_FR_BO_A
+hc set frame_border_normal_color $COLOR_FR_BO_N
+hc set frame_bg_normal_color $COLOR_FR_BG_N
+hc set frame_bg_active_color $COLOR_FR_BG_A
+hc set window_border_normal_color $COLOR_W_BO_N
+hc set window_border_active_color $COLOR_W_BO_A
+hc set frame_bg_transparent 1
+hc set frame_border_width 2
+hc set window_border_width 2
+
+# rules
+hc unrule -F
+#hc rule class=XTerm tag=3 # move all xterms to tag 3
+hc rule focus=off # normally do not focus new clients
+# give focus to most common terminals
+hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole|Terminator)' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
+hc rule class~OperaNext tag=web
+hc rule class=Vlc tag=video
+hc rule class=Banshee tag=video
+hc rule class=Evince tag=pdf
+hc rule class=Zathura tag=pdf
+#hc rule windowtype~'WM_NAME(Kontaktliste)' empathy
+hc rule class~Tilda manage=off
+hc rule class~Synapse manage=off pseudotile=on
+hc rule class=Scribes tag=ed
+hc rule class=Sublime_text tag=ed
+
+#custom add
+#hc set pad 0 "" "" 30
+
+#custom bindings
+
+hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
+hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
+hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
+hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run
+hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
+hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
+hc keybind XF86AudioMute spawn amixer -q sset Master toggle
+hc keybind Shift-XF86AudioMute spawn ~/.config/herbstluftwm/unmute.sh
+hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 2+
+hc keybind XF86AudioLowerVolume spawn amixer -q set Master 2-
+hc keybind $Mod-XF86Back spawn ~/.config/herbstluftwm/cycle.sh prev
+hc keybind $Mod-XF86Forward spawn ~/.config/herbstluftwm/cycle.sh next
+hc keybind $Mod-g toggle window_gap
+
+
+#sh ~/.config/herbstluftwm/restartpanels.sh
+
+sh ~/bin/sshk.sh
+
+killall trayer
+killall nm-applet
+killall parcellite
+killall tint2
+killall volumeicon
+killall synapse
+#trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
+
+xfsettingsd &
+
+#tint2
+hc pad 0 0 0 30 0
+tint2 &
+
+#parcellite &
+
+#custom settings depending on if running in gnome session or not
+
+nm-applet &
+volumeicon &
+xfce4-power-manager &
+gnome-keyring &
+nitrogen --restore &
+dropbox start
+synapse &
+
+hc set focus_follows_mouse 1
+xset m 10 2
+hc rule class=sublime-text-2 tag=ed
