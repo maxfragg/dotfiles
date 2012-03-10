@@ -1,13 +1,15 @@
 #!/bin/bash
 
-DOTFILES=< .files
-#"bash_aliases  bashprompt  bashrc  bashscripts  cipbash config/herbstluftwm"
+#read content of files to decide, which files should be installed
+DOTFILES="`cat files`"
+
 
 
 cutstring="DO NOT EDIT BELOW THIS LINE"
 #for name in *; do
 for name in $DOTFILES; do
   target="$HOME/.$name"
+  #echo "trying to install $HOME/.$name"
   if [ -e "$target" ]; then
     if [ ! -L "$target" ]; then
       cutline=`grep -n -m1 "$cutstring" "$target" | sed "s/:.*//"`
