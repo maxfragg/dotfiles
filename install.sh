@@ -1,12 +1,34 @@
 #!/bin/bash
 
 #read content of files to decide, which files should be installed
+#files contains files for all hosts
+#$HOSTNAME contains host specific files
+#$HOSTNAME-not contains files excluded for this host, 
+#overwrites everything else
+
 DOTFILES="`cat files`"
+NOTHOST=""$HOSTNAME"-not"
+
+if [ -f $HOSTNAME ]; then
+  DOTFILES="$DOTFILES `cat $HOSTNAME`"
+else
+  touch $HOSTNAME
+fi
+
+if [ -f "$HOSTNAME"-not ]; then
+  if [ -f $HOSTNAME ]; then
+    DOTFILES=$(comm -3 <(sort <(cat $HOSTNAME files)) <(sort $NOTHOST))
+  else
+    DOTFILES=$(comm -3 <(sort "files") <(sort $NOTHOST))
+  fi
+else
+  touch $NOTHOST
+fi
 
 
 
 cutstring="DO NOT EDIT BELOW THIS LINE"
-#for name in *; do
+
 for name in $DOTFILES; do
   target="$HOME/.$name"
   #echo "trying to install $HOME/.$name"
