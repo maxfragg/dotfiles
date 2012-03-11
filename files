@@ -3,10 +3,8 @@ bash_aliases
 bashprompt
 bashrc
 bashscripts
-cipbash
-config/herbstluftwm 
+config/herbstluftwm
 config/utf8db
 ssh/config
-wmlist
 xinitrc
 xsessionrc
