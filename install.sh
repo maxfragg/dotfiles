@@ -7,17 +7,22 @@
 #overwrites everything else
 
 DOTFILES="`cat files`"
+if [$HOSTNAME == faui0* ]; then
+  HOSTNAME_=faui00
+else
+  HOSTNAME_=$HOSTNAME
+fi  
 NOTHOST=""$HOSTNAME"-not"
 
-if [ -f $HOSTNAME ]; then
-  DOTFILES="$DOTFILES `cat $HOSTNAME`"
+if [ -f $HOSTNAME_ ]; then
+  DOTFILES="$DOTFILES `cat $HOSTNAME_`"
 else
-  touch $HOSTNAME
+  touch $HOSTNAME_
 fi
 
-if [ -f "$HOSTNAME"-not ]; then
-  if [ -f $HOSTNAME ]; then
-    DOTFILES=$(comm -3 <(sort <(cat $HOSTNAME files)) <(sort $NOTHOST))
+if [ -f "$HOSTNAME_"-not ]; then
+  if [ -f $HOSTNAME_ ]; then
+    DOTFILES=$(comm -3 <(sort <(cat $HOSTNAME_ files)) <(sort $NOTHOST))
   else
     DOTFILES=$(comm -3 <(sort "files") <(sort $NOTHOST))
   fi
