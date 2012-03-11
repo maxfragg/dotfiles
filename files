@@ -1,13 +1,12 @@
+
 bash_aliases
 bashprompt
 bashrc
 bashscripts
 cipbash
-xsessionrc
-xinitrc
-wmlist
+config/herbstluftwm 
+config/utf8db
 ssh/config
-config/utf8db xsessionrc
-config/herbstluftwm
-config/utf8db 
-
+wmlist
+xinitrc
+xsessionrc
