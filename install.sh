@@ -7,12 +7,12 @@
 #overwrites everything else
 
 DOTFILES="`cat files`"
-if [$HOSTNAME == faui0* ]; then
+if [ $HOSTNAME == faui0* ]; then
   HOSTNAME_=faui00
 else
   HOSTNAME_=$HOSTNAME
 fi  
-NOTHOST=""$HOSTNAME"-not"
+NOTHOST=""$HOSTNAME_"-not"
 
 if [ -f $HOSTNAME_ ]; then
   DOTFILES="$DOTFILES `cat $HOSTNAME_`"
