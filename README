@@ -1,6 +1,7 @@
 
 Dotfiles GIT including installscript, based onthoughtbot/dotfiles for github, tweaked to accept a 
 selected list of files/dirs, stored in files, to make adding easy by appending a path to the file
+Select which files to sync based on hostname, with white and blacklist
 
 currently syncing bash and herbstluftwm, ssh/config, xinit/xsessionrc (still specific for x61/cip)
 
@@ -9,4 +10,3 @@ make herbstclient independent from env
 add sublime-config
 automate backup process
 create deployable package without git
-optional: change the switch case $HOSTNAME to something, that only gets evaluated at install time

@@ -8,3 +8,4 @@ config/utf8db
 ssh/config
 xinitrc
 xsessionrc
+bash_profile
