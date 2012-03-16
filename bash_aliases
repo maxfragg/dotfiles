@@ -46,6 +46,7 @@ case "$HOSTNAME" in
 		alias bluetooth_on="sudo rfkill unblock bluetooth"
 		alias tint2rs='pkill tint2 && herbstclient spawn tint2'
 		alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
+		alias lock='gnome-screensaver-command -l'
         ;;
     faui0*)
         alias edit=gedit
