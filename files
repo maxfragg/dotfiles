@@ -5,6 +5,7 @@ bashrc
 bashscripts
 config/herbstluftwm
 config/utf8db
+config/tint2
 ssh/config
 xinitrc
 xsessionrc

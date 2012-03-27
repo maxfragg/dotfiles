@@ -47,6 +47,8 @@ case "$HOSTNAME" in
 		alias tint2rs='pkill tint2 && herbstclient spawn tint2'
 		alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
 		alias lock='gnome-screensaver-command -l'
+		alias opm='operamobile -tabletui -displaysize 1400x1020'
+
         ;;
     faui0*)
         alias edit=gedit
