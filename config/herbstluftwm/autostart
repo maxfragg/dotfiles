@@ -114,6 +114,7 @@ hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
 hc rule class=Sublime_text tag=ed
+hc rule class=Google-chrome tag=web
 
 #custom add
 #hc set pad 0 "" "" 30
