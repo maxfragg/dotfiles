@@ -34,7 +34,13 @@ alias hlwm='herbstluftwm'
 alias exec_on_tag='~/.config/herbstluftwm/exec_on_tag.sh'
 alias difff='diff -urNp'
 alias sshtunnel='ssh -D 8080 -f -C -N uni'
-
+alias ucrypt='encfs ~/Dropbox/BoxCryptor ~/Private'
+alias bluetooth_off="sudo rfkill block bluetooth"
+alias bluetooth_on="sudo rfkill unblock bluetooth"
+alias tint2rs='pkill tint2 && herbstclient spawn tint2'
+alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
+alias lock='gnome-screensaver-command -l'
+alias opm='operamobile -tabletui -displaysize 1400x1020'
 alias sshfs_cip="sshfs el79irih@faui06e.cs.fau.de:/home/cip/2009/el79irih cip"
 
 case "$HOSTNAME" in
@@ -42,14 +48,6 @@ case "$HOSTNAME" in
     	alias myterm=roxterm
 		alias edit=sublime-text-2
         alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
-		alias ucrypt='encfs ~/Dropbox/BoxCryptor ~/Private'
-		alias bluetooth_off="sudo rfkill block bluetooth"
-		alias bluetooth_on="sudo rfkill unblock bluetooth"
-		alias tint2rs='pkill tint2 && herbstclient spawn tint2'
-		alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
-		alias lock='gnome-screensaver-command -l'
-		alias opm='operamobile -tabletui -displaysize 1400x1020'
-
         ;;
     faui0*)
     	myterm=terminator

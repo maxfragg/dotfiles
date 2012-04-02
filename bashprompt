@@ -73,8 +73,8 @@
         HOST_S="x61"
         ;;
     max-x61-f15)
-	UC=$B
-	HC=$Y
+	UC=$Y
+	HC=$EMB
 	HOST_S="x61"
 	;;
     taurus.uberspace.de)
