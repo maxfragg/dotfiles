@@ -63,15 +63,20 @@
     local BGW="\[\033[47m\]"
 
     # user's color
-    local UC=$W
+    local UC=$EMC
     local HC=$W
     local HOST_S
     case "$HOSTNAME" in
     max-x61-ub)
         UC=$R
-        HC=$EMB
+        HC=$EMM
         HOST_S="x61"
         ;;
+    max-x61-f15)
+	UC=$B
+	HC=$Y
+	HOST_S="x61"
+	;;
     taurus.uberspace.de)
         UC=$Y
         HC=$EMR

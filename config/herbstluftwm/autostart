@@ -95,6 +95,7 @@ hc set window_border_active_color $COLOR_W_BO_A
 hc set frame_bg_transparent 1
 hc set frame_border_width 2
 hc set window_border_width 2
+hc set focus_follows_mouse 1
 
 # rules
 hc unrule -F
@@ -116,6 +117,8 @@ hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
 hc rule class=Sublime_text tag=ed
 hc rule class=Pdf tag=pdf
+hc rule class=sublime-text-2 tag=ed
+hc rule isFullscreen=on focus=on
 #hc rule class=Google-chrome tag=web
 
 #custom add
@@ -139,8 +142,8 @@ hc keybind $Mod-g toggle window_gap
 
 
 #sh ~/.config/herbstluftwm/restartpanels.sh
+#trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
 
-sh ~/bin/sshk.sh
 
 killall trayer
 killall nm-applet
@@ -149,9 +152,17 @@ killall tint2
 killall volumeicon
 killall synapse
 killall xfce4-power-manager
-#trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
 
+sh ~/bin/sshk.sh
 xfsettingsd &
+nm-applet &
+volumeicon &
+xfce4-power-manager --no-daemon &
+gnome-keyring &
+nitrogen --restore &
+dropbox start
+synapse &
+xset m 10 2
 
 #tint2
 hc pad 0 0 0 30 0
@@ -161,15 +172,23 @@ tint2 &
 
 #custom settings depending on if running in gnome session or not
 
-nm-applet &
-volumeicon &
-xfce4-power-manager --no-daemon &
-gnome-keyring &
-nitrogen --restore &
-dropbox start
-synapse &
+case "$HOSTNAME" in
+    max-x61-ub)
+        ;;
+    max-x61-f15)
+		ssh-add ~/.ssh/mykey &
+		;;
+    taurus.uberspace.de)
+        
+        ;;
+    faui49man*)   
+        ;;
+    faui0*)      
+        ;;
+    faui3*)
+        ;;
+    *)
+        ;;
+    esac
 
-hc set focus_follows_mouse 1
-xset m 10 2
-hc rule class=sublime-text-2 tag=ed
-hc rule isFullscreen=on focus=on
+
