@@ -39,6 +39,7 @@ for i in ${!TAG_NAMES[@]} ; do
 done
 
 #default layouts for some tags
+hc load web '(clients max:0)'
 hc load video '(clients max:0)'
 hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
 hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
@@ -114,7 +115,8 @@ hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
 hc rule class=Sublime_text tag=ed
-hc rule class=Google-chrome tag=web
+hc rule class=Pdf tag=pdf
+#hc rule class=Google-chrome tag=web
 
 #custom add
 #hc set pad 0 "" "" 30
@@ -146,6 +148,7 @@ killall parcellite
 killall tint2
 killall volumeicon
 killall synapse
+killall xfce4-power-manager
 #trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
 
 xfsettingsd &
@@ -160,7 +163,7 @@ tint2 &
 
 nm-applet &
 volumeicon &
-xfce4-power-manager &
+xfce4-power-manager --no-daemon &
 gnome-keyring &
 nitrogen --restore &
 dropbox start
@@ -169,3 +172,4 @@ synapse &
 hc set focus_follows_mouse 1
 xset m 10 2
 hc rule class=sublime-text-2 tag=ed
+hc rule isFullscreen=on focus=on

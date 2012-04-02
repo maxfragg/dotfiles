@@ -4,7 +4,8 @@
 ##################################################
 ##	added scripts and comfort-functions          #
 ##################################################
- 
+
+alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/' 
 
 
 ##################################################

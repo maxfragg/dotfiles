@@ -8,25 +8,25 @@
 # ID 1
 rounded = 0
 border_width = 1
-background_color = #3C9DE2 100
-border_color = #3C9DE2 100
+background_color = #268BD2 100
+border_color = #268BD2 100
 
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 73
+background_color = #0D252B 74
 border_color = #073642 0
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #272727 100
+background_color = #002B36 100
 border_color = #073642 0
 
 # ID 4
 rounded = 0
 border_width = 0
-background_color = #76B739 100
+background_color = #859900 100
 border_color = #222222 0
 
 # ID 5
