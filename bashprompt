@@ -69,17 +69,17 @@
     case "$HOSTNAME" in
     max-x61-ub)
         UC=$R
-        HC=$EMM
+        HC=$EMY
         HOST_S="x61"
         ;;
     max-x61-f15)
-	UC=$Y
-	HC=$EMB
+		UC=$Y
+		HC=$EMB
 	HOST_S="x61"
 	;;
     taurus.uberspace.de)
         UC=$Y
-        HC=$EMR
+        HC=$EMC
         HOST_S="uber"
         ;;
     faui49man*)
