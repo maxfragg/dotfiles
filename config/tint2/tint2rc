@@ -14,7 +14,7 @@ border_color = #3C9DE2 100
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 73
+background_color = #272727 72
 border_color = #073642 0
 
 # ID 3
@@ -65,7 +65,7 @@ task_icon = 1
 task_text = 0
 task_centered = 1
 task_maximum_size = 0 32
-task_padding = 4 2
+task_padding = 2 2
 task_background_id = 4
 task_active_background_id = 1
 task_urgent_background_id = 0
