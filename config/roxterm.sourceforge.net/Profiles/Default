@@ -1,0 +1,14 @@
+
+[roxterm profile]
+maximise=1
+background_type=2
+true_translucence=1
+saturation=0,067590
+hide_menubar=1
+always_show_tabs=0
+audible_bell=0
+visible_bell=0
+scrollbar_pos=0
+font=Liberation Mono 11
+cursor_shape=0
+cursor_blink_mode=1
