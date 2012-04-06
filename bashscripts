@@ -7,7 +7,7 @@
 
 alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/' 
 
-#pdf(){ ~/bin/pdf "$@" 2>/dev/null & }
+pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
 ##################################################
 ############# Fun stuff        ###################

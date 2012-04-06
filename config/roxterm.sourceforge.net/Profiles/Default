@@ -13,5 +13,5 @@ font=Liberation Mono 11
 cursor_shape=0
 cursor_blink_mode=1
 disable_menu_access=1
-disable_menu_shortcuts=1
+disable_menu_shortcuts=0
 disable_tab_menu_shortcuts=1
