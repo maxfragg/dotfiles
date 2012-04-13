@@ -62,16 +62,14 @@ export EDITOR=nano
 export PATH=$PATH:$HOME/bin:$HOME/.bin:/opt/intel/bin
 #export PATH=/usr/local/share/perl/5.12.4/auto/share/dist/Cope:
 export PATH=/usr/local/games:$PATH
-export LANGUAGE=$LANGUAGE:de_DE:de
+export LANGUAGE=$LANGUAGE:de_DE:de 
+ 
 
+
+if [ -f ~/.cipbash ]; then
+	source ~/.cipbash
+fi
 
 
 #include prompt needed 
 source ~/.bashprompt
- 
- 
-
-
-if [ $HOSTNAME == faui0* ]; then
-	source ~/.cipbash
-fi
