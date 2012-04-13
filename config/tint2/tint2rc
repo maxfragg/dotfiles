@@ -14,7 +14,7 @@ border_color = #3C9DE2 100
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 72
+background_color = #272727 71
 border_color = #073642 0
 
 # ID 3
@@ -33,6 +33,12 @@ border_color = #222222 0
 rounded = 0
 border_width = 0
 background_color = #FDF6E3 100
+border_color = #FFFFFF 0
+
+# ID 6
+rounded = 0
+border_width = 0
+background_color = #FF2491 100
 border_color = #FFFFFF 0
 
 # Panel
@@ -68,7 +74,7 @@ task_maximum_size = 0 32
 task_padding = 2 2
 task_background_id = 4
 task_active_background_id = 1
-task_urgent_background_id = 0
+task_urgent_background_id = 6
 task_iconified_background_id = 4
 
 # Task Icons

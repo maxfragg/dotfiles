@@ -69,17 +69,17 @@
     case "$HOSTNAME" in
     max-x61-ub)
         UC=$R
-        HC=$EMM
+        HC=$EMY
         HOST_S="x61"
         ;;
     max-x61-f15)
-	UC=$Y
-	HC=$EMB
-	HOST_S="x61"
-	;;
+		UC=$Y
+		HC=$EMB
+		HOST_S="x61"
+		;;
     taurus.uberspace.de)
         UC=$Y
-        HC=$EMR
+        HC=$EMC
         HOST_S="uber"
         ;;
     faui49man*)
@@ -101,10 +101,15 @@
     *)
         ;;
     esac
-
-                    
-    [ $UID -eq "0" ] && UC=$C   # root's color
-    PS1="$TITLEBAR${EMK}${UC}\u${W} ${HC}$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
+	
+	# LOCation
+	local LOC=""
+	[ -n "$SSH_CONNECTION" ] && LOC="[r]"
+	
+	# root's color            
+    [ $UID -eq "0" ] && UC=$C
+       
+    PS1="$TITLEBAR${EMK}${UC}\u${W} ${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
  }

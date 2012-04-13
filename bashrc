@@ -59,8 +59,12 @@ fi
 export EDITOR=nano
 
 #path
+
+if [ $HOSTNAME == max-x61-ub ]; then
+	export PATH=/usr/local/share/perl/5.14.2/auto/share/dist/Cope:$PATH
+fi
+
 export PATH=$PATH:$HOME/bin:$HOME/.bin:/opt/intel/bin
-#export PATH=/usr/local/share/perl/5.12.4/auto/share/dist/Cope:
 export PATH=/usr/local/games:$PATH
 export LANGUAGE=$LANGUAGE:de_DE:de 
  
