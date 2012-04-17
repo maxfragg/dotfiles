@@ -98,7 +98,11 @@
         HC=$EMG
         HOST_S="ls3"
         ;;
-
+    debian-vm)
+    	UC=$R
+    	HC=$EMB
+    	HOST_S="vm"
+    	;;
     *)
         ;;
     esac
