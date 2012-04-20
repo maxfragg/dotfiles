@@ -19,6 +19,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
 
+alias uberspace='mosh --port=51988 uber'
 alias ping='ping -c 4'
 alias openports='netstat -nape --inet'
 alias valgrind='valgrind --leak-check=full'
