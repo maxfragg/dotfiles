@@ -174,6 +174,11 @@ tint2 &
 
 case "$HOSTNAME" in
     max-x61-ub)
+    	#hc set frame_bg_transparent 0
+    	#hc set always_show_frame 1
+    	#hc set frame_normal_opacity 30
+    	#hc set frame_active_opacity 50
+    	#hc spawn xcompmgr
     	gnome-screensaver-command -d &
         ;;
     max-x61-f15)
