@@ -67,7 +67,6 @@ fi
 export PATH=$PATH:$HOME/bin:$HOME/.bin:/opt/intel/bin
 export PATH=/usr/local/games:$PATH
 export LANGUAGE=$LANGUAGE:de_DE:de 
- 
 
 
 if [ -f ~/.cipbash ]; then
