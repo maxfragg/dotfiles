@@ -33,8 +33,19 @@ for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
     key="${TAG_KEYS[$i]}"
     if ! [ -z "$key" ] ; then
-        hc keybind "$Mod-$key" 			spawn $FCMOUSE use_index "$i"
-        hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
+	
+		case "$HOSTNAME" in
+			faui49man*)   
+		    	;;
+			faui0*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
+    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+				;;
+			*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use_index "$i"
+        		hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
+				;;
+			esac
     fi
 done
 
@@ -179,17 +190,20 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
+    	tint2 &
     	gnome-screensaver-command -d &
         ;;
     max-x61-f15)
+    	tint2 &
 		ssh-add ~/.ssh/mykey &
 		;;
     taurus.uberspace.de)
-        
         ;;
-    faui49man*)   
+    faui49man*)
         ;;
-    faui0*)      
+    faui0*)
+    	hc spawn ~/bin/tint2
+    	ssh-add ~/.ssh/cipkey &
         ;;
     faui3*)
         ;;
