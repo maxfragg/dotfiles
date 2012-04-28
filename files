@@ -11,3 +11,5 @@ ssh/config
 xinitrc
 xsessionrc
 bash_profile
+#bin/display.sh
+#bin/sshk.sh

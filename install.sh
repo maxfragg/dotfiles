@@ -2,6 +2,8 @@
 
 #read content of files to decide, which files should be installed
 #files contains files for all hosts
+#if filename starts with a "#" it will not be treated as hidden, 
+#and no "." will be added
 #$HOSTNAME contains host specific files
 #$HOSTNAME-not contains files excluded for this host, 
 #overwrites everything else
@@ -30,8 +32,14 @@ fi
 cutstring="DO NOT EDIT BELOW THIS LINE"
 
 for name in $DOTFILES; do
-  target="$HOME/.$name"
-  #echo "trying to install $HOME/.$name"
+  if [ `expr index "$name" "#"` == 1 ]; then
+  	name=${name/"#"/""}
+  	target="$HOME/$name"
+  else
+  	target="$HOME/.$name"
+  fi
+  #echo "trying to install $target"
+  #continue
   if [ -e "$target" ]; then
     if [ ! -L "$target" ]; then
       cutline=`grep -n -m1 "$cutstring" "$target" | sed "s/:.*//"`
