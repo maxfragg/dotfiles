@@ -118,6 +118,7 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 hc rule class~OperaNext tag=web
+hc rule class~Opera tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
@@ -130,6 +131,7 @@ hc rule class=Sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
 hc rule isFullscreen=on focus=on
+hc rule class=Audience tag=video
 #hc rule class=Google-chrome tag=web
 
 #custom add
@@ -177,7 +179,7 @@ xset m 10 2
 
 #tint2
 hc pad 0 0 0 30 0
-tint2 &
+#tint2 &
 
 #parcellite &
 

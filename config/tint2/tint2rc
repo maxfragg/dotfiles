@@ -14,13 +14,13 @@ border_color = #3C9DE2 100
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 39
-border_color = #272727 70
+background_color = #272727 38
+border_color = #272727 69
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #272727 86
+background_color = #272727 85
 border_color = #073642 0
 
 # ID 4
