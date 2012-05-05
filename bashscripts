@@ -4,8 +4,10 @@
 ##################################################
 ##	added scripts and comfort-functions          #
 ##################################################
- 
 
+alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/' 
+
+pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
 ##################################################
 ############# Fun stuff        ###################
@@ -46,11 +48,6 @@ function swap()
 alias appson="netstat -lantp | grep -i stab | awk -F/ '{print $2}' | sort | uniq"	# view only the process name using an internet connection
 alias bandwidth='dd if=/dev/zero of=/dev/null bs=1M count=32768'			# processor / memory bandwidthd? in GB/s
 alias browse_bonjour='dns-sd -B'							# browse services advertised via Bonjour
-alias dbdumpcp='scp -P 1234 username@12.34.56.78:$HOME/Backup/www/data/someSite/db.sql $HOME/Backup/data/db.sql'	# copy remote db to local
-alias dns='cat /etc/resolv.conf'							# view DNS numbers
-alias domain2ban='~/.scripts/Domain2Ban.sh'
-alias estab='ss -p | grep STA' 								# view only established sockets (fails if "ss" is screensaver alias)
-alias finchsync='java -jar ~/finchsync/finchsync.jar'					# start FinchSync Admin
 alias hdinfo='hdparm -i[I] /dev/sda'							# hard disk information - model/serial no.
 alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
@@ -95,6 +92,3 @@ alias udp_trace='pkt_trace udp'								# to show all UDP packets
 alias website_dl='wget --random-wait -r -p -e robots=off -U mozilla "$1"'		# download an entire website
 alias website_images='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg" "$1"'	# download all images from a site
 alias whois='whois -H'
-alias wscan='iwlist scan'								# terminal network scan for wireless signals
-alias wwwmirror2='wget -k -r -l ${2} ${1}'						# wwwmirror2 usage: wwwmirror2 [level] [site_url]
-alias wwwmirror='wget -ErkK -np ${1}'

@@ -19,6 +19,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
 
+alias rootpath='PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH'
+alias uberspace='mosh --port=51988 uber'
 alias ping='ping -c 4'
 alias openports='netstat -nape --inet'
 alias valgrind='valgrind --leak-check=full'
@@ -34,23 +36,26 @@ alias hlwm='herbstluftwm'
 alias exec_on_tag='~/.config/herbstluftwm/exec_on_tag.sh'
 alias difff='diff -urNp'
 alias sshtunnel='ssh -D 8080 -f -C -N uni'
-
+alias ucrypt='encfs ~/Dropbox/BoxCryptor ~/Private'
+alias bluetooth_off="sudo rfkill block bluetooth"
+alias bluetooth_on="sudo rfkill unblock bluetooth"
+alias tint2rs='pkill tint2 && herbstclient spawn tint2'
+alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
+alias lock='gnome-screensaver-command -l'
+alias opm='operamobile -tabletui -displaysize 1400x1020'
 alias sshfs_cip="sshfs el79irih@faui06e.cs.fau.de:/home/cip/2009/el79irih cip"
 
 case "$HOSTNAME" in
     max-x61-ub)
+    	alias myterm=roxterm
 		alias edit=sublime-text-2
         alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
-		alias ucrypt='encfs ~/Dropbox/BoxCryptor ~/Private'
-		alias bluetooth_off="sudo rfkill block bluetooth"
-		alias bluetooth_on="sudo rfkill unblock bluetooth"
-		alias tint2rs='pkill tint2 && herbstclient spawn tint2'
-		alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
-		alias lock='gnome-screensaver-command -l'
         ;;
     faui0*)
+    	myterm=terminator
         alias edit=gedit
         ;;
     *)
+    	myterm=xterm
         ;;
     esac

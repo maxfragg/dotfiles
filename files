@@ -5,7 +5,11 @@ bashrc
 bashscripts
 config/herbstluftwm
 config/utf8db
+config/tint2
+config/roxterm.sourceforge.net
 ssh/config
 xinitrc
 xsessionrc
 bash_profile
+#bin/display.sh
+#bin/sshk.sh

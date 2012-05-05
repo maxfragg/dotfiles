@@ -33,12 +33,24 @@ for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
     key="${TAG_KEYS[$i]}"
     if ! [ -z "$key" ] ; then
-        hc keybind "$Mod-$key" 			spawn $FCMOUSE use_index "$i"
-        hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
+	
+		case "$HOSTNAME" in
+			faui49man*)   
+		    	;;
+			faui0*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
+    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+				;;
+			*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use_index "$i"
+        		hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
+				;;
+			esac
     fi
 done
 
 #default layouts for some tags
+hc load web '(clients max:0)'
 hc load video '(clients max:0)'
 hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
 hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
@@ -94,6 +106,7 @@ hc set window_border_active_color $COLOR_W_BO_A
 hc set frame_bg_transparent 1
 hc set frame_border_width 2
 hc set window_border_width 2
+hc set focus_follows_mouse 1
 
 # rules
 hc unrule -F
@@ -105,6 +118,7 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 hc rule class~OperaNext tag=web
+hc rule class~Opera tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
@@ -114,6 +128,11 @@ hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
 hc rule class=Sublime_text tag=ed
+hc rule class=Katarakt tag=pdf
+hc rule class=sublime-text-2 tag=ed
+hc rule isFullscreen=on focus=on
+hc rule class=Audience tag=video
+#hc rule class=Google-chrome tag=web
 
 #custom add
 #hc set pad 0 "" "" 30
@@ -136,8 +155,8 @@ hc keybind $Mod-g toggle window_gap
 
 
 #sh ~/.config/herbstluftwm/restartpanels.sh
+#trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
 
-sh ~/bin/sshk.sh
 
 killall trayer
 killall nm-applet
@@ -145,26 +164,53 @@ killall parcellite
 killall tint2
 killall volumeicon
 killall synapse
-#trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
+killall xfce4-power-manager
 
+sh ~/bin/sshk.sh
 xfsettingsd &
+nm-applet &
+volumeicon &
+xfce4-power-manager --no-daemon &
+gnome-keyring &
+nitrogen --restore &
+dropbox start
+synapse &
+xset m 10 2
 
 #tint2
 hc pad 0 0 0 30 0
-tint2 &
+#tint2 &
 
 #parcellite &
 
 #custom settings depending on if running in gnome session or not
 
-nm-applet &
-volumeicon &
-xfce4-power-manager &
-gnome-keyring &
-nitrogen --restore &
-dropbox start
-synapse &
+case "$HOSTNAME" in
+    max-x61-ub)
+    	#hc set frame_bg_transparent 0
+    	#hc set always_show_frame 1
+    	#hc set frame_normal_opacity 30
+    	#hc set frame_active_opacity 50
+    	#hc spawn xcompmgr
+    	tint2 &
+    	gnome-screensaver-command -d &
+        ;;
+    max-x61-f15)
+    	tint2 &
+		ssh-add ~/.ssh/mykey &
+		;;
+    taurus.uberspace.de)
+        ;;
+    faui49man*)
+        ;;
+    faui0*)
+    	hc spawn ~/bin/tint2
+    	ssh-add ~/.ssh/cipkey &
+        ;;
+    faui3*)
+        ;;
+    *)
+        ;;
+    esac
 
-hc set focus_follows_mouse 1
-xset m 10 2
-hc rule class=sublime-text-2 tag=ed
+
