@@ -13,3 +13,4 @@ xsessionrc
 bash_profile
 #bin/display.sh
 #bin/sshk.sh
+#bin/nopaste
