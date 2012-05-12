@@ -47,6 +47,7 @@ alias sshfs_cip="sshfs el79irih@faui06e.cs.fau.de:/home/cip/2009/el79irih cip"
 
 case "$HOSTNAME" in
     max-x61-ub)
+    	alias today='ddate | cowsay -f dragon'
     	alias myterm=roxterm
 		alias edit=sublime-text-2
         alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
