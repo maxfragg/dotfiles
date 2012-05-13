@@ -1,10 +1,10 @@
 #-----------#
 # Passwords #
 #-----------#
-set my_tmpsecret=`gpg2 -o ~/.sec/.tmp -d ~/.sec/pass.gpg`
-set my_gpass1=`awk '/Gmail1/ {print $2}' ~/.sec/.tmp`
-set my_gpass2=`awk '/Gmail2/ {print $2}' ~/.sec/.tmp`
-set my_del=`rm -f ~/.sec/.tmp`
+set my_tmpsecret=`gpg2 --multifile -d ~/.sec/pass.gpg ~/.sec/goobookrc.gpg`
+set my_gpass1=`awk '/Gmail1/ {print $2}' ~/.sec/pass`
+set my_gpass2=`awk '/Gmail2/ {print $2}' ~/.sec/pass`
+set my_del=`rm -f ~/.sec/pass`
 
 #---------------#
 # Account Hooks #
@@ -85,20 +85,27 @@ set sort_aux        = last-date-received
 set editor="nano +7"
 
 #-------------------------#
+# GooBook settings        #
+#-------------------------#
+
+set query_command="goobook query '%s'"
+macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
+#-------------------------#
 # GPG settings            #
 #-------------------------#
 set pgp_verify_sig=yes
 set pgp_replyencrypt
 unset pgp_autosign
 
-set pgp_default_version=gpg
-set pgp_key_version=default
-set pgp_receive_version=default
-set pgp_send_version=default
-set pgp_sign_micalg=pgp-sha1
-set pgp_gpg=/usr/bin/gpg
-set pgp_gpg_pubring=~/.gnupg/pubring.gpg
-set pgp_gpg_secring=~/.gnupg/secring.gpg
+#set pgp_default_version=gpg
+#set pgp_key_version=default
+#set pgp_receive_version=default
+#set pgp_send_version=default
+#set pgp_sign_micalg=pgp-sha1
+#set pgp_gpg=/usr/bin/gpg
+#set pgp_gpg_pubring=~/.gnupg/pubring.gpg
+#set pgp_gpg_secring=~/.gnupg/secring.gpg
 
 #-------------------------#
 # color settings          #
