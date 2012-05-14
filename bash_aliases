@@ -52,6 +52,9 @@ case "$HOSTNAME" in
 		alias edit=sublime-text-2
         alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
         ;;
+    debian-vm)
+    	alias gpg2=gpg
+        ;;
     faui0*)
     	myterm=terminator
         alias edit=gedit
