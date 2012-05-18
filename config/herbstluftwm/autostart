@@ -175,7 +175,6 @@ gnome-keyring &
 nitrogen --restore &
 dropbox start
 synapse &
-xset m 10 2
 
 #tint2
 hc pad 0 0 0 30 0
@@ -194,6 +193,7 @@ case "$HOSTNAME" in
     	#hc spawn xcompmgr
     	tint2 &
     	gnome-screensaver-command -d &
+    	xset m 10 2
         ;;
     max-x61-f15)
     	tint2 &
