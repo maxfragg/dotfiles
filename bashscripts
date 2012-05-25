@@ -18,6 +18,7 @@ done
 
 alias mymutt='mutt; sleep 10; rm -f ~/.sec/goobookrc'
 
+alarm(){ sleep "$@" ; mplayer ~/Musik/bcc-break/machine_lullaby_1.ogg >/dev/null ;}
 
 ##################################################
 ############# Fun stuff        ###################
