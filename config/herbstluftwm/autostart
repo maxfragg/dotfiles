@@ -176,7 +176,7 @@ nitrogen --restore &
 dropbox start
 synapse &
 xset m 10 2
-
+xsetroot -name hlwm
 #tint2
 hc pad 0 0 0 30 0
 #tint2 &
