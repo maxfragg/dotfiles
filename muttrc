@@ -29,8 +29,8 @@ folder-hook         imaps://maxfragg@imap.gmail.com/ "\
         spoolfile   = +INBOX \
         postponed   = +[Gmail]/Drafts \
         record      = +[Gmail]/'Sent Mail' \
-        from        = 'My Real Name <maxfragg@gmail.com> ' \
-        realname    = 'My Real Name' \
+        from        = 'Max Krueger <maxfragg@gmail.com> ' \
+        realname    = 'Max Krueger' \
         smtp_url    = smtps://maxfragg@smtp.gmail.com \
         smtp_pass   = $my_gpass1"
 
@@ -43,8 +43,8 @@ folder-hook         imaps://max.h.krueger@imap.gmail.com/ "\
         spoolfile   = +INBOX \
         postponed   = +[Gmail]/Drafts \
         record      = +[Gmail]/'Sent Mail' \
-        from        = 'My Real Name <max.h.krueger@gmail.com> ' \
-        realname    = 'My Real Name' \
+        from        = 'Max Krueger <max.h.krueger@gmail.com> ' \
+        realname    = 'Max Krueger' \
         smtp_url    = smtps://max.h.krueger@smtp.gmail.com \
         smtp_pass   = $my_gpass2"
 

@@ -72,3 +72,7 @@ Host uber
 host faui32h
 	HostName faui32h.informatik.uni-erlangen.de
 	User el79irih
+
+host cssun
+	HostName cssun.rrze.uni-erlangen.de
+	User el79irih

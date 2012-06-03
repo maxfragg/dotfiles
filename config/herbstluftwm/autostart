@@ -14,6 +14,7 @@ Mod=Mod4
 hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
+hc keybind $Mod-Shift-r close_or_remove
 hc keybind $Mod-Return spawn roxterm
 hc keybind $Mod-Control-o spawn opera-next
 
@@ -59,9 +60,7 @@ hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split ver
 hc keybind $Mod-r remove
 hc keybind $Mod-space cycle_layout 1
 hc keybind $Mod-u split vertical 0.5
-hc keybind $Mod-y split vertical 0.7
 hc keybind $Mod-o split horizontal 0.5
-hc keybind $Mod-i split horizontal 0.7
 hc keybind $Mod-s floating toggle
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-p pseudotile toggle
@@ -91,6 +90,7 @@ hc keybind $Mod-Shift-Left	spawn $FCMOUSE shift left
 hc keybind $Mod-Shift-Down	spawn $FCMOUSE shift down
 hc keybind $Mod-Shift-Up 	spawn $FCMOUSE shift up
 hc keybind $Mod-Shift-Right spawn $FCMOUSE shift right
+hc keybind $Mod-i jumpto urgent
 
 #colortheme-support
 
@@ -175,6 +175,7 @@ gnome-keyring &
 nitrogen --restore &
 dropbox start
 synapse &
+xsetroot -name hlwm
 
 #tint2
 hc pad 0 0 0 30 0
