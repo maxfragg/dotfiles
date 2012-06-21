@@ -59,6 +59,7 @@ case "$HOSTNAME" in
     	myterm=terminator
         alias edit=gedit
         ;;
+    
     *)
     	myterm=xterm
         ;;

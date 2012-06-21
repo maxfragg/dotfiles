@@ -99,9 +99,9 @@
         HOST_S="ls3"
         ;;
     irene-ThinkPad)
-	UC=$G
-	HC=$EMB
-	HOST_S="z61"
+	   UC=$G
+	   HC=$EMB
+	   HOST_S="z61"
 	;;
     debian-vm)
     	UC=$R
@@ -117,9 +117,9 @@
 	[ -n "$SSH_CONNECTION" ] && LOC="✈"
 	
 	# root's color            
-    [ $UID -eq "0" ] && UC=$C
+    [ $UID -eq "0" ] && UC=$EMR && HC=$EMW
        
-    PS1="\[\033[G\]$TITLEBAR${EMK}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
+    PS1="$TITLEBAR${EMK}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
  }

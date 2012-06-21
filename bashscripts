@@ -5,7 +5,7 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
-alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/' 
+alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/'
 
 pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
@@ -16,10 +16,12 @@ grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\
 done
 }
 
-mutt(){
-	mutt
-	rm -f ~/.sec/goobookrc
-}
+commitmsg(){
+wget http://whatthecommit.com/ -O - 2>/dev/null | grep -o '<p>.*$' | sed 's/<[^>]*>//g';}
+
+alias mymutt='mutt; sleep 10; rm -f ~/.sec/goobookrc'
+
+alarm(){ sleep "$@" ; mplayer ~/Musik/bcc-break/machine_lullaby_1.ogg >/dev/null ;}
 
 ##################################################
 ############# Fun stuff        ###################

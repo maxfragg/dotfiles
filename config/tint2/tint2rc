@@ -42,7 +42,7 @@ background_color = #FF2491 100
 border_color = #FFFFFF 0
 
 # Panel
-panel_monitor = LVDS
+panel_monitor = ALL
 panel_position = bottom center horizontal
 panel_size = 100% 30
 panel_margin = 10 0
