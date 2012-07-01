@@ -48,9 +48,10 @@ panel_size = 100% 30
 panel_margin = 10 0
 panel_padding = 0 0 0
 panel_dock = 0
-wm_menu = 1
+wm_menu = 0
 panel_layer = top
 panel_background_id = 0
+panel_items = TSCL
 
 # Panel Autohide
 autohide = 0
@@ -58,6 +59,16 @@ autohide_show_timeout = 0.7
 autohide_hide_timeout = 1.5
 autohide_height = 2
 strut_policy = follow_size
+
+# Launcher
+launcher_padding = 8 4 
+launcher_background_id = 2  
+launcher_icon_size = 18 
+#launcher_item_app = /usr/share/applications/opera-next-browser.desktop
+launcher_item_app = /usr/share/applications/roxterm.desktop
+#launcher_item_app = /usr/share/applications/pantheon-files.desktop
+launcher_icon_asb = 100 0 0 
+launcher_tooltip = 0
 
 # Taskbar
 taskbar_mode = multi_desktop
