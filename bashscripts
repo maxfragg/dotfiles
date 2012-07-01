@@ -23,7 +23,7 @@ alias mymutt='mutt; sleep 10; rm -f ~/.sec/goobookrc'
 
 alarm(){ sleep "$@" ; mplayer ~/Musik/bcc-break/machine_lullaby_1.ogg >/dev/null ;}
 
-calc(){ echo "$@" | bc -l }
+calc(){ echo "$@" | bc -l ;}
 
 ##################################################
 ############# Fun stuff        ###################
