@@ -27,7 +27,9 @@ calc(){ echo "$@" | bc -l ;}
 
 ipof(){ grep "$@" ~/.ip | cut -d" " -f2 ;}
 
-ipadd(){ echo "$@" >>/.ip ;}
+ipadd(){ echo "$@" >> ~/.ip ;}
+
+host2ip(){ nslookup "$@" | grep Add | grep -v '#' | cut -f 2 -d ' ' ;}
 
 ##################################################
 ############# Fun stuff        ###################
