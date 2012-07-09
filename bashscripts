@@ -25,6 +25,10 @@ alarm(){ sleep "$@" ; mplayer ~/Musik/bcc-break/machine_lullaby_1.ogg >/dev/null
 
 calc(){ echo "$@" | bc -l ;}
 
+ipof(){ grep "$@" ~/.ip | cut -d" " -f2 ;}
+
+ipadd(){ echo "$@" >>/.ip ;}
+
 ##################################################
 ############# Fun stuff        ###################
 ##################################################
