@@ -53,6 +53,8 @@ done
 #default layouts for some tags
 hc load web '(clients max:0)'
 hc load video '(clients max:0)'
+hc load pdf '(clients max:0)'
+hc load ed '(clients grid:0)'
 hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
 hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
 
