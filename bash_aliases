@@ -44,6 +44,7 @@ alias tint2wiz='~/bin/tint2wiz/./tintwizard.py'
 alias lock='gnome-screensaver-command -l'
 alias opm='operamobile -tabletui -displaysize 1400x1020'
 alias sshfs_cip="sshfs el79irih@faui06e.cs.fau.de:/home/cip/2009/el79irih cip"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 case "$HOSTNAME" in
     max-x61-ub)
