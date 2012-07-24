@@ -31,6 +31,25 @@ ipadd(){ echo "$@" >> ~/.ip ;}
 
 host2ip(){ nslookup "$@" | grep Add | grep -v '#' | cut -f 2 -d ' ' ;}
 
+bluetooth(){
+	case $@ in
+		1)
+		sudo rfkill unblock bluetooth
+		;;
+		on)
+		sudo rfkill unblock bluetooth
+		;;
+		0)
+		sudo rfkill block bluetooth
+		;;
+		off)
+		sudo rfkill block bluetooth
+		;;
+		*)
+		echo "option musst be on/1 or off/0"
+	esac
+}
+
 ##################################################
 ############# Fun stuff        ###################
 ##################################################

@@ -47,6 +47,12 @@ alias sshfs_cip="sshfs el79irih@faui06e.cs.fau.de:/home/cip/2009/el79irih cip"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias us-int-gr='setxkbmap  -layout us -variant altgr-intl' 
 alias us-int="setxkbmap -option '' 'us international' ',phonetic'"
+alias dropbox="cd ~/Dropbox"
+alias current="cd ~/current"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 case "$HOSTNAME" in
     max-x61-ub)
