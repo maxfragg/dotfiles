@@ -14,13 +14,13 @@ border_color = #3C9DE2 100
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 38
-border_color = #272727 69
+background_color = #272727 37
+border_color = #272727 68
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #272727 85
+background_color = #272727 84
 border_color = #073642 0
 
 # ID 4
@@ -38,7 +38,7 @@ border_color = #FFFFFF 0
 # ID 6
 rounded = 0
 border_width = 0
-background_color = #FF2491 100
+background_color = #FFA800 100
 border_color = #FFFFFF 0
 
 # Panel
@@ -61,14 +61,15 @@ autohide_height = 2
 strut_policy = follow_size
 
 # Launcher
-launcher_padding = 8 4 
-launcher_background_id = 2  
-launcher_icon_size = 18 
+launcher_padding = 8 4
+launcher_background_id = 2
+launcher_icon_size = 18
 #launcher_item_app = /usr/share/applications/opera-next-browser.desktop
 launcher_item_app = /usr/share/applications/roxterm.desktop
 #launcher_item_app = /usr/share/applications/pantheon-files.desktop
-launcher_icon_asb = 100 0 0 
+launcher_icon_asb = 100 0 0
 launcher_tooltip = 0
+
 
 # Taskbar
 taskbar_mode = multi_desktop
