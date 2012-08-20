@@ -125,7 +125,8 @@ hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
-#hc rule windowtype~'WM_NAME(Kontaktliste)' empathy
+hc rule windowrole~contact_list tag=im index=1/1
+hc rule windowrole~chat tag=im index=2/0
 hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
