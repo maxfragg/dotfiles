@@ -202,8 +202,11 @@ case "$HOSTNAME" in
         ;;
     max-x61-f15)
     	tint2 &
-		ssh-add ~/.ssh/mykey &
-		;;
+	ssh-add ~/.ssh/mykey &
+	;;
+    irene-ThinkPad)
+    	(sleep 12 && tint2) &
+    	;;
     taurus.uberspace.de)
         ;;
     faui49man*)
