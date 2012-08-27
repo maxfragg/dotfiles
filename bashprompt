@@ -37,14 +37,14 @@ function _git_prompt() {
 
 function bash_prompt_command() {
     # set an error string for the prompt, if applicable
-    if [ $? -eq 0 ]; then 
+    if [ $? -eq 0 ]; then
         ERRPROMPT=""
     else
         ERRPROMPT='->($?)\n'
     fi
 
     # How many characters of the $PWD should be kept
-    local pwdmaxlen=12 
+    local pwdmaxlen=12
 
     # Indicate that there has been dir truncation
     local trunc_symbol=".."
