@@ -3,6 +3,15 @@
 ##	BASH PROMPT	##
 ##################################
 
+function timer_start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
+
 #git prompt is form: 
 # http://www.opinionatedprogrammer.com/2011/01/colorful-bash-prompt-reflecting-git-status/
 function _git_prompt() {
@@ -38,9 +47,18 @@ function _git_prompt() {
 function bash_prompt_command() {
     # set an error string for the prompt, if applicable
     if [ $? -eq 0 ]; then
-        ERRPROMPT=""
+        local ERRPROMPT=""
     else
-        ERRPROMPT='->($?)\n'
+        local ERRPROMPT='->($?)\n\a'
+    fi
+
+    # echo a bell-character if execution took more than 3 seconds
+    timer_stop
+    if [ $timer_show -gt 3 ]; then
+        #echo -e
+        local TIMES='($timer_show s)\n\a'
+    else
+        local TIMES=""
     fi
 
     # How many characters of the $PWD should be kept
@@ -57,13 +75,15 @@ function bash_prompt_command() {
         NEW_PWD=${NEW_PWD:$pwdoffset:$pwdmaxlen}
         NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
     fi
-
-    PS1="$TITLEBAR${HC}${ERRPROMPT}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}`_git_prompt`${UC}\\$ ${NONE}"
-
+    #with git (slow)
+    #PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}`_git_prompt`${UC}\\$ ${NONE}"
+    #without git
+    PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
 }
 
 #run once per sheell
 function bash_prompt() {
+
     case $TERM in
      xterm*|rxvt*)
          TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
@@ -159,6 +179,8 @@ function bash_prompt() {
     [ $UID -eq "0" ] && UC=$EMR && HC=$EMW
 
 }
+
+trap 'timer_start' DEBUG
 PROMPT_COMMAND=bash_prompt_command
 bash_prompt
 unset bash_prompt
