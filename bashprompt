@@ -23,7 +23,7 @@ function _git_prompt() {
             branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
                 echo HEAD`)"
         fi
-        echo -n '\[\e[0;37;'"$ansi"';1m\]'"$branch"'\[\e[0m\] '
+        echo -n '\[\e[0;37;'"$ansi"';1m\]'"$branch"'\[\e[0m\]'
     fi
 }
 
@@ -34,7 +34,7 @@ function _git_prompt() {
 ## /home/me/stuff          -> ~/stuff               if USER=me
 ## /usr/share/big_dir_name -> ../share/big_dir_name if pwdmaxlen=20
 
-
+#run each time
 function bash_prompt_command() {
     # set an error string for the prompt, if applicable
     if [ $? -eq 0 ]; then
@@ -58,11 +58,12 @@ function bash_prompt_command() {
         NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
     fi
 
-    PS1="$TITLEBAR${HC}${ERRPROMPT}`_git_prompt`${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
+    PS1="$TITLEBAR${HC}${ERRPROMPT}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}`_git_prompt`${UC}\\$ ${NONE}"
 
+}
 
- }
- function bash_prompt() {
+#run once per sheell
+function bash_prompt() {
     case $TERM in
      xterm*|rxvt*)
          TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
@@ -72,7 +73,7 @@ function bash_prompt_command() {
           ;;
     esac
     NONE="\[\033[0m\]"    # unsets color to term's fg color
-    
+
     # regular colors
     local K="\[\033[0;30m\]"    # black
     local R="\[\033[0;31m\]"    # red
@@ -140,7 +141,7 @@ function bash_prompt_command() {
 	   UC=$G
 	   HC=$EMB
 	   HOST_S="z61"
-	;;
+	   ;;
     debian-vm)
     	UC=$R
     	HC=$EMB
@@ -157,9 +158,7 @@ function bash_prompt_command() {
 	# root's color
     [ $UID -eq "0" ] && UC=$EMR && HC=$EMW
 
-    # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
-    # extra backslash in front of \$ to make bash colorize the prompt
- }
- PROMPT_COMMAND=bash_prompt_command
- bash_prompt
- unset bash_prompt
+}
+PROMPT_COMMAND=bash_prompt_command
+bash_prompt
+unset bash_prompt
