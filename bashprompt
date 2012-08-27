@@ -3,6 +3,29 @@
 ##	BASH PROMPT	##
 ##################################
 
+#git prompt is form: 
+# http://www.opinionatedprogrammer.com/2011/01/colorful-bash-prompt-reflecting-git-status/
+function _git_prompt() {
+    local git_status="`git status -unormal 2>&1`"
+    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+        if [[ "$git_status" =~ nothing\ to\ commit ]]; then
+            local ansi=42
+        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
+            local ansi=43
+        else
+            local ansi=45
+        fi
+        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
+            branch=${BASH_REMATCH[1]}
+            test "$branch" != master || branch=' '
+        else
+            # Detached HEAD.  (branch=HEAD is a faster alternative.)
+            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
+                echo HEAD`)"
+        fi
+        echo -n '\[\e[0;37;'"$ansi"';1m\]'"$branch"'\[\e[0m\] '
+    fi
+}
 
 ## Fancy PWD display function
 ## The home directory (HOME) is replaced with a ~
@@ -10,9 +33,19 @@
 ## Leading partial directory names are striped off
 ## /home/me/stuff          -> ~/stuff               if USER=me
 ## /usr/share/big_dir_name -> ../share/big_dir_name if pwdmaxlen=20
- function bash_prompt_command() {
+
+
+function bash_prompt_command() {
+    # set an error string for the prompt, if applicable
+    if [ $? -eq 0 ]; then 
+        ERRPROMPT=""
+    else
+        ERRPROMPT='->($?)\n'
+    fi
+
     # How many characters of the $PWD should be kept
-    local pwdmaxlen=12
+    local pwdmaxlen=12 
+
     # Indicate that there has been dir truncation
     local trunc_symbol=".."
     local dir=${PWD##*/}
@@ -24,17 +57,22 @@
         NEW_PWD=${NEW_PWD:$pwdoffset:$pwdmaxlen}
         NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
     fi
+
+    PS1="$TITLEBAR${HC}${ERRPROMPT}`_git_prompt`${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
+
+
  }
  function bash_prompt() {
     case $TERM in
      xterm*|rxvt*)
-         local TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
+         TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
           ;;
      *)
-         local TITLEBAR=""
+         TITLEBAR=""
           ;;
     esac
-    local NONE="\[\033[0m\]"    # unsets color to term's fg color
+    NONE="\[\033[0m\]"    # unsets color to term's fg color
+    
     # regular colors
     local K="\[\033[0;30m\]"    # black
     local R="\[\033[0;31m\]"    # red
@@ -64,9 +102,9 @@
     local BGW="\[\033[47m\]"
 
     # user's color
-    local UC=$EMC
-    local HC=$W
-    local HOST_S
+    UC=$EMC
+    HC=$W
+    HOST_S=""
     case "$HOSTNAME" in
     max-x61-ub)
         UC=$R
@@ -111,15 +149,14 @@
     *)
         ;;
     esac
-	
+
 	# LOCation
-	local LOC="•"
+	LOC="•"
 	[ -n "$SSH_CONNECTION" ] && LOC="✈"
-	
-	# root's color            
+
+	# root's color
     [ $UID -eq "0" ] && UC=$EMR && HC=$EMW
-       
-    PS1="$TITLEBAR${EMK}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}${UC}\\$ ${NONE}"
+
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
  }
