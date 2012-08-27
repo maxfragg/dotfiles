@@ -19,6 +19,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
 
+alias prompt_git='GIT=1'
+alias prompt_fast='GIT=0'
 alias rootpath='PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH'
 alias uberspace='mosh --port=51988 uber'
 alias ping='ping -c 4'
