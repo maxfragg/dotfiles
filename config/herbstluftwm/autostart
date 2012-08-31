@@ -115,16 +115,19 @@ hc unrule -F
 #hc rule class=XTerm tag=3 # move all xterms to tag 3
 hc rule focus=off # normally do not focus new clients
 # give focus to most common terminals
-hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole|Terminator)' focus=on
+hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole|Terminator|Roxterm)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
+hc rule isFullscreen=on focus=on
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
+hc rule class~Google-chrome tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
+hc rule class~Empathy tag=im
 hc rule windowrole~contact_list tag=im index=1/1
 hc rule windowrole~chat tag=im index=2/0
 hc rule class~Tilda manage=off
@@ -133,7 +136,6 @@ hc rule class=Scribes tag=ed
 hc rule class=Sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
-hc rule isFullscreen=on focus=on
 hc rule class=Audience tag=video
 #hc rule class=Google-chrome tag=web
 
