@@ -27,9 +27,9 @@ calc(){ echo "scale=2; $@" | bc -l ;}
 
 ipof(){ grep "$@" ~/.ip | cut -d" " -f2 ;}
 
-ipadd(){ echo "$@" >> ~/.ip ;}
+ipadd(){ host2ip "$@" >> ~/.ip ;}
 
-host2ip(){ nslookup "$@" | grep Add | grep -v '#' | cut -f 2 -d ' ' ;}
+host2ip(){ echo -n "$@ "; nslookup "$@" | grep Add | grep -v '#' | cut -f 2 -d ' ' | head -1 ; }
 
 bluetooth(){
 	case $@ in
