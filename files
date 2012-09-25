@@ -1,18 +1,19 @@
 
 bash_aliases
+bash_profile
 bashprompt
 bashrc
 bashscripts
+#bin/bell
+#bin/display.sh
+#bin/nopaste
+#bin/sshk.sh
 config/herbstluftwm
-config/utf8db
-config/tint2
 config/roxterm.sourceforge.net
+config/tint2
+config/utf8db
+fonts
+ip
 ssh/config
 xinitrc
 xsessionrc
-bash_profile
-ip
-#bin/display.sh
-#bin/sshk.sh
-#bin/nopaste
-#bin/bell
