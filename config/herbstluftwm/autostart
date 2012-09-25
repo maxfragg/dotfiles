@@ -156,7 +156,7 @@ hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 2+
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 2-
 hc keybind $Mod-XF86Back spawn ~/.config/herbstluftwm/cycle.sh prev
 hc keybind $Mod-XF86Forward spawn ~/.config/herbstluftwm/cycle.sh next
-hc keybind $Mod-g toggle window_gap
+hc keybind $Mod-g toggle frame_gap
 hc keybind $Mod-Shift-a spawn ~/.config/herbstluftwm/urgent.sh
 
 
