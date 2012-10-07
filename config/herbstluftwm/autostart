@@ -147,7 +147,7 @@ hc rule class=Audience tag=video
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
-hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run
+hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
 hc keybind XF86AudioMute spawn amixer -q sset Master toggle
@@ -173,6 +173,7 @@ killall synapse
 killall xfce4-power-manager
 
 sh ~/bin/sshk.sh
+sh ~/.config/herbstluftwm/dmenu_run_cache &
 (sleep 10 && xfsettingsd) &
 nm-applet &
 volumeicon &
