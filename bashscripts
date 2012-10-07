@@ -13,6 +13,8 @@ allpdf(){ for i in "$@"*.pdf ; do echo $i ; katarakt $i ; done }
 
 pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
+anycat(){ if( file "$1" | grep "image data" >/dev/null ) then icat $1 ; else cat $@; fi }
+
 imgur(){
 for i in "$@";do
 curl -# -F "image"=@"$i" -F "key"="4907fcd89e761c6b07eeb8292d5a9b2a" http://imgur.com/api/upload.xml|\
