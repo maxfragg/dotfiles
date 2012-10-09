@@ -9,7 +9,7 @@ alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5
 
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
 
-allpdf(){ for i in "$@"*.pdf ; do echo $i ; katarakt $i ; done }
+allpdf(){ for i in "$@"*.pdf ; do echo $i ; ~/bin/katarakt "$i" 2>/dev/null ; done }
 
 pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
