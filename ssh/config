@@ -76,3 +76,7 @@ host faui32h
 host cssun
 	HostName cssun.rrze.uni-erlangen.de
 	User el79irih
+
+host raspi
+	HostName raspi
+	User root
