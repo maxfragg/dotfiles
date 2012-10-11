@@ -22,6 +22,15 @@ grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\
 done
 }
 
+wallpaper(){ 
+X=$RANDOM%`ls ~/Bilder/wallbase/*{.jpg,.png} | wc -l`;
+for i in ~/Bilder/wallbase/*{.jpg,.png}
+do
+	[[ $X == 1 ]] && feh --bg-center $i && break
+	X=$(($X-1))
+done
+}
+
 commitmsg(){
 wget http://whatthecommit.com/ -O - 2>/dev/null | grep -o '<p>.*$' | sed 's/<[^>]*>//g';}
 
