@@ -147,7 +147,7 @@ hc rule class=Audience tag=video
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
-hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run
+hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
 hc keybind XF86AudioMute spawn amixer -q sset Master toggle
@@ -173,12 +173,13 @@ killall synapse
 killall xfce4-power-manager
 
 sh ~/bin/sshk.sh
+sh ~/.config/herbstluftwm/dmenu_run_cache &
 (sleep 10 && xfsettingsd) &
 nm-applet &
 volumeicon &
 xfce4-power-manager --no-daemon &
 gnome-keyring &
-nitrogen --restore &
+#nitrogen --restore &
 dropbox start
 synapse &
 xsetroot -name hlwm
@@ -198,6 +199,7 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
+    	(sleep 8 && wallpaper) &
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
     	xset m 10 2

@@ -45,13 +45,13 @@ Host baron
 	HostName dev-baron.de
 	User max
 	
-Host ls4
+Host man3
 	HostName faui49man3.informatik.uni-erlangen.de
  	User el79irih
 
 Host man4
 	HostName faui49man4.informatik.uni-erlangen.de
-
+	User el79irih
 
 Host scalar
 	HostName 131.188.33.176
@@ -76,3 +76,7 @@ host faui32h
 host cssun
 	HostName cssun.rrze.uni-erlangen.de
 	User el79irih
+
+host raspi
+	HostName raspi
+	User root

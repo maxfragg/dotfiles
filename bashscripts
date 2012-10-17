@@ -7,12 +7,27 @@
 
 alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/'
 
+countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
+
+allpdf(){ for i in "$@"*.pdf ; do echo $i ; ~/bin/katarakt "$i" 2>/dev/null ; done }
+
 pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
+
+anycat(){ if( file "$1" | grep "image data" >/dev/null ) then icat $1 ; else cat $@; fi }
 
 imgur(){
 for i in "$@";do
 curl -# -F "image"=@"$i" -F "key"="4907fcd89e761c6b07eeb8292d5a9b2a" http://imgur.com/api/upload.xml|\
 grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\1:\x1B[0m /'
+done
+}
+
+wallpaper(){ 
+X=$RANDOM%`ls ~/Bilder/wallbase/*{.jpg,.png} | wc -l`;
+for i in ~/Bilder/wallbase/*{.jpg,.png}
+do
+	[[ $X == 1 ]] && feh --bg-center $i && break
+	X=$(($X-1))
 done
 }
 
