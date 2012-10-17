@@ -214,7 +214,7 @@ case "$HOSTNAME" in
     faui49man*)
         ;;
     faui0*)
-    	hc spawn ~/bin/tint2
+    	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
         ;;
     faui3*)
