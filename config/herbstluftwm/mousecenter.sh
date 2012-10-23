@@ -1,8 +1,11 @@
 #!/bin/bash
 
 #exec herbstclient move before moving mouse
-
-herbstclient "$@"
+#$MON=`tagtomon $2`
+#herbstclient $@
+#herbstclient focus_monitor $MON
+#herbstclient raise_monitor $MON
+herbstclient $@
 
 #classic stuff by thorsten
 

@@ -31,6 +31,12 @@ do
 done
 }
 
+tagtomon(){
+	MON=`herbstclient stack | grep ${TAG_NAMES[$@]} |cut -d' ' -f5`
+	[[ $MON  ]] && echo $MON && return
+	echo 0
+}
+
 commitmsg(){
 wget http://whatthecommit.com/ -O - 2>/dev/null | grep -o '<p>.*$' | sed 's/<[^>]*>//g';}
 
