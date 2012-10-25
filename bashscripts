@@ -32,6 +32,7 @@ done
 }
 
 tagtomon(){
+	TAG_NAMES=(irc term web ed im video pdf fm music mail )
 	MON=`herbstclient stack | grep ${TAG_NAMES[$@]} |cut -d' ' -f5`
 	[[ $MON  ]] && echo $MON && return
 	echo 0

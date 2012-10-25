@@ -12,6 +12,7 @@ config/herbstluftwm
 config/roxterm.sourceforge.net
 config/tint2
 config/utf8db
+config/Terminal
 fonts
 ip
 ssh/config

@@ -15,7 +15,8 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Return spawn roxterm
+hc keybind $Mod-Shift-Return spawn roxterm
+hc keybind $Mod-Return spawn xfce4-terminal
 hc keybind $Mod-Control-o spawn opera-next
 
 #script centering mouse
@@ -137,7 +138,7 @@ hc rule class=Sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
 hc rule class=Audience tag=video
-#hc rule class=Google-chrome tag=web
+hc rule class~Geary tag=mail
 
 #custom add
 #hc set pad 0 "" "" 30
