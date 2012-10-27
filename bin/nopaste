@@ -17,10 +17,17 @@
 ##################################################
 
 # settings
-login="el79irih"
-folder="/home/cip/2009/$login/.www/p/"
-urlprefix="http://wwwcip.cs.fau.de/~$login/p"
-remote="$login@faui0sr0.cs.fau.de"
+#cip
+#login="el79irih"
+#folder="/home/cip/2009/$login/.www/p/"
+#urlprefix="http://wwwcip.cs.fau.de/~$login/p"
+#remote="$login@faui0sr0.cs.fau.de"
+#remotefolder="$remote:$folder/"
+
+login="maxfragg"
+folder="/home/$login/html/p/"
+urlprefix="http://max.fauiwg.de/p"
+remote="$login@taurus.uberspace.de"
 remotefolder="$remote:$folder/"
 
 # cmdlineoptions

@@ -36,4 +36,6 @@ ColorPalette14=#ffff24249191
 ColorPalette15=#0a0a9b9b8181
 ColorCursor=#ffffa8a80000
 ColorForeground=#ecececececec
+MiscScrollAlternateScreen=TRUE
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
 
