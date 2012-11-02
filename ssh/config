@@ -36,6 +36,10 @@ Host faui36a
 	HostName faui36a.informatik.uni-erlangen.de
 	User el79irih
 
+Host faui33b
+	Hostname faui33b.informatik.uni-erlangen.de
+	User el79irih
+
 Host baronk
 	HostName dev-baron.de
 	User max
