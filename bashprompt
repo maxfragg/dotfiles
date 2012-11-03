@@ -135,10 +135,10 @@ function bash_prompt() {
         HOST_S="x61"
         ;;
     max-x61-f15)
-		UC=$Y
-		HC=$EMB
-		HOST_S="x61"
-		;;
+	UC=$Y
+	HC=$EMB
+	HOST_S="x61"
+	;;
     taurus.uberspace.de)
         UC=$Y
         HC=$EMC
@@ -160,14 +160,19 @@ function bash_prompt() {
         HOST_S="ls3"
         ;;
     irene-ThinkPad)
-	   UC=$G
-	   HC=$EMB
-	   HOST_S="z61"
-	   ;;
+    	UC=$G
+    	HC=$EMB
+	HOST_S="z61"
+	;;
     debian-vm)
     	UC=$R
     	HC=$EMB
     	HOST_S="vm"
+    	;;
+    squarez)
+    	UC=$EMC
+    	HC=$EMG
+    	HOST_S="squarez"
     	;;
     *)
         ;;
