@@ -84,3 +84,7 @@ host cssun
 host raspi
 	HostName raspi
 	User root
+
+host squarez
+	HostName squarez
+	User maxfragg
