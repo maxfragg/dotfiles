@@ -85,6 +85,10 @@ host raspi
 	HostName raspi
 	User root
 
-host squarez
+host squarez_max
 	HostName squarez
 	User maxfragg
+
+host squarez_git
+	HostName squarez
+	User git-annex
