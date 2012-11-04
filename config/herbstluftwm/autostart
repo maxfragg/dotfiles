@@ -200,7 +200,7 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
-    	(while true ;do wallpaper; sleep 10m; done)&
+    	(while true ;do wallpaper autum; sleep 10m; done)&
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
     	xset m 10 2
@@ -217,7 +217,7 @@ case "$HOSTNAME" in
     faui49man*)
         ;;
     faui0*)
-    	(while true ;do wallpaper; sleep 10m; done)&
+    	(sleep 5 && wallpaper autum)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
         ;;
