@@ -175,7 +175,6 @@ killall synapse
 killall xfce4-power-manager
 
 sh ~/bin/sshk.sh
-sh ~/.config/herbstluftwm/dmenu_run_cache &
 (sleep 10 && xfsettingsd) &
 nm-applet &
 volumeicon &
@@ -201,6 +200,7 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
+    	sh ~/.config/herbstluftwm/dmenu_run_cache &
     	(while true ;do wallpaper; sleep 10m; done)&
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
@@ -222,6 +222,7 @@ case "$HOSTNAME" in
     	(sleep 5 && wallpaper)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
+    	dmenu_path >~/.cache/dmenu_run &
         ;;
     faui3*)
         ;;
