@@ -145,6 +145,7 @@ hc rule class~Geary tag=mail
 
 #custom bindings
 
+hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
@@ -217,7 +218,8 @@ case "$HOSTNAME" in
     faui49man*)
         ;;
     faui0*)
-    	(while true ;do wallpaper; sleep 10m; done)&
+    	#(while true ; wallpaper; sleep 10m; done)&
+    	(sleep 5 && wallpaper)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
         ;;
