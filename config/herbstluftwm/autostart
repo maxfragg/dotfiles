@@ -145,6 +145,7 @@ hc rule class~Geary tag=mail
 
 #custom bindings
 
+hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
@@ -200,7 +201,7 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
-    	(sleep 8s && (while true ;do wallpaper autum; sleep 10m; done))&
+    	(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
     	xset m 10 2
