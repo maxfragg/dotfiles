@@ -86,9 +86,9 @@ host raspi
 	User root
 
 host squarez_max
-	HostName squarez
+	HostName squarez.fauiwg.de
 	User maxfragg
 
 host squarez_git
-	HostName squarez
+	HostName squarez.fauiwg.de
 	User git-annex

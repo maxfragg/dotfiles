@@ -13,6 +13,8 @@ countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
 
 allpdf(){ for i in "$@"*.pdf ; do echo $i ; ~/bin/katarakt "$i" 2>/dev/null ; done }
 
+allxournal(){ for i in "$@"*/*.pdf ; do echo $i ; xournal $i ; done }
+
 pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
 anycat(){ if( file "$1" | grep "image data" >/dev/null ) then icat $1 ; else cat $@; fi }
@@ -115,8 +117,8 @@ alias appson="netstat -lantp | grep -i stab | awk -F/ '{print $2}' | sort | uniq
 alias bandwidth='dd if=/dev/zero of=/dev/null bs=1M count=32768'			# processor / memory bandwidthd? in GB/s
 alias browse_bonjour='dns-sd -B'							# browse services advertised via Bonjour
 alias hdinfo='hdparm -i[I] /dev/sda'							# hard disk information - model/serial no.
-alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
-alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
+#alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
+#alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
 alias http_trace='pkt_trace port 80'							# to show all HTTP packets
 alias iftop='sudo iftop -i eth0' 							# start "iftop" program (sudo apt-get install iftop)
 alias ip4grep="grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'"					# look for IPv4 address in files
