@@ -5,11 +5,15 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
-alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ tmp/'
+alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ ~/tmp/'
+
+alias squarez='sshfs -o reconnect squarez_git:/media/3tb-0 ~/squarez/'
 
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
 
 allpdf(){ for i in "$@"*.pdf ; do echo $i ; ~/bin/katarakt "$i" 2>/dev/null ; done }
+
+allxournal(){ for i in "$@"*/*.pdf ; do echo $i ; xournal $i ; done }
 
 pdf(){ ~/bin/katarakt "$@" 2>/dev/null & }
 
@@ -23,8 +27,9 @@ done
 }
 
 wallpaper(){ 
-X=$RANDOM%`ls ~/Bilder/wallbase/*{.jpg,.png} | wc -l`;
-for i in ~/Bilder/wallbase/*{.jpg,.png}
+WALLPATH=~/GIT/annex/wallpaper/$1/
+X=$RANDOM%`ls $WALLPATH* | wc -l`;
+for i in $WALLPATH*
 do
 	[[ $X == 1 ]] && feh --bg-center $i && break
 	X=$(($X-1))
@@ -112,8 +117,8 @@ alias appson="netstat -lantp | grep -i stab | awk -F/ '{print $2}' | sort | uniq
 alias bandwidth='dd if=/dev/zero of=/dev/null bs=1M count=32768'			# processor / memory bandwidthd? in GB/s
 alias browse_bonjour='dns-sd -B'							# browse services advertised via Bonjour
 alias hdinfo='hdparm -i[I] /dev/sda'							# hard disk information - model/serial no.
-alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
-alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
+#alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
+#alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
 alias http_trace='pkt_trace port 80'							# to show all HTTP packets
 alias iftop='sudo iftop -i eth0' 							# start "iftop" program (sudo apt-get install iftop)
 alias ip4grep="grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'"					# look for IPv4 address in files

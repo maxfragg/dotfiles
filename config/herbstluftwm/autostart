@@ -15,8 +15,8 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Shift-Return spawn roxterm
-hc keybind $Mod-Return spawn xfce4-terminal
+hc keybind $Mod-Return spawn roxterm
+hc keybind $Mod-Shift-Return spawn xfce4-terminal
 hc keybind $Mod-Control-o spawn opera-next
 
 #script centering mouse
@@ -201,7 +201,7 @@ case "$HOSTNAME" in
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
     	sh ~/.config/herbstluftwm/dmenu_run_cache &
-    	(while true ;do wallpaper; sleep 10m; done)&
+    	(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
     	xset m 10 2
@@ -218,8 +218,7 @@ case "$HOSTNAME" in
     faui49man*)
         ;;
     faui0*)
-    	#(while true ; wallpaper; sleep 10m; done)&
-    	(sleep 5 && wallpaper)&
+    	(sleep 5 && wallpaper autum)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
     	dmenu_path >~/.cache/dmenu_run &

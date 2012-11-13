@@ -85,6 +85,14 @@ host raspi
 	HostName raspi.fauiwg.de
 	User root
 
+<<<<<<< HEAD
 host squarez
+=======
+host squarez_max
+>>>>>>> e00ccf7b44c5c46dfb1125dd30fa80ed2fc13b4a
 	HostName squarez.fauiwg.de
 	User maxfragg
+
+host squarez_git
+	HostName squarez.fauiwg.de
+	User git-annex
