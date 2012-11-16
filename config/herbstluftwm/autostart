@@ -213,6 +213,7 @@ case "$HOSTNAME" in
     irene-ThinkPad)
     	(sleep 12 && tint2) &
     	ssh-add ~/.ssh/mykey &
+    	dmenu_path >~/.cache/dmenu_run &
     	nitrogen --restore &
     	;;
     taurus.uberspace.de)
