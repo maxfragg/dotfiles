@@ -212,6 +212,8 @@ case "$HOSTNAME" in
 	;;
     irene-ThinkPad)
     	(sleep 12 && tint2) &
+    	ssh-add ~/.ssh/mykey &
+    	nitrogen --restore &
     	;;
     taurus.uberspace.de)
         ;;
