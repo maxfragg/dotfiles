@@ -201,6 +201,7 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
+    	wallpaper autum
     	(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
