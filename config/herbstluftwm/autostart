@@ -175,7 +175,6 @@ killall synapse
 killall xfce4-power-manager
 
 sh ~/bin/sshk.sh
-sh ~/.config/herbstluftwm/dmenu_run_cache &
 (sleep 10 && xfsettingsd) &
 nm-applet &
 volumeicon &
@@ -201,7 +200,8 @@ case "$HOSTNAME" in
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
-    	wallpaper autum
+    	wallpaper autum &
+    	sh ~/.config/herbstluftwm/dmenu_run_cache &
     	(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
     	(sleep 12 && tint2) &
     	gnome-screensaver-command -d &
@@ -213,6 +213,9 @@ case "$HOSTNAME" in
 	;;
     irene-ThinkPad)
     	(sleep 12 && tint2) &
+    	ssh-add ~/.ssh/mykey &
+    	dmenu_path >~/.cache/dmenu_run &
+    	nitrogen --restore &
     	;;
     taurus.uberspace.de)
         ;;
@@ -222,6 +225,7 @@ case "$HOSTNAME" in
     	(sleep 5 && wallpaper autum)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
+    	dmenu_path >~/.cache/dmenu_run &
         ;;
     faui3*)
         ;;

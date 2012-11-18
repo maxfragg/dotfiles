@@ -82,8 +82,9 @@ host cssun
 	User el79irih
 
 host raspi
-	HostName raspi
+	HostName raspi.fauiwg.de
 	User root
+
 
 host squarez_max
 	HostName squarez.fauiwg.de
