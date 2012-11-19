@@ -9,6 +9,8 @@ alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5
 
 alias squarez='sshfs -o reconnect squarez_git:/media/3tb-0 ~/squarez/'
 
+rsyncpsa(){ rsync --progress --recursive --append $@;}
+
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
 
 allpdf(){ for i in "$@"*.pdf ; do echo $i ; ~/bin/katarakt "$i" 2>/dev/null ; done }
