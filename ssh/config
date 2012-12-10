@@ -82,7 +82,7 @@ host cssun
 	User el79irih
 
 host raspi
-	HostName raspi.fauiwg.de
+	HostName raspi
 	User root
 
 
