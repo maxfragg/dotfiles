@@ -157,7 +157,7 @@ function bash_prompt() {
     faui3*)
         UC=$M
         HC=$EMG
-        HOST_S="ls3"
+        HOST_S=`echo $HOSTNAME | cut -d. -f1`
         ;;
     irene-ThinkPad)
     	UC=$G
