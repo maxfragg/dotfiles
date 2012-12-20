@@ -64,7 +64,8 @@ function bash_prompt_command() {
     # How many characters of the $PWD should be kept
     local pwdmaxlen=20
     local host_s=$HOST_S
-    [[ `tput cols` -lt 110 ]] && pwdmaxlen=10 && host_s=""
+    [[ `tput cols` -lt 110 ]] && pwdmaxlen=10
+    [[ `tput cols` -lt 85 ]] && host_s=""
 
     # Indicate that there has been dir truncation
     local trunc_symbol=".."
