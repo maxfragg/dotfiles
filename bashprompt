@@ -63,9 +63,9 @@ function bash_prompt_command() {
 
     # How many characters of the $PWD should be kept
     local pwdmaxlen=20
-    local host_s=$HOST_S
+    local newline=""
     [[ `tput cols` -lt 110 ]] && pwdmaxlen=10
-    [[ `tput cols` -lt 85 ]] && host_s=""
+    [[ `tput cols` -lt 85 ]] && newline="\n"
 
     # Indicate that there has been dir truncation
     local trunc_symbol=".."
@@ -81,7 +81,7 @@ function bash_prompt_command() {
     
     [ $GIT = "1" ] && local GITPROMPT_=`_git_prompt`
 
-    PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${UC}\u${W}${HC}$LOC$host_s${EMK} ${HC}\${NEW_PWD}${EMK}$GITPROMPT_${UC}\\$ ${NONE}"
+    PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${UC}\u${W}${HC}$LOC$HOST_S${EMK} ${HC}\${NEW_PWD}${EMK}$GITPROMPT_$newline${UC}\\$ ${NONE}"
 
 }
 
