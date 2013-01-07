@@ -19,3 +19,4 @@ ip
 ssh/config
 xinitrc
 xsessionrc
+tmux.conf
