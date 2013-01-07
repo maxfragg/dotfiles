@@ -14,13 +14,13 @@ border_color = #3C9DE2 100
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 37
-border_color = #272727 68
+background_color = #272727 36
+border_color = #272727 67
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #272727 84
+background_color = #272727 83
 border_color = #073642 0
 
 # ID 4
@@ -51,7 +51,6 @@ panel_dock = 0
 wm_menu = 0
 panel_layer = top
 panel_background_id = 0
-panel_items = TSCL
 
 # Panel Autohide
 autohide = 0
@@ -59,17 +58,6 @@ autohide_show_timeout = 0.7
 autohide_hide_timeout = 1.5
 autohide_height = 2
 strut_policy = follow_size
-
-# Launcher
-launcher_padding = 8 4
-launcher_background_id = 2
-launcher_icon_size = 18
-#launcher_item_app = /usr/share/applications/opera-next-browser.desktop
-launcher_item_app = /usr/share/applications/roxterm.desktop
-#launcher_item_app = /usr/share/applications/pantheon-files.desktop
-launcher_icon_asb = 100 0 0
-launcher_tooltip = 0
-
 
 # Taskbar
 taskbar_mode = multi_desktop
@@ -143,6 +131,6 @@ bat1_font = Diavlo 10
 bat2_font = Aller 0
 battery_font_color = #D3CAAA 40
 battery_padding = 4 2
-battery_background_id = 4
+battery_background_id = 3
 
 # End of config

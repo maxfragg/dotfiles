@@ -19,6 +19,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
 
+alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
 alias prompt_git='GIT=1'
 alias prompt_fast='GIT=0'
 alias rootpath='PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH'
@@ -38,7 +39,8 @@ alias hlwm='herbstluftwm'
 alias exec_on_tag='~/.config/herbstluftwm/exec_on_tag.sh'
 alias difff='diff -urNp'
 alias sshtunnel='ssh -D 8080 -f -C -N uni'
-alias ucrypt='encfs ~/Dropbox/BoxCryptor ~/Private'
+alias ucrypt_p='encfs ~/Dropbox/BoxCryptor ~/Private'
+alias ucrypt_f='encfs /media/files/.files /home/maxfragg/files'
 alias bluetooth_off="sudo rfkill block bluetooth"
 alias bluetooth_on="sudo rfkill unblock bluetooth"
 alias tint2rs='pkill tint2 && herbstclient spawn tint2'

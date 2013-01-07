@@ -139,6 +139,7 @@ hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
 hc rule class=Audience tag=video
 hc rule class~Geary tag=mail
+hc rule class~Xournal tag=ed
 
 #custom add
 #hc set pad 0 "" "" 30
@@ -160,7 +161,7 @@ hc keybind $Mod-XF86Back spawn ~/.config/herbstluftwm/cycle.sh prev
 hc keybind $Mod-XF86Forward spawn ~/.config/herbstluftwm/cycle.sh next
 hc keybind $Mod-g toggle frame_gap
 hc keybind $Mod-Shift-a spawn ~/.config/herbstluftwm/urgent.sh
-
+hc keybind $Mod-l spawn xscreensaver-command -lock
 
 #sh ~/.config/herbstluftwm/restartpanels.sh
 #trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
@@ -170,21 +171,20 @@ killall trayer
 killall nm-applet
 killall parcellite
 killall tint2
-killall volumeicon
+#killall volumeicon
 killall synapse
 killall xfce4-power-manager
 
 sh ~/bin/sshk.sh
 (sleep 10 && xfsettingsd) &
 nm-applet &
-volumeicon &
+#volumeicon &
 xfce4-power-manager --no-daemon &
 gnome-keyring &
 #nitrogen --restore &
 dropbox start
 synapse &
 xsetroot -name hlwm
-
 #tint2
 hc pad 0 0 0 30 0
 #tint2 &
@@ -194,19 +194,23 @@ hc pad 0 0 0 30 0
 #custom settings depending on if running in gnome session or not
 
 case "$HOSTNAME" in
-    max-x61-ub)
+    max-x61-cb)
     	#hc set frame_bg_transparent 0
     	#hc set always_show_frame 1
     	#hc set frame_normal_opacity 30
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
+    	sh ~/wheeel.sh &
+    	pnmixer &
     	wallpaper winter &
     	sh ~/.config/herbstluftwm/dmenu_run_cache &
     	#(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
     	hc spawn ~/bin/wp.sh &
     	(sleep 12 && tint2) &
-    	gnome-screensaver-command -d &
+    	#gnome-screensaver-command -d &
+    	xscreensaver -no-splash &
     	xset m 10 2
+    	(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
         ;;
     max-x61-f15)
     	tint2 &
