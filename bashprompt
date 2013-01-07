@@ -131,7 +131,7 @@ function bash_prompt() {
     HC=$W
     HOST_S=""
     case "$HOSTNAME" in
-    max-x61-ub)
+    max-x61-cb)
         UC=$R
         HC=$EMY
         HOST_S="x61"
