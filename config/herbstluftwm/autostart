@@ -201,7 +201,7 @@ case "$HOSTNAME" in
     	#hc set frame_active_opacity 50
     	#hc spawn xcompmgr
     	sh ~/wheeel.sh &
-    	pnmixer &
+    	volumeicon &
     	wallpaper winter &
     	sh ~/.config/herbstluftwm/dmenu_run_cache &
     	#(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
@@ -211,6 +211,7 @@ case "$HOSTNAME" in
     	xscreensaver -no-splash &
     	xset m 10 2
     	(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
+        xflux -l 49.563302 -g 11.032162 -k 4500 &
         ;;
     max-x61-f15)
     	tint2 &
