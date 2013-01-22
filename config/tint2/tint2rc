@@ -8,25 +8,25 @@
 # ID 1
 rounded = 0
 border_width = 1
-background_color = #3C9DE2 100
-border_color = #3C9DE2 100
+background_color = #16B1FC 100
+border_color = #3C9DE2 0
 
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 36
-border_color = #272727 67
+background_color = #272727 34
+border_color = #272727 65
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #272727 83
+background_color = #272727 81
 border_color = #073642 0
 
 # ID 4
 rounded = 0
 border_width = 0
-background_color = #76B739 100
+background_color = #FFA800 100
 border_color = #222222 0
 
 # ID 5
@@ -38,7 +38,7 @@ border_color = #FFFFFF 0
 # ID 6
 rounded = 0
 border_width = 0
-background_color = #FFA800 100
+background_color = #FF2491 100
 border_color = #FFFFFF 0
 
 # Panel
@@ -72,8 +72,8 @@ task_text = 0
 task_centered = 1
 task_maximum_size = 0 32
 task_padding = 2 2
-task_background_id = 4
-task_active_background_id = 1
+task_background_id = 1
+task_active_background_id = 4
 task_urgent_background_id = 6
 task_iconified_background_id = 4
 
@@ -84,8 +84,8 @@ task_urgent_icon_asb = 100 0 0
 task_iconified_icon_asb = 100 0 0
 
 # Fonts
-task_font = Aller 7.6
-task_font_color = #D3CAAA 20
+task_font = Source Code Pro 9
+task_font_color = #FFFFFF 100
 task_active_font_color = #FFFFFF 100
 task_urgent_font_color = #FFFFFF 100
 task_iconified_font_color = #D3CAAA 20

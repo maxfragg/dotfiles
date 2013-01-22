@@ -57,7 +57,7 @@ fi
 
 #default editor
 export EDITOR=nano
-
+export EDITOR2=nano
 #path
 
 
@@ -76,7 +76,10 @@ case "$HOSTNAME" in
         ;;
     max-x61-f15)
 		
-		;;
+	;;
+    max-x61-cb)
+    	export EDITOR2=sublime_text
+    	;;
     taurus.uberspace.de)
         export LC_ALL=en_US.utf8
         ;;

@@ -10,9 +10,19 @@ alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5
 alias squarez='sshfs -o reconnect squarez_git:/media/3tb-0 ~/squarez/'
 
 heute.txt(){
-	local title=`date +%Y-%m-%d`-$@.txt
-	touch $title
-	editor $title
+	local t1=`date +%Y-%m-%d`
+	local t2=$@
+	if [ -f $t1* ]; then
+		$EDITOR2 $t1* &
+	else
+		if [[ $@ == "" ]]; then
+			echo -n "Enter title:"
+			read t2
+		fi
+		local title=$t1-t2.txt
+		touch $title
+		$EDITOR2 $title &
+	fi
 } 
 
 rsyncpsa(){ rsync --progress --recursive --append $@;}

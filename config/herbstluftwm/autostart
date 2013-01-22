@@ -211,7 +211,7 @@ case "$HOSTNAME" in
     	xscreensaver -no-splash &
     	xset m 10 2
     	(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
-        xflux -l 49.563302 -g 11.032162 -k 4500 &
+        #xflux -l 49.563302 -g 11.032162 -k 4700 &
         ;;
     max-x61-f15)
     	tint2 &
