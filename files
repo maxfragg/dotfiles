@@ -9,6 +9,8 @@ bashscripts
 #bin/nopaste
 #bin/sshk.sh
 #bin/wallpaper.sh
+#bin/utf8select.sh
+#bin/utf8db
 config/herbstluftwm
 config/roxterm.sourceforge.net
 config/tint2
@@ -20,3 +22,4 @@ ssh/config
 xinitrc
 xsessionrc
 tmux.conf
+#bin/dropbox_uploader.sh

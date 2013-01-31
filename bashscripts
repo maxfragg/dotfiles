@@ -13,19 +13,20 @@ heute.txt(){
 	local t1=`date +%Y-%m-%d`
 	local t2=$@
 	if [ -f $t1* ]; then
-		$EDITOR2 $t1* &
+		$EDITOR2 $t1*
 	else
 		if [[ $@ == "" ]]; then
-			echo -n "Enter title:"
+			echo "Enter title: "
 			read t2
 		fi
-		local title=$t1-t2.txt
+		local title=$t1-$t2.txt
 		touch $title
-		$EDITOR2 $title &
+		echo $ti-$t2>$title
+		$EDITOR2 $title
 	fi
 } 
 
-rsyncpsa(){ rsync --progress --recursive --append $@;}
+rsyncpra(){ rsync --progress --recursive --append $@;}
 
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
 
