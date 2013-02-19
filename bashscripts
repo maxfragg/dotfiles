@@ -13,7 +13,7 @@ heute.txt(){
 	local t1=`date +%Y-%m-%d`
 	local t2=$@
 	if [ -f $t1* ]; then
-		$EDITOR2 $t1*
+		herbstclient spawn $EDITOR2 $t1*
 	else
 		if [[ $@ == "" ]]; then
 			echo "Enter title: "
@@ -21,8 +21,10 @@ heute.txt(){
 		fi
 		local title=$t1-$t2.txt
 		touch $title
-		echo $ti-$t2>$title
-		$EDITOR2 $title
+		git add $title
+		date +%Y-%m-%d>>$title
+		echo $t2>>$title
+		$EDITOR2 $title 2>/dev/null &
 	fi
 } 
 
