@@ -37,7 +37,10 @@ for i in ${!TAG_NAMES[@]} ; do
     if ! [ -z "$key" ] ; then
 
 		case "$HOSTNAME" in
-			faui49man*)   
+			faui49man*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
+    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+
 		    	;;
 			faui0*)
 				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
@@ -229,6 +232,8 @@ case "$HOSTNAME" in
     taurus.uberspace.de)
         ;;
     faui49man*)
+    	ssh-add ~/.ssh/i4 &
+    	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
         ;;
     faui0*)
     	(sleep 5 && wallpaper autum)&

@@ -23,4 +23,5 @@ mailer=
 command=
 title_string=%s
 win_title=%s
-width=80
+width=100
+height=30
