@@ -178,7 +178,7 @@ function bash_prompt() {
     	;;
     phenux)
 	UC=$B
-	HC=$EMW
+	HC=$EMY
 	;;
     *)
         ;;
