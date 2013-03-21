@@ -37,7 +37,10 @@ for i in ${!TAG_NAMES[@]} ; do
     if ! [ -z "$key" ] ; then
 
 		case "$HOSTNAME" in
-			faui49man*)   
+			faui49man*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
+    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+
 		    	;;
 			faui0*)
 				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
@@ -229,6 +232,8 @@ case "$HOSTNAME" in
     taurus.uberspace.de)
         ;;
     faui49man*)
+    	ssh-add ~/.ssh/i4 &
+    	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
         ;;
     faui0*)
     	(sleep 5 && wallpaper autum)&
@@ -238,6 +243,18 @@ case "$HOSTNAME" in
         ;;
     faui3*)
         ;;
+    phenux)
+    	nitrogen --restore &&
+    	xrandr --output DIN --off --output DVI-1 --mode 1680x1050 --pos 1280x0 --rotate normal --output DVI-0 --mode 1280x1024 --pos 0x0 --rotate normal
+    	tint2&
+    	ssh-add ~/.ssh/phenux &
+    	dmenu_path >~/.cache/dmenu_run &
+    	#volumeicon &
+    	pnmixer &
+    	#xfce4-volumed &
+    	hc add_monitor 1680x1050+1280+0 term wide
+    	hc pad wide 0 0 30 0
+    	;;
     *)
         ;;
     esac

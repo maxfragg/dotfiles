@@ -18,4 +18,5 @@ case $@ in
 	;;
 
 	*)
+	exec /bin/bash -login /etc/X11/Xsession %session
 esac

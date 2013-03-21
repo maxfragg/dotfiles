@@ -129,7 +129,7 @@ function bash_prompt() {
     # user's color
     UC=$EMC
     HC=$W
-    HOST_S=""
+    HOST_S="$HOSTNAME"
     case "$HOSTNAME" in
     max-x61-cb)
         UC=$R
@@ -176,6 +176,10 @@ function bash_prompt() {
     	HC=$EMG
     	HOST_S="squarez"
     	;;
+    phenux)
+	UC=$B
+	HC=$EMY
+	;;
     *)
         ;;
     esac
