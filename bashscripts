@@ -28,6 +28,8 @@ heute.txt(){
 	fi
 } 
 
+kueche(){ ssh squarez mpc $@;}
+
 rsyncpra(){ rsync --progress --recursive --append $@;}
 
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}

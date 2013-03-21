@@ -148,7 +148,7 @@ hc rule class~Thunar tag=fm
 #hc set pad 0 "" "" 30
 
 #custom bindings
-
+hc keybind F1 spawn ~/.config/herbstluftwm/q3terminal.sh
 hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh

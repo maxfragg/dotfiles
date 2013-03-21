@@ -19,6 +19,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
 
+
 alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
 alias prompt_git='GIT=1'
 alias prompt_fast='GIT=0'
