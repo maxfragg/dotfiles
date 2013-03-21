@@ -208,9 +208,9 @@ case "$HOSTNAME" in
     	#hc spawn xcompmgr
     	sh ~/wheeel.sh &
     	volumeicon &
-    	wallpaper winter &
+    	wallpaper spring &
     	sh ~/.config/herbstluftwm/dmenu_run_cache &
-    	#(sleep 10 && (while true ;do wallpaper autum; sleep 10m; done))&
+    	(sleep 10 && (while true ;do wallpaper; sleep 10m; done))&
     	hc spawn ~/bin/wp.sh &
     	(sleep 12 && tint2) &
     	#gnome-screensaver-command -d &

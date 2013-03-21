@@ -49,14 +49,18 @@ grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\
 done
 }
 
-wallpaper(){ 
-WALLPATH=~/GIT/annex/wallpaper/$1/
-X=$RANDOM%`ls $WALLPATH* | wc -l`;
-for i in $WALLPATH*
-do
-	[[ $X == 1 ]] && feh --bg-center $i && break
-	X=$(($X-1))
-done
+wallpaper(){
+
+	if [[ $1 != "" ]]; then
+		echo $1
+		WALLSET=$1
+	fi
+	WALLPATH=~/GIT/wallpaper/$WALLSET/
+	local files=($WALLPATH*)
+	printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
+
+	feh --bg-center `printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
+		
 }
 
 tagtomon(){
