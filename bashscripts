@@ -49,17 +49,31 @@ grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\
 done
 }
 
+#renames files and folders to not contain any spaces, use with care!
+stu(){
+	find -name "* *" -type d | rename 's/ /_/g'    # do the directories first
+	find -name "* *" -type f | rename 's/ /_/g'
+}
+
 wallpaper(){
-
-	if [[ $1 != "" ]]; then
-		echo $1
-		WALLSET=$1
+	if [[ $1 == "-info" ]]; then
+		echo "current wallset is: "$WALLSET
+		echo "available sets are:"
+		echo `ls ~/GIT/wallpaper/`
+		return
 	fi
-	WALLPATH=~/GIT/wallpaper/$WALLSET/
-	local files=($WALLPATH*)
-	printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
+	if [[ $1 != "" ]]; then
+		WALLSET=$1
+	else
+		if [[ $WALLSET == "" ]]; then
+			WALLSET=misc
+		fi
+		
+	fi
+	local files=(~/GIT/wallpaper/$WALLSET/*)
+	#printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
 
-	feh --bg-center `printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
+	feh --bg-fill `printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
 		
 }
 
