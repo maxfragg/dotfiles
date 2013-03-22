@@ -87,7 +87,7 @@ case "$HOSTNAME" in
         
         ;;
     faui0*)
-        
+        addpackage herbstluftwm-git
         ;;
     faui3*)
        
