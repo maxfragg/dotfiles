@@ -54,6 +54,8 @@ for i in ${!TAG_NAMES[@]} ; do
     fi
 done
 
+hc rename_monitor 0 intern
+
 #default layouts for some tags
 hc load web '(clients max:0)'
 hc load video '(clients max:0)'
@@ -210,7 +212,7 @@ case "$HOSTNAME" in
     	volumeicon &
     	wallpaper spring &
     	sh ~/.config/herbstluftwm/dmenu_run_cache &
-    	(sleep 10 && (while true ;do wallpaper; sleep 10m; done))&
+    	(sleep 10 && (while true ;do wallpaper spring; sleep 6m; done))&
     	hc spawn ~/bin/wp.sh &
     	(sleep 12 && tint2) &
     	#gnome-screensaver-command -d &

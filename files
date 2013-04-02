@@ -23,3 +23,4 @@ xinitrc
 xsessionrc
 tmux.conf
 #bin/dropbox_uploader.sh
+display2.sh
