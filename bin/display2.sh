@@ -1,9 +1,16 @@
 #!/bin/bash
 
+###########################
+# display setup script v2 #
+###########################
+
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
-# for args mode enter $mode x1 y1 x2 y2
-
+# for args mode enter $mode [dryrun] x1 y1 [x2 y2]
+#
+# needs hlwm with monitorname support and xrandr
+# dryrun function does not changes you might also use the output of this for a static script 
+#
 # Beamer:
 # ---------
 # |1111|22|
@@ -26,6 +33,7 @@
 
 PADUP=0
 PADDOWN=30
+DRYRUN=0
 
 ex(){
 	if [[ $DRYRUN == "1" ]]; then
@@ -43,6 +51,21 @@ getnum(){
 	[[ $MODE == "dual" ]] 	&& MONS=2 && MONSU=2
 }
 
+
+# based on cycle.sh to find unused tags
+tags=( $(herbstclient tag_status) )
+
+# Find the currently active tag
+for ((i=0; i<="${#tags[@]}"; i++)); do
+	[[ "${tags[i]}" == "#"* ]] && activetag="$i"
+done
+
+
+
+##############
+# Real stuff #
+##############
+
 if [[ $@ == "" || $@ == "dryrun" ]]; then
 	#interactive mode
 	if [[ $@ == "dryrun" ]]; then
@@ -51,7 +74,7 @@ if [[ $@ == "" || $@ == "dryrun" ]]; then
 	fi
 
 	echo -n "Enter mode (single, beamer, dual, 2in1): "
-	read MODE
+	read MODE 
 	
 	getnum
 
@@ -65,14 +88,20 @@ if [[ $@ == "" || $@ == "dryrun" ]]; then
 else
 	MODE=$1
 	getnum
+	if [[ $2 == "dryrun" ]]; then
+		DRYRUN=1
+		echo "Dryrun mode, no changes!"
+	fi
 
 	for i in `seq $MONSU` ; do
-		indx=$(( ($i * 2)))
-		indy=$((1+ ($i * 2)))
+		indx=$(( ($i * 2) + $DRYRUN ))
+		indy=$((1+ ($i * 2) + $DRYRUN ))
 		eval X[$i]=\$$indx
 		eval Y[$i]=\$$indy
 	done
 fi;
+
+ex herbstclient lock
 
 #pre setup of variables
 case $MODE in
@@ -127,14 +156,15 @@ case $MODE in
 esac
 
 #establish monitors
+#just to make sure, we don't want errors here!!
 
-ex herbstclient rename_monitor 0 "${MNAME[1]}"
+ex herbstclient rename_monitor 0 "${MNAME[1]}" 2>/dev/null
 
 for i in `seq $MONS` ; do
 	if [[ $i == "1" ]]; then
 		ex herbstclient move_monitor "${MNAME[$i]}" "${X[$i]}x${Y[$i]}+${XOFF[$i]}+${YOFF[$i]}"
 	else
-		ex herbstclient add_monitor "${X[$i]}x${Y[$i]}+${XOFF[$i]}+${YOFF[$i]}" "${MNAME[$i]}"
+		ex herbstclient add_monitor "${X[$i]}x${Y[$i]}+${XOFF[$i]}+${YOFF[$i]}" "${tags[$(( ( $activetag+$i ) % ${#tags[@]} ))]:1}"  "${MNAME[$i]}"
 	fi
 done
 
@@ -142,34 +172,35 @@ done
 
 case $MODE in
 	"single" )
-		ex herbstclient pad "${MNAME[$1]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor "intern2"
-		ex herbstclient remove_monitor "extern"
-		ex herbstclient remove_monitor "sidebar"
-		ex herbstclient remove_monitor "bottom"
+		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		ex herbstclient remove_monitor "extern" 2>/dev/null
+		ex herbstclient remove_monitor "sidebar" 2>/dev/null
+		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		ex xrandr --output VGA1 --off
 		;;
 	"extern" )
-		ex herbstclient pad "${MNAME[$1]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
 		ex herbstclient remove_monitor 2
 		ex herbstclient remove_monitor 1
 		ex xrandr --output LVDS1 --off
-		ex herbstclient remove_monitor "intern"
-		ex herbstclient remove_monitor "intern2"
-		ex herbstclient remove_monitor "sidebar"
-		ex herbstclient remove_monitor "bottom"
+		ex herbstclient remove_monitor "intern" 2>/dev/null
+		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		ex herbstclient remove_monitor "sidebar" 2>/dev/null
+		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
 	"beamer" )
-		ex herbstclient pad "${MNAME[$1]}" $PADUP 0 0 0
-		ex herbstclient pad "${MNAME[$2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient pad "${MNAME[$3]}" 0 0 $PADDOWN 0
-		ex herbstclient remove_monitor "intern2"
-		ex herbstclient remove_monitor "extern"
+		ex herbstclient pad "${MNAME[1]}" $PADUP 0 0 0
+		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient pad "${MNAME[3]}" 0 0 $PADDOWN 0
+		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		ex herbstclient remove_monitor "extern" 2>/dev/null
 		;;
 	"dual" )
-		ex herbstclient pad "${MNAME[$1]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient pad "${MNAME[$2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor "extern"
+		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient remove_monitor "extern" 2>/dev/null
 		;;
 esac
 
+ex herbstclient unlock

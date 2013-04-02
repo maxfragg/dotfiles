@@ -8,7 +8,6 @@ bashscripts
 #bin/display.sh
 #bin/nopaste
 #bin/sshk.sh
-#bin/wallpaper.sh
 #bin/utf8select.sh
 #bin/utf8db
 config/herbstluftwm
@@ -23,4 +22,4 @@ xinitrc
 xsessionrc
 tmux.conf
 #bin/dropbox_uploader.sh
-display2.sh
+#bin/display2.sh
