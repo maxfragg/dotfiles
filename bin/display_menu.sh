@@ -192,8 +192,6 @@ case $MODE in
 		;;
 	"extern" )
 		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor 2
-		ex herbstclient remove_monitor 1
 		ex xrandr --output LVDS1 --off
 		ex herbstclient remove_monitor "intern" 2>/dev/null
 		ex herbstclient remove_monitor "intern2" 2>/dev/null
@@ -210,7 +208,9 @@ case $MODE in
 	"dual" )
 		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
 		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor "extern" 2>/dev/null
+		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		ex herbstclient remove_monitor "sidebar" 2>/dev/null
+		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
 esac
 
