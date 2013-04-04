@@ -160,6 +160,7 @@ hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
 hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
+hc keybind $Mod-Print spawn ~/bin/display_menu.sh
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
 hc keybind XF86AudioMute spawn amixer -q sset Master toggle
 hc keybind Shift-XF86AudioMute spawn ~/.config/herbstluftwm/unmute.sh
@@ -202,7 +203,7 @@ hc pad 0 0 0 30 0
 #custom settings depending on if running in gnome session or not
 
 case "$HOSTNAME" in
-    max-x61-cb)
+    max-x61-xu)
     	#hc set frame_bg_transparent 0
     	#hc set always_show_frame 1
     	#hc set frame_normal_opacity 30
@@ -211,20 +212,21 @@ case "$HOSTNAME" in
     	sh ~/wheeel.sh &
     	volumeicon &
     	wallpaper spring &
-    	sh ~/.config/herbstluftwm/dmenu_run_cache &
-    	(sleep 10 && (while true ;do wallpaper spring; sleep 6m; done))&
-    	hc spawn ~/bin/wp.sh &
+    	dmenu_path >~/.cache/dmenu_run &
+    	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
     	(sleep 12 && tint2) &
     	#gnome-screensaver-command -d &
     	xscreensaver -no-splash &
     	xset m 10 2
-    	(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
+        (sleep 15 && gigolo) &
+
+    	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
         #xflux -l 49.563302 -g 11.032162 -k 4700 &
         ;;
     max-x61-f15)
-    	tint2 &
-	ssh-add ~/.ssh/mykey &
-	;;
+        tint2 &
+        ssh-add ~/.ssh/mykey &
+        ;;
     irene-ThinkPad)
     	(sleep 12 && tint2) &
     	ssh-add ~/.ssh/mykey &
