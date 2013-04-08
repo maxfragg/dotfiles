@@ -214,11 +214,11 @@ case "$HOSTNAME" in
     	wallpaper spring &
     	dmenu_path >~/.cache/dmenu_run &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
-    	(sleep 12 && tint2) &
+    	(sleep 5 && tint2) &
     	#gnome-screensaver-command -d &
     	xscreensaver -no-splash &
     	xset m 10 2
-        (sleep 15 && gigolo) &
+        #(sleep 15 && gigolo) &
 
     	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
         #xflux -l 49.563302 -g 11.032162 -k 4700 &

@@ -19,7 +19,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
 
-
+alias squarez_musik="cd /run/user/maxfragg/gvfs/smb-share\:server=squarez\,share=musik/"
+alias squarez_videos="cd /run/user/maxfragg/gvfs/smb-share\:server=squarez\,share=videos"
 alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
 alias prompt_git='GIT=1'
 alias prompt_fast='GIT=0'

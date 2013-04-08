@@ -10,6 +10,8 @@ bashscripts
 #bin/sshk.sh
 #bin/utf8select.sh
 #bin/utf8db
+#bin/dmenu
+#bin/dmenu_run
 config/herbstluftwm
 config/roxterm.sourceforge.net
 config/tint2
