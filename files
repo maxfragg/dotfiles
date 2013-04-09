@@ -26,3 +26,4 @@ tmux.conf
 #bin/dropbox_uploader.sh
 #bin/display2.sh
 #bin/display_menu.sh
+#bin/display3.sh
