@@ -3,8 +3,16 @@
 ###########################
 # display setup script v3 #
 ###########################
-
-
+#
+# Author: 	Max Krueger
+# Date: 	2013-04-09 
+# License:  MIT
+#
+# # TODO:
+# # Half width resolutions for 2in1 mode as suggestion
+# # max switch picking the maximal resolution
+# # Spliting functionality up for easyer maintainance
+#
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
 # this version uses dmenu, commandline interactive or arguents for the graphical setup
@@ -65,7 +73,6 @@ getnum(){
 }
 
 #based on https://github.com/jpic/bashworks/blob/master/os/xrandr/source.sh
-# MIT license
 
 os_xrandr_displays=()
 
@@ -111,7 +118,7 @@ done
 
 
 ##############
-# Real stuff #
+# Parsing    #
 ##############
 
 os_xrandr_reset
@@ -185,9 +192,9 @@ else
 	fi
 fi
 
-
-
-
+###################
+# Breaking things #
+###################
 
 ex herbstclient lock
 
