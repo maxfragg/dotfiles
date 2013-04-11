@@ -160,7 +160,7 @@ hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
 hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
-hc keybind $Mod-Print spawn ~/bin/display_menu.sh
+hc keybind $Mod-Print spawn ~/bin/display3.sh --dmenu
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
 hc keybind XF86AudioMute spawn amixer -q sset Master toggle
 hc keybind Shift-XF86AudioMute spawn ~/.config/herbstluftwm/unmute.sh
@@ -180,7 +180,7 @@ killall trayer
 killall nm-applet
 killall parcellite
 killall tint2
-#killall volumeicon
+killall volumeicon
 killall synapse
 killall xfce4-power-manager
 
@@ -214,7 +214,7 @@ case "$HOSTNAME" in
     	wallpaper spring &
     	dmenu_path >~/.cache/dmenu_run &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
-    	(sleep 5 && tint2) &
+    	(sleep 7 && tint2) &
     	#gnome-screensaver-command -d &
     	xscreensaver -no-splash &
     	xset m 10 2

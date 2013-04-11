@@ -65,6 +65,8 @@ ex(){
 }
 
 getnum(){
+	MONS=0
+	MONSU=0
 	[[ $MODE == "2in1" ]] 	&& TWOINONE=1 && MODE="dual"
 	[[ $MODE == "single" ]] && MONS=1 && MONSU=1
 	[[ $MODE == "extern" ]] && MONS=1 && MONSU=1
@@ -163,7 +165,8 @@ else
 		getnum
 
 		for i in `seq $MONSU` ; do
-			echo -n "Choose output for monitor $i: (${os_xrandr_displays[@]})"
+			echo "Choose output for monitor $i:"
+			echo -e -n "${os_xrandr_displays[@]}"
 			read output[$i]
 			echo -n "Enter resolution X Y for monitor $i:"
 			read X[$i] Y[$i]
@@ -191,6 +194,11 @@ else
 		done
 	fi
 fi
+
+if [[ $MONSU == 0 || $MONS == 0 ]]; then
+	exit 255
+fi
+
 
 ###################
 # Breaking things #
