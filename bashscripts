@@ -28,6 +28,8 @@ heute.txt(){
 	fi
 } 
 
+
+
 kueche(){ ssh squarez mpc $@;}
 
 rsyncpra(){ rsync --progress --recursive --append $@;}
@@ -59,7 +61,7 @@ wallpaper(){
 	if [[ $1 == "-info" ]]; then
 		echo "current wallset is: "$WALLSET
 		echo "available sets are:"
-		echo `ls ~/GIT/wallpaper/`
+		echo `ls ~/git/wallpaper/`
 		return
 	fi
 	if [[ $1 != "" ]]; then
@@ -70,7 +72,7 @@ wallpaper(){
 		fi
 		
 	fi
-	local files=(~/GIT/wallpaper/$WALLSET/*)
+	local files=(~/git/wallpaper/$WALLSET/*)
 	#printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
 
 	feh --bg-fill `printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`

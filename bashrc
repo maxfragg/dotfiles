@@ -77,7 +77,7 @@ case "$HOSTNAME" in
     max-x61-f15)
 		
 	   ;;
-    max-x61-cb)
+    max-x61-xu)
     	export EDITOR2=sublime_text
     	;;
     taurus.uberspace.de)
