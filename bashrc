@@ -104,4 +104,4 @@ case "$HOSTNAME" in
 
 
 #include prompt needed 
-source ~/.bashprompt
+source ~/.bash_powerline
