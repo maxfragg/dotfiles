@@ -28,6 +28,10 @@ heute.txt(){
 	fi
 } 
 
+
+
+kueche(){ ssh squarez mpc $@;}
+
 rsyncpra(){ rsync --progress --recursive --append $@;}
 
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
@@ -47,14 +51,32 @@ grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\
 done
 }
 
-wallpaper(){ 
-WALLPATH=~/GIT/annex/wallpaper/$1/
-X=$RANDOM%`ls $WALLPATH* | wc -l`;
-for i in $WALLPATH*
-do
-	[[ $X == 1 ]] && feh --bg-center $i && break
-	X=$(($X-1))
-done
+#renames files and folders to not contain any spaces, use with care!
+stu(){
+	find -name "* *" -type d | rename 's/ /_/g'    # do the directories first
+	find -name "* *" -type f | rename 's/ /_/g'
+}
+
+wallpaper(){
+	if [[ $1 == "-info" ]]; then
+		echo "current wallset is: "$WALLSET
+		echo "available sets are:"
+		echo `ls ~/git/wallpaper/`
+		return
+	fi
+	if [[ $1 != "" ]]; then
+		WALLSET=$1
+	else
+		if [[ $WALLSET == "" ]]; then
+			WALLSET=misc
+		fi
+		
+	fi
+	local files=(~/git/wallpaper/$WALLSET/*)
+	#printf "%s\n" "${files[RANDOM % ${#files[@]}]}"
+
+	feh --bg-fill `printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
+		
 }
 
 tagtomon(){

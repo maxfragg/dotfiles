@@ -12,9 +12,7 @@ DOTFILES="`cat files`"
 
 
 if [ -f $HOSTNAME ]; then
-  DOTFILES="$DOTFILES `cat $HOSTNAME`"
-else
-  touch $HOSTNAME
+  DOTFILES="$DOTFILES `cat $HOSTNAME`" 
 fi
 
 if [ -f "$HOSTNAME"-not ]; then
@@ -23,8 +21,6 @@ if [ -f "$HOSTNAME"-not ]; then
   else
     DOTFILES=$(comm -3 <(sort "files") <(sort "$HOSTNAME"-not))
   fi
-else
-  touch "$HOSTNAME"-not
 fi
 
 

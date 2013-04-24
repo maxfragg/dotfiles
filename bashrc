@@ -77,7 +77,7 @@ case "$HOSTNAME" in
     max-x61-f15)
 		
 	   ;;
-    max-x61-cb)
+    max-x61-xu)
     	export EDITOR2=sublime_text
     	;;
     taurus.uberspace.de)
@@ -87,7 +87,7 @@ case "$HOSTNAME" in
         
         ;;
     faui0*)
-        
+        addpackage herbstluftwm-git
         ;;
     faui3*)
        
@@ -104,4 +104,4 @@ case "$HOSTNAME" in
 
 
 #include prompt needed 
-source ~/.bashprompt
+source ~/.bash_powerline
