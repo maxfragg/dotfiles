@@ -154,7 +154,7 @@ def add_host_segment(powerline, cwd):
     elif 'faui0' in hostname:
         bg = 226 #yellow
     elif 'faui49' in hostname:
-        bg = 33 #blue
+        bg = 161 #pink
 
     powerline.append(Segment(powerline, hs, fg, bg))
 
