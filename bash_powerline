@@ -1,5 +1,7 @@
 function _update_ps1() {
-   export PS1="$(~/.powerline-shell.py --sshflag $SSH_CONNECTION $?)"
+	LOC="0"
+	[ -n "$SSH_CONNECTION" ] && LOC="1"
+	export PS1="$(~/.powerline-shell.py --sshflag $LOC $?)"
 }
    
 export PROMPT_COMMAND="_update_ps1"
