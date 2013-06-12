@@ -130,6 +130,7 @@ hc rule isFullscreen=on focus=on
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
+hc rule class~chromium-browser tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
@@ -239,6 +240,7 @@ case "$HOSTNAME" in
     	ssh-add ~/.ssh/i4 &
     	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
     	dmenu_path >~/.cache/dmenu_run &
+    	(sleep 2 && tint2) &
         ;;
     faui0*)
     	(sleep 5 && wallpaper autum)&
