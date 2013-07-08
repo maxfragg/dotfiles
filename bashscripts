@@ -28,7 +28,7 @@ heute.txt(){
 	fi
 } 
 
-
+mancell(){ man -M ~/.man $@;}
 
 kueche(){ ssh squarez mpc $@;}
 

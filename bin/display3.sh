@@ -187,7 +187,7 @@ else
 		for i in `seq $MONSU` ; do
 			indoutput=$(( ($i * 2) + $DRYRUN ))
 			indres=$((1+ ($i * 2) + $DRYRUN ))
-			output[$i]=\$$indoutput
+			eval output[$i]=\$$indoutput
 			eval XY=\$$indres
 			X[$i]=`echo $XY | cut -d'x' -f1`
 			Y[$i]=`echo $XY | cut -d'x' -f2`
@@ -213,15 +213,18 @@ case $MODE in
 		YOFF[1]=0
 
 		MNAME[1]="intern"
+		ex xrandr --output ${output[1]} --mode ${X[1]}x${Y[1]}
 		;;
 	"extern" )
 		XOFF[1]=0
 		YOFF[1]=0
-		ex xrandr --output ${output[1]} --auto
+		ex xrandr --output ${output[1]} --mode ${X[1]}x${Y[1]}
 
 		MNAME[1]="extern"
 		;;
 	"beamer" )
+		ex xrandr --output ${output[1]} ${X[1]}x${Y[1]}
+		ex xrandr --output ${output[2]} ${X[2]}x${Y[2]}
 		XTMP=${X[1]}
 		YTMP=${Y[1]}
 		X[1]=${X[2]}
@@ -236,7 +239,6 @@ case $MODE in
 		YOFF[2]=0
 		XOFF[3]=0
 		YOFF[3]=${Y[1]}
-		ex xrandr --output ${output[1]} --auto
 		MNAME[1]="intern"
 		MNAME[2]="sidebar"
 		MNAME[3]="bottom"
@@ -247,7 +249,11 @@ case $MODE in
 		XOFF[2]=${X[1]}
 		YOFF[2]=0
 		if [[ $TWOINONE != "1" ]]; then
+			ex xrandr --output ${output[1]} --auto
+			ex xrandr --output ${output[1]} ${X[1]}x${Y[1]}
+			ex xrandr --output ${output[1]} --pos "${XOFF[1]}x${YOFF[1]}"
 			ex xrandr --output ${output[2]} --auto
+			ex xrandr --output ${output[2]} ${X[2]}x${Y[2]}
 			ex xrandr --output ${output[2]} --pos "${XOFF[2]}x${YOFF[2]}"
 			MNAME[1]="intern"
 			MNAME[2]="extern"
