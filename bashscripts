@@ -7,7 +7,7 @@
 
 alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ ~/tmp/'
 
-alias squarez='sshfs -o reconnect squarez_git:/media/3tb-0 ~/squarez/'
+alias squarez='sshfs -o reconnect squarez_git:/home/git-annex ~/squarez/'
 
 heute.txt(){
 	local t1=`date +%Y-%m-%d`
@@ -27,6 +27,8 @@ heute.txt(){
 		$EDITOR2 $title 2>/dev/null &
 	fi
 } 
+
+finger_uni(){ ssh uni finger $@;}
 
 mancell(){ man -M ~/.man $@;}
 
