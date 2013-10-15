@@ -60,6 +60,7 @@ hc rename_monitor 0 intern
 hc load web '(clients max:0)'
 hc load video '(clients max:0)'
 hc load pdf '(clients max:0)'
+hc load mail '(clients max:0)'
 hc load ed '(clients grid:0)'
 hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
 #hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
@@ -154,6 +155,7 @@ hc rule class~Thunar tag=fm
 hc rule class~Thunderbird tag=mail
 hc rule class='Pdfpc' windowrole='presenter' tag=pdf
 hc rule class='Pdfpc' windowrole='presentation' tag=video
+hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
 
 #custom add
 #hc set pad 0 "" "" 30
