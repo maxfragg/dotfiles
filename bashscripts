@@ -5,9 +5,20 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
 alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ ~/tmp/'
 
-alias squarez='sshfs -o reconnect squarez_git:/media/3tb-0 ~/squarez/'
+alias squarez='sshfs -o reconnect squarez_git:/home/git-annex ~/squarez/'
 
 heute.txt(){
 	local t1=`date +%Y-%m-%d`
@@ -27,6 +38,8 @@ heute.txt(){
 		$EDITOR2 $title 2>/dev/null &
 	fi
 } 
+
+finger_uni(){ ssh uni finger $@;}
 
 mancell(){ man -M ~/.man $@;}
 

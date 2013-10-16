@@ -81,7 +81,7 @@ function bash_prompt_command() {
     
     [ $GIT = "1" ] && local GITPROMPT_=`_git_prompt`
 
-    PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${HC}[${UC}\u${W}${HC}$LOC$HOST_S${EMK}${UC}\${NEW_PWD}${EMK}$GITPROMPT_${HC}]$newline${UC}\\$ ${NONE}"
+    PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${HC}[${UC}\u${W}${HC}$LOC$HOST_S${EMK}${UC}\${NEW_PWD}${HC}]${EMK}$GITPROMPT_$newline${UC}\\$ ${NONE}"
 
 }
 
