@@ -55,8 +55,8 @@ update_geom() {
     hc move_monitor "$monitor" $geom
 }
 
-steps=5
-interval=0.01
+steps=1
+interval=0.0
 
 animate() {
     progress=( "$@" )

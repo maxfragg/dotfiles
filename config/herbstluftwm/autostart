@@ -60,6 +60,7 @@ hc rename_monitor 0 intern
 hc load web '(clients max:0)'
 hc load video '(clients max:0)'
 hc load pdf '(clients max:0)'
+hc load mail '(clients max:0)'
 hc load ed '(clients grid:0)'
 hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
 #hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
@@ -116,6 +117,8 @@ hc set frame_bg_transparent 1
 hc set frame_border_width 2
 hc set window_border_width 2
 hc set focus_follows_mouse 1
+hc set focus_stealing_prevention 1
+
 
 # rules
 hc unrule -F
@@ -149,6 +152,10 @@ hc rule class~Geary tag=mail
 hc rule class~Xournal tag=ed
 hc rule class~gnome-mplayer tag=video
 hc rule class~Thunar tag=fm
+hc rule class~Thunderbird tag=mail
+hc rule class='Pdfpc' windowrole='presenter' tag=pdf
+hc rule class='Pdfpc' windowrole='presentation' tag=video
+hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
 
 #custom add
 #hc set pad 0 "" "" 30
@@ -208,17 +215,20 @@ case "$HOSTNAME" in
     	#hc set frame_bg_transparent 0
     	#hc set always_show_frame 1
     	#hc set frame_normal_opacity 30
-    	#hc set frame_active_opacity 50
+    	#hc set frame_active_opacity 0
+        #xcompmgr -cC -r4 &
     	#hc spawn xcompmgr
     	sh ~/wheeel.sh &
     	volumeicon &
-    	wallpaper spring &
+    	wallpaper nsfw &
     	dmenu_path >~/.cache/dmenu_run &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
     	(sleep 7 && tint2) &
     	#gnome-screensaver-command -d &
     	xscreensaver -no-splash &
-    	xset m 10 2
+    	xset m 10 2 &
+    	pcscd &
+    	gpg-agent &
         #(sleep 15 && gigolo) &
 
     	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &

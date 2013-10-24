@@ -78,7 +78,7 @@ case "$HOSTNAME" in
 		
 	   ;;
     max-x61-xu)
-    	export EDITOR2=sublime_text
+    	export EDITOR2=sublime-text
     	;;
     taurus.uberspace.de)
         export LC_ALL=en_US.utf8
@@ -104,4 +104,5 @@ case "$HOSTNAME" in
 
 
 #include prompt needed 
-source ~/.bash_powerline
+#source ~/.bash_powerline
+source ~/.bashprompt

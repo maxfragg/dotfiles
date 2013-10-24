@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#forked from https://github.com/milkbikis/powerline-shell
+
 import os
 import subprocess
 import sys
