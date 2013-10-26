@@ -27,7 +27,7 @@ FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
 #TAG_KEYS=( {1..9} 0 )
 
 #TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
-TAG_NAMES=(irc term web ed var video pdf fm music mail )
+TAG_NAMES=(cip term web ed var video pdf fm music mail )
 TAG_KEYS=( {1..9} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
