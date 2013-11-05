@@ -1,9 +1,10 @@
 #!/bin/bash
 
+#echo $@ >xtest.log
 
 case $@ in
 	herbstluftwm)
-	exec xterm
+	#exec xterm
 	# Start a D-Bus session
 	source /etc/X11/xinit/xinitrc.d/30-dbus
 	# Start GNOME Keyring
@@ -21,5 +22,8 @@ case $@ in
 	ssh-agent herbstluftwm -c ~/.config/herbstluftwm/autostart
 	;;
 	*)
+	#exec $@
+	exec ssh-agent `dmenu <~/.wmlist`
 	#exec /bin/bash -login /etc/X11/Xsession %session
 esac
+

@@ -133,7 +133,7 @@ hc rule isFullscreen=on focus=on
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
-hc rule class~chromium-browser tag=web
+hc rule class=Chromium-browser tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
