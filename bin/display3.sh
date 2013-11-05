@@ -1,21 +1,23 @@
 #!/bin/bash
 
 ###########################
-# display setup script v3 #
+# display setup script v3.1 #
 ###########################
 #
 # Author: 	Max Krueger
-# Date: 	2013-04-09 
+# Date: 	2013-11-05 
 # License:  MIT
 #
 # # TODO:
 # # Half width resolutions for 2in1 mode as suggestion
-# # max switch picking the maximal resolution
 # # Spliting functionality up for easyer maintainance
 #
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
 # this version uses dmenu, commandline interactive or arguents for the graphical setup
+# New feature: automode, dedects connected monitors and sets them to their maximum 
+# resolution, at the moment only for up to 2 monitors, support for arbitrary monitor numbers
+# is in the works. Be prepared, dual will be renamend to multi, once we are there!
 #
 # needs hlwm with monitorname support, cut, grep, dmenu and xrandr
 # dryrun function does not changes you might also use the output of this for a static script 
@@ -46,7 +48,7 @@
 source ~/.config/herbstluftwm/colors.sh
 
 PADUP=0
-PADDOWN=30
+PADDOWN=25
 DRYRUN=0
 
 
@@ -54,7 +56,8 @@ MODES="single
 extern
 dual
 2in1
-beamer"
+beamer
+auto"
 
 ex(){
 	if [[ $DRYRUN == "1" ]]; then
@@ -67,6 +70,7 @@ ex(){
 getnum(){
 	MONS=0
 	MONSU=0
+	[[ $MODE == auto ]] && MONS=`xrandr | grep " connected" | cut -d' ' -f1| wc -l` && MONSU=$MONS
 	[[ $MODE == "2in1" ]] 	&& TWOINONE=1 && MODE="dual"
 	[[ $MODE == "single" ]] && MONS=1 && MONSU=1
 	[[ $MODE == "extern" ]] && MONS=1 && MONSU=1
@@ -184,14 +188,35 @@ else
 			echo "Dryrun mode, no changes!"
 		fi
 
-		for i in `seq $MONSU` ; do
-			indoutput=$(( ($i * 2) + $DRYRUN ))
-			indres=$((1+ ($i * 2) + $DRYRUN ))
-			eval output[$i]=\$$indoutput
-			eval XY=\$$indres
-			X[$i]=`echo $XY | cut -d'x' -f1`
-			Y[$i]=`echo $XY | cut -d'x' -f2`
-		done
+		# auto mode is special, uses more xrandr magic and takes only
+		# dryrun as aditional argument 
+		if [[ $MODE == "auto" ]]; then
+			i=1
+			for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
+				output[$i]=$outputs
+				XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
+				XY=`echo $XY | cut -d'\' -f1`
+				echo $XY
+				X[$i]=`echo $XY | cut -d'x' -f1`
+				Y[$i]=`echo $XY | cut -d'x' -f2`
+				i=`expr $i + 1` 
+			done
+			if [[ $i == 2 ]]; then
+				MODE="single"
+			else
+				MODE="dual"
+			fi
+		else
+
+			for i in `seq $MONSU` ; do
+				indoutput=$(( ($i * 2) + $DRYRUN ))
+				indres=$((1+ ($i * 2) + $DRYRUN ))
+				eval output[$i]=\$$indoutput
+				eval XY=\$$indres
+				X[$i]=`echo $XY | cut -d'x' -f1`
+				Y[$i]=`echo $XY | cut -d'x' -f2`
+			done
+		fi
 	fi
 fi
 

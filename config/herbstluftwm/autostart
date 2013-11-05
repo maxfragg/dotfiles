@@ -203,7 +203,7 @@ dropbox start
 synapse &
 xsetroot -name hlwm
 #tint2
-hc pad 0 0 0 30 0
+hc pad 0 0 0 25 0
 #tint2 &
 
 #parcellite &

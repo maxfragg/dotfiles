@@ -8,19 +8,19 @@
 # ID 1
 rounded = 0
 border_width = 1
-background_color = #16B1FC 100
-border_color = #3C9DE2 0
+background_color = #D81765 100
+border_color = #D81765 100
 
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 34
-border_color = #272727 65
+background_color = #272727 32
+border_color = #272727 63
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #272727 81
+background_color = #171814 80
 border_color = #073642 0
 
 # ID 4
@@ -32,19 +32,19 @@ border_color = #222222 0
 # ID 5
 rounded = 0
 border_width = 0
-background_color = #FDF6E3 100
+background_color = #ECECEC 100
 border_color = #FFFFFF 0
 
 # ID 6
 rounded = 0
 border_width = 0
-background_color = #FF2491 100
+background_color = #171814 100
 border_color = #FFFFFF 0
 
 # Panel
 panel_monitor = ALL
 panel_position = bottom center horizontal
-panel_size = 100% 30
+panel_size = 100% 24
 panel_margin = 10 0
 panel_padding = 0 0 0
 panel_dock = 0
@@ -61,19 +61,19 @@ strut_policy = follow_size
 
 # Taskbar
 taskbar_mode = multi_desktop
-taskbar_padding = 8 4 12
+taskbar_padding = 8 0 12
 taskbar_background_id = 2
 taskbar_active_background_id = 3
 
 # Tasks
-urgent_nb_of_blink = 64
+urgent_nb_of_blink = 999999
 task_icon = 1
 task_text = 0
 task_centered = 1
 task_maximum_size = 0 32
 task_padding = 2 2
-task_background_id = 1
-task_active_background_id = 4
+task_background_id = 4
+task_active_background_id = 1
 task_urgent_background_id = 6
 task_iconified_background_id = 4
 
@@ -84,8 +84,8 @@ task_urgent_icon_asb = 100 0 0
 task_iconified_icon_asb = 100 0 0
 
 # Fonts
-task_font = Source Code Pro 9
-task_font_color = #FFFFFF 100
+task_font = Aller 7.6
+task_font_color = #D3CAAA 20
 task_active_font_color = #FFFFFF 100
 task_urgent_font_color = #FFFFFF 100
 task_iconified_font_color = #D3CAAA 20
@@ -93,18 +93,18 @@ font_shadow = 0
 
 # System Tray
 systray = 1
-systray_padding = 5 5 5
+systray_padding = 5 0 5
 systray_sort = ascending
 systray_background_id = 4
-systray_icon_size = 18
+systray_icon_size = 22
 systray_icon_asb = 100 0 0
 
 # Clock
 time1_format = %H:%M %b %d
 time1_font = Sans 10
 clock_font_color = #FFFFFF 100
-clock_padding = 4 2
-clock_background_id = 1
+clock_padding = 4 0
+clock_background_id = 3
 clock_rclick_command = gsimplecal
 
 # Tooltips
