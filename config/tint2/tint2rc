@@ -14,8 +14,8 @@ border_color = #D81765 100
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #272727 32
-border_color = #272727 63
+background_color = #272727 31
+border_color = #272727 62
 
 # ID 3
 rounded = 0
@@ -127,10 +127,10 @@ battery = 0
 battery_low_status = 7
 battery_low_cmd = notify-send "battery low"
 battery_hide = 100
-bat1_font = Diavlo 10
-bat2_font = Aller 0
-battery_font_color = #D3CAAA 40
+bat1_font = Source Sans Pro 10
+bat2_font = Aksara Bali Galang 6
+battery_font_color = #1E2C29 100
 battery_padding = 4 2
-battery_background_id = 3
+battery_background_id = 4
 
 # End of config

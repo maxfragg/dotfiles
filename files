@@ -20,8 +20,6 @@ config/Terminal
 fonts
 ip
 ssh/config
-xinitrc
-xsessionrc
 tmux.conf
 #bin/dropbox_uploader.sh
 #bin/display2.sh
