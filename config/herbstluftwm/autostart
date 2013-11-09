@@ -153,6 +153,8 @@ hc rule class~Xournal tag=ed
 hc rule class~gnome-mplayer tag=video
 hc rule class~Thunar tag=fm
 hc rule class~Thunderbird tag=mail
+hc rule class~Thunderbird focus=on
+hc rule windowrole~EventDialog pseudotile=on
 hc rule class='Pdfpc' windowrole='presenter' tag=pdf
 hc rule class='Pdfpc' windowrole='presentation' tag=video
 hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
