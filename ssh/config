@@ -99,3 +99,9 @@ host squarez_git_extern
 host squarez_git
 	HostName squarez.fritz.box
 	User git-annex
+
+host vulbox
+	HostName 10.22.8.1
+	User root
+	IdentityFile ~/.ssh/rwthctf
+
