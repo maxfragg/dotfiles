@@ -105,3 +105,7 @@ host vulbox
 	User root
 	IdentityFile ~/.ssh/rwthctf
 
+host ctf00
+	HostName ctf00.informatik.uni-erlangen.de
+	User maxfragg
+	IdentityFile ~/.ssh/ctf00
