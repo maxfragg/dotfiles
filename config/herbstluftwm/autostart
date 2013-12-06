@@ -262,6 +262,7 @@ case "$HOSTNAME" in
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
     	dmenu_path >~/.cache/dmenu_run &
+    	hc keybind $Mod-l spawn xlock
         ;;
     faui3*)
         ;;
