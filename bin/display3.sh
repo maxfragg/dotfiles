@@ -88,6 +88,8 @@ os_xrandr_parse() {
     # extract
     local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
+    #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+
     # parse
     for result in $results; do
         if [[ $result =~ connected ]]; then
