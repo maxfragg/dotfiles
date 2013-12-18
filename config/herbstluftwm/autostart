@@ -206,7 +206,7 @@ synapse &
 xsetroot -name hlwm
 #tint2
 hc pad 0 0 0 25 0
-#tint2 &
+
 
 #parcellite &
 
@@ -232,7 +232,7 @@ case "$HOSTNAME" in
     	pcscd &
     	gpg-agent &
         hc spawn ~/bin/display3.sh auto
-        hc keybind $Mod-l spawn i3lock
+        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
         #(sleep 15 && gigolo) &
 
     	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &

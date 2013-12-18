@@ -351,7 +351,11 @@ case $MODE in
 	"dual" )
 		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
 		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		if [[ $TWOINONE != "1" ]]; then
+			ex herbstclient remove_monitor "intern2" 2>/dev/null
+		else
+			ex herbstclient remove_monitor "extern" 2>/dev/null
+		fi
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
