@@ -92,9 +92,13 @@ os_xrandr_parse() {
 
     # parse
     for result in $results; do
-        if [[ $result =~ connected ]]; then
-            continue
-        fi
+        #if [[ $result =~ connected ]]; then
+        #    result=$(echo $result | cut -d' ' -f1)
+        #    if [[ result == "" ]]; then
+        #    	continue
+        #    fi
+        #
+        #fi
 
         if [[ $result =~ [A-Z] ]]; then
             current_modes="os_xrandr_modes_${result}"
