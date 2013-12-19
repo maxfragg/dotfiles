@@ -149,34 +149,35 @@ if [[ $1 == "--dmenu" || $1 == "-d" ]]; then
 
 	getnum
 
-	# auto mode is special, uses more xrandr magic and takes only
-	# dryrun as aditional argument 
-	if [[ $MODE == "auto" ]]; then
-		i=1
-		for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
-			output[$i]=$outputs
-			XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
-			XY=`echo $XY | cut -d'\' -f1`
-			echo $XY
-			X[$i]=`echo $XY | cut -d'x' -f1`
-			Y[$i]=`echo $XY | cut -d'x' -f2`
-			i=`expr $i + 1` 
-		done
-		if [[ $i == 2 ]]; then
-			MODE="single"
-		else
-			MODE="dual"
-		fi
-	else
-		for i in `seq $MONSU` ; do
-			output[$i]=`echo -e "${os_xrandr_displays[@]}" | dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select monitor $i"`
-			CUR_MODES=$(eval "echo \${os_xrandr_modes_${output[$i]}[@]}")
-			XY=`echo -e $CUR_MODES | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Resolution for monitor $i"`
+    # auto mode is special, uses more xrandr magic and takes only
+    # dryrun as aditional argument 
+    if [[ $MODE == "auto" ]]; then
+    	i=1
+    	for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
+    		output[$i]=$outputs
+    		XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
+    		XY=`echo $XY | cut -d'\' -f1`
+    		echo $XY
+    		X[$i]=`echo $XY | cut -d'x' -f1`
+    		Y[$i]=`echo $XY | cut -d'x' -f2`
+    		i=`expr $i + 1` 
+    	done
+    	if [[ $i == 2 ]]; then
+    		MODE="single"
+    	else
+    		MODE="dual"
+    	fi
+    else
+    # Conventional dmenu mode, we need to ask for more settings
+    	for i in `seq $MONSU` ; do
+    		output[$i]=`echo -e "${os_xrandr_displays[@]}" | dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select monitor $i"`
+    		CUR_MODES=$(eval "echo \${os_xrandr_modes_${output[$i]}[@]}")
+    		XY=`echo -e $CUR_MODES | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Resolution for monitor $i"`
 
-			X[$i]=`echo $XY | cut -d'x' -f1`
-			Y[$i]=`echo $XY | cut -d'x' -f2`
-		done
-	fi
+    		X[$i]=`echo $XY | cut -d'x' -f1`
+    		Y[$i]=`echo $XY | cut -d'x' -f2`
+    	done
+    fi
 else
 	if [[ $@ == "" || $@ == "dryrun" ]]; then
 		####################
@@ -356,7 +357,11 @@ case $MODE in
 	"dual" )
 		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
 		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		if [[ $TWOINONE != "1" ]]; then
+			ex herbstclient remove_monitor "intern2" 2>/dev/null
+		else
+			ex herbstclient remove_monitor "extern" 2>/dev/null
+		fi
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;

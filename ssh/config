@@ -84,18 +84,20 @@ host raspi
 	User root
 
 
-host squarez_max_extern
-	HostName squarez.fauiwg.de
-	User maxfragg
-
 host squarez_max
-	HostName squarez.fritz.box
-	User maxfragg
-
-host squarez_git_extern
 	HostName squarez.fauiwg.de
-	User git-annex
+	User maxfragg
 
 host squarez_git
-	HostName squarez.fritz.box
+	HostName squarez.fauiwg.de
 	User git-annex
+
+host vulbox
+	HostName 10.23.31.2
+	User root
+	IdentityFile ~/.ssh/ructf
+
+host ctf00
+	HostName ctf00.informatik.uni-erlangen.de
+	User maxfragg
+	IdentityFile ~/.ssh/ctf00
