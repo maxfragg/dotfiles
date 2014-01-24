@@ -288,7 +288,8 @@ case "$HOSTNAME" in
         hc set frame_bg_transparent 0
         hc set always_show_frame 1
         hc set frame_normal_opacity 30
-        hc set frame_active_opacity 0
+        hc set frame_active_opacity 30
+        hc set frame_bg_active_color $COLOR_FR_BG_N
 
         compton --config ~/.compton.conf &
         ;;
