@@ -27,3 +27,4 @@ tmux.conf
 #bin/display3.sh
 powerline-shell.py 
 bash_powerline
+compton.conf

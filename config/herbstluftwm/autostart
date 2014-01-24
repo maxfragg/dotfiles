@@ -283,6 +283,14 @@ case "$HOSTNAME" in
         ssh-add ~/.ssh/cipkey &
         (sleep 10 && wallpaper misc )&
         hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
+
+
+        hc set frame_bg_transparent 0
+        hc set always_show_frame 1
+        hc set frame_normal_opacity 30
+        hc set frame_active_opacity 0
+
+        compton --config ~/.compton.conf &
         ;;
     *)
         ;;
