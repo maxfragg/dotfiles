@@ -9,7 +9,7 @@
 #overwrites everything else
 
 DOTFILES="`cat files`"
-
+OPTIONAL="`cat files-opt`"
 
 if [ -f $HOSTNAME ]; then
   DOTFILES="$DOTFILES `cat $HOSTNAME`" 
@@ -23,6 +23,16 @@ if [ -f "$HOSTNAME"-not ]; then
   fi
 fi
 
+for name in $OPTIONAL; do
+  echo "Install "$name"? [y\n]"
+  read answer
+  if [[ $answer == "y" ]]; then
+    echo "adding"$name
+    DOTFILES="$DOTFILES `echo $name`"
+  else
+    echo "skipping "$name
+  fi
+done
 
 for name in $DOTFILES; do
   if [ `expr index "$name" "#"` == 1 ]; then

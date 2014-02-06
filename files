@@ -20,11 +20,11 @@ config/Terminal
 fonts
 ip
 ssh/config
-xinitrc
-xsessionrc
 tmux.conf
 #bin/dropbox_uploader.sh
 #bin/display2.sh
 #bin/display_menu.sh
 #bin/display3.sh
-powerline-shell.py bash_powerline
+powerline-shell.py 
+bash_powerline
+compton.conf

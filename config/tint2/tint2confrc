@@ -1,7 +1,7 @@
 #---------------------------------------------
 # TINT2CONF CONFIG FILE
-default_theme = /home/maxfragg/.config/tint2/hlwm.tint2rc
+default_theme = /home/maxfragg/.config/tint2/hlwm_2013.tint2rc
 cmd_property = python /usr/bin/tintwizard
-width = 1382
+width = 684
 height = 1002
 

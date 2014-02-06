@@ -1,4 +1,4 @@
 #!/bin/bash
 source ~/.bashscripts
-while true ;do wallpaper autum; sleep 10m; done
+while true ;do wallpaper winter; sleep 10m; done
 

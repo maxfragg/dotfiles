@@ -20,8 +20,8 @@ hc() {
 }
 
 mrect=( $(hc monitor_rect -p "" ) )
-termwidth=$(((${mrect[2]}*8)/10))
-termheight=600
+termwidth=$(((${mrect[2]}*9)/10))
+termheight=550
 
 rect=(
     $termwidth
@@ -70,6 +70,7 @@ animate() {
 show() {
 
     hc lock
+    hc set focus_follows_mouse 0
     hc raise_monitor $monitor
     hc focus_monitor $monitor
     hc unlock
@@ -95,6 +96,7 @@ hide() {
         and + compare monitors.focus.name = $monitor \
             + focus_monitor M
     hc remove_monitor $monitor
+    hc set focus_follows_mouse 1
 }
 
 [ $exists = true ] && hide || show

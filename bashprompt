@@ -175,6 +175,11 @@ function bash_prompt() {
 	   UC=$B
 	   HC=$EMY
 	   ;;
+    faui1*)
+    	UC=$B
+    	HC=$EMC
+    	HOST_S="i1"
+    	;;
     *)
         ;;
     esac

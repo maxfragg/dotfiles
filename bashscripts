@@ -5,6 +5,10 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
+lt(){
+    ~/bin/LightTable/LightTable "$@"
+}
+
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -178,7 +182,7 @@ alias hdinfo='hdparm -i[I] /dev/sda'							# hard disk information - model/seria
 alias http_trace='pkt_trace port 80'							# to show all HTTP packets
 alias iftop='sudo iftop -i eth0' 							# start "iftop" program (sudo apt-get install iftop)
 alias ip4grep="grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'"					# look for IPv4 address in files
-alias ip='curl www.whatismyip.org'
+alias myip='curl www.whatismyip.org'
 alias ip_info='ipconfig getpacket en1'							# info on DHCP server, router, DNS server, etc (for en0 or en1)
 alias ipt80='sudo iptstate -D 80'							# check out only iptables state of http port 80 (requires iptstate)
 alias ip_trace='pkt_trace ip'								# to show all IP packets

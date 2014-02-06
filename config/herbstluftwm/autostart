@@ -27,7 +27,7 @@ FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
 #TAG_KEYS=( {1..9} 0 )
 
 #TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
-TAG_NAMES=(irc term web ed var video pdf fm music mail )
+TAG_NAMES=(cip term web ed var video pdf fm music mail )
 TAG_KEYS=( {1..9} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
@@ -133,7 +133,7 @@ hc rule isFullscreen=on focus=on
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
-hc rule class~chromium-browser tag=web
+hc rule class=Chromium-browser tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
@@ -153,6 +153,8 @@ hc rule class~Xournal tag=ed
 hc rule class~gnome-mplayer tag=video
 hc rule class~Thunar tag=fm
 hc rule class~Thunderbird tag=mail
+hc rule class~Thunderbird focus=on
+hc rule windowrole~EventDialog pseudotile=on
 hc rule class='Pdfpc' windowrole='presenter' tag=pdf
 hc rule class='Pdfpc' windowrole='presentation' tag=video
 hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
@@ -203,8 +205,9 @@ dropbox start
 synapse &
 xsetroot -name hlwm
 #tint2
-hc pad 0 0 0 30 0
-#tint2 &
+hc pad 0 0 0 25 0
+
+dmenu_path >~/.cache/dmenu_run &
 
 #parcellite &
 
@@ -221,7 +224,6 @@ case "$HOSTNAME" in
     	sh ~/wheeel.sh &
     	volumeicon &
     	wallpaper nsfw &
-    	dmenu_path >~/.cache/dmenu_run &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
     	(sleep 7 && tint2) &
     	#gnome-screensaver-command -d &
@@ -229,6 +231,8 @@ case "$HOSTNAME" in
     	xset m 10 2 &
     	pcscd &
     	gpg-agent &
+        hc spawn ~/bin/display3.sh auto
+        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
         #(sleep 15 && gigolo) &
 
     	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
@@ -251,12 +255,14 @@ case "$HOSTNAME" in
     	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
     	dmenu_path >~/.cache/dmenu_run &
     	(sleep 2 && tint2) &
+        hc keybind $Mod-l spawn i3lock
         ;;
     faui0*)
     	(sleep 5 && wallpaper autum)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
     	dmenu_path >~/.cache/dmenu_run &
+    	hc keybind $Mod-l spawn xlock
         ;;
     faui3*)
         ;;
@@ -272,6 +278,21 @@ case "$HOSTNAME" in
     	hc add_monitor 1680x1050+1280+0 term wide
     	hc pad wide 0 0 30 0
     	;;
+    faui1-104)
+        tint2&
+        ssh-add ~/.ssh/cipkey &
+        (sleep 10 && wallpaper misc )&
+        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
+
+
+        hc set frame_bg_transparent 0
+        hc set always_show_frame 1
+        hc set frame_normal_opacity 30
+        hc set frame_active_opacity 30
+        hc set frame_bg_active_color $COLOR_FR_BG_N
+
+        compton --config ~/.compton.conf &
+        ;;
     *)
         ;;
     esac

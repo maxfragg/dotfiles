@@ -1,21 +1,23 @@
 #!/bin/bash
 
 ###########################
-# display setup script v3 #
+# display setup script v3.1 #
 ###########################
 #
 # Author: 	Max Krueger
-# Date: 	2013-04-09 
+# Date: 	2013-11-05 
 # License:  MIT
 #
 # # TODO:
 # # Half width resolutions for 2in1 mode as suggestion
-# # max switch picking the maximal resolution
 # # Spliting functionality up for easyer maintainance
 #
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
 # this version uses dmenu, commandline interactive or arguents for the graphical setup
+# New feature: automode, dedects connected monitors and sets them to their maximum 
+# resolution, at the moment only for up to 2 monitors, support for arbitrary monitor numbers
+# is in the works. Be prepared, dual will be renamend to multi, once we are there!
 #
 # needs hlwm with monitorname support, cut, grep, dmenu and xrandr
 # dryrun function does not changes you might also use the output of this for a static script 
@@ -46,7 +48,7 @@
 source ~/.config/herbstluftwm/colors.sh
 
 PADUP=0
-PADDOWN=30
+PADDOWN=25
 DRYRUN=0
 
 
@@ -54,7 +56,8 @@ MODES="single
 extern
 dual
 2in1
-beamer"
+beamer
+auto"
 
 ex(){
 	if [[ $DRYRUN == "1" ]]; then
@@ -67,6 +70,7 @@ ex(){
 getnum(){
 	MONS=0
 	MONSU=0
+	[[ $MODE == auto ]] && MONS=`xrandr | grep " connected" | cut -d' ' -f1| wc -l` && MONSU=$MONS
 	[[ $MODE == "2in1" ]] 	&& TWOINONE=1 && MODE="dual"
 	[[ $MODE == "single" ]] && MONS=1 && MONSU=1
 	[[ $MODE == "extern" ]] && MONS=1 && MONSU=1
@@ -84,11 +88,17 @@ os_xrandr_parse() {
     # extract
     local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
+    #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+
     # parse
     for result in $results; do
-        if [[ $result =~ connected ]]; then
-            continue
-        fi
+        #if [[ $result =~ connected ]]; then
+        #    result=$(echo $result | cut -d' ' -f1)
+        #    if [[ result == "" ]]; then
+        #    	continue
+        #    fi
+        #
+        #fi
 
         if [[ $result =~ [A-Z] ]]; then
             current_modes="os_xrandr_modes_${result}"
@@ -139,15 +149,35 @@ if [[ $1 == "--dmenu" || $1 == "-d" ]]; then
 
 	getnum
 
-	for i in `seq $MONSU` ; do
+    # auto mode is special, uses more xrandr magic and takes only
+    # dryrun as aditional argument 
+    if [[ $MODE == "auto" ]]; then
+    	i=1
+    	for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
+    		output[$i]=$outputs
+    		XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
+    		XY=`echo $XY | cut -d'\' -f1`
+    		echo $XY
+    		X[$i]=`echo $XY | cut -d'x' -f1`
+    		Y[$i]=`echo $XY | cut -d'x' -f2`
+    		i=`expr $i + 1` 
+    	done
+    	if [[ $i == 2 ]]; then
+    		MODE="single"
+    	else
+    		MODE="dual"
+    	fi
+    else
+    # Conventional dmenu mode, we need to ask for more settings
+    	for i in `seq $MONSU` ; do
+    		output[$i]=`echo -e "${os_xrandr_displays[@]}" | dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select monitor $i"`
+    		CUR_MODES=$(eval "echo \${os_xrandr_modes_${output[$i]}[@]}")
+    		XY=`echo -e $CUR_MODES | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Resolution for monitor $i"`
 
-		output[$i]=`echo -e "${os_xrandr_displays[@]}" | dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select monitor $i"`
-		CUR_MODES=$(eval "echo \${os_xrandr_modes_${output[$i]}[@]}")
-		XY=`echo -e $CUR_MODES | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Resolution for monitor $i"`
-
-		X[$i]=`echo $XY | cut -d'x' -f1`
-		Y[$i]=`echo $XY | cut -d'x' -f2`
-	done
+    		X[$i]=`echo $XY | cut -d'x' -f1`
+    		Y[$i]=`echo $XY | cut -d'x' -f2`
+    	done
+    fi
 else
 	if [[ $@ == "" || $@ == "dryrun" ]]; then
 		####################
@@ -184,14 +214,35 @@ else
 			echo "Dryrun mode, no changes!"
 		fi
 
-		for i in `seq $MONSU` ; do
-			indoutput=$(( ($i * 2) + $DRYRUN ))
-			indres=$((1+ ($i * 2) + $DRYRUN ))
-			eval output[$i]=\$$indoutput
-			eval XY=\$$indres
-			X[$i]=`echo $XY | cut -d'x' -f1`
-			Y[$i]=`echo $XY | cut -d'x' -f2`
-		done
+		# auto mode is special, uses more xrandr magic and takes only
+		# dryrun as aditional argument 
+		if [[ $MODE == "auto" ]]; then
+			i=1
+			for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
+				output[$i]=$outputs
+				XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
+				XY=`echo $XY | cut -d'\' -f1`
+				echo $XY
+				X[$i]=`echo $XY | cut -d'x' -f1`
+				Y[$i]=`echo $XY | cut -d'x' -f2`
+				i=`expr $i + 1` 
+			done
+			if [[ $i == 2 ]]; then
+				MODE="single"
+			else
+				MODE="dual"
+			fi
+		else
+
+			for i in `seq $MONSU` ; do
+				indoutput=$(( ($i * 2) + $DRYRUN ))
+				indres=$((1+ ($i * 2) + $DRYRUN ))
+				eval output[$i]=\$$indoutput
+				eval XY=\$$indres
+				X[$i]=`echo $XY | cut -d'x' -f1`
+				Y[$i]=`echo $XY | cut -d'x' -f2`
+			done
+		fi
 	fi
 fi
 
@@ -306,7 +357,11 @@ case $MODE in
 	"dual" )
 		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
 		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient remove_monitor "intern2" 2>/dev/null
+		if [[ $TWOINONE != "1" ]]; then
+			ex herbstclient remove_monitor "intern2" 2>/dev/null
+		else
+			ex herbstclient remove_monitor "extern" 2>/dev/null
+		fi
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
