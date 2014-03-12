@@ -55,6 +55,9 @@ xdg_paths=(
     ~/.local/share/applications
 )
 
+#colors
+source ~/.config/herbstluftwm/colors.sh
+
 # Path to Dmenu Launcher configuration file.
 config="$HOME/.config/dmenu-launch/config"
 
@@ -65,7 +68,7 @@ cache="$HOME/.cache/dmenu-launch.cache"
 hist="$HOME/.config/dmenu-launch/history"
 
 # Dmenu command.
-dm="dmenu -i $DMENU_OPTIONS"
+dm="dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG $DMENU_OPTIONS"
 if tty &> /dev/null && [[ "$TERM" != 'dumb' ]]; then
     if which 'slmenu' &> /dev/null; then
         dm='slmenu -i'
