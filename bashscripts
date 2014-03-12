@@ -43,6 +43,8 @@ heute.txt(){
 	fi
 } 
 
+echoerr() { echo "$@" 1>&2; }
+
 finger_uni(){ ssh uni finger $@;}
 
 mancell(){ man -M ~/.man $@;}
