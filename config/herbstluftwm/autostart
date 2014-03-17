@@ -168,7 +168,8 @@ hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
-hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
+hc keybind $Mod-Shift-e spawn ~/.config/herbstluftwm/dmenu_run_fast
+hc keybind $Mod-e spawn ~/bin/dmenu-launch
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
 hc keybind $Mod-Print spawn ~/bin/display3.sh --dmenu
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh

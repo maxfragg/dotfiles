@@ -141,6 +141,11 @@ function bash_prompt() {
         HC=$EMC
         HOST_S="uber"
         ;;
+    horologium.uberspace.de)
+    	UC=$R
+    	HC=$EMC
+        HOST_S="uber"
+        ;;
     faui49man*)
         UC=$B
         HC=$EMM
