@@ -2,7 +2,7 @@
 
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
-# for args mode enter $mode x1 y1 y2 y2
+# for args mode enter $mode x1 y1 x2 y2
 
 # Beamer:
 # ---------
@@ -90,7 +90,7 @@ if [[ $MODE == "dual" ]]; then
 	YOFF[2]=0
 	if [[ $TWOINONE != "1" ]]; then
 		 xrandr --output VGA1 --auto
-		 xrandr --output VGA1 --pos "${XOFF[2]}+${YOFF[2]}"
+		 xrandr --output VGA1 --pos "${XOFF[2]}x${YOFF[2]}"
 	fi
 fi
 

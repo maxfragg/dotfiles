@@ -9,12 +9,10 @@
 #overwrites everything else
 
 DOTFILES="`cat files`"
-
+OPTIONAL="`cat files-opt`"
 
 if [ -f $HOSTNAME ]; then
-  DOTFILES="$DOTFILES `cat $HOSTNAME`"
-else
-  touch $HOSTNAME
+  DOTFILES="$DOTFILES `cat $HOSTNAME`" 
 fi
 
 if [ -f "$HOSTNAME"-not ]; then
@@ -23,10 +21,18 @@ if [ -f "$HOSTNAME"-not ]; then
   else
     DOTFILES=$(comm -3 <(sort "files") <(sort "$HOSTNAME"-not))
   fi
-else
-  touch "$HOSTNAME"-not
 fi
 
+for name in $OPTIONAL; do
+  echo "Install "$name"? [y\n]"
+  read answer
+  if [[ $answer == "y" ]]; then
+    echo "adding"$name
+    DOTFILES="$DOTFILES `echo $name`"
+  else
+    echo "skipping "$name
+  fi
+done
 
 for name in $DOTFILES; do
   if [ `expr index "$name" "#"` == 1 ]; then

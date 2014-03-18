@@ -1,7 +1,10 @@
-Host unik
-	HostName faui06f.informatik.uni-erlangen.de
+Host cip
+	HostName faui00m.informatik.uni-erlangen.de
 	User el79irih
-	IdentityFile ~/.ssh/mykey
+
+host 0sr0
+	HostName faui0sr0.informatik.uni-erlangen.de
+	User el79irih
 	
 Host uni
 	HostName faui06f.informatik.uni-erlangen.de
@@ -10,14 +13,9 @@ Host uni
 Host huber
 	HostName faui04b.informatik.uni-erlangen.de
 	User el79irih
-
-Host uni5k
-	HostName faui05.informatik.uni-erlangen.de
-	User el79irih
-	IdentityFile ~/.ssh/mykey
 	
 Host uni5
-	HostName faui05.informatik.uni-erlangen.de
+	HostName faui05b.informatik.uni-erlangen.de
 	User el79irih
 
 Host cell
@@ -73,6 +71,10 @@ Host uber
 	HostName taurus.uberspace.de
 	User maxfragg
 
+Host uber2
+	HostName horologium.uberspace.de
+	User mxk
+
 host faui32h
 	HostName faui32h.informatik.uni-erlangen.de
 	User el79irih
@@ -84,3 +86,22 @@ host cssun
 host raspi
 	HostName raspi
 	User root
+
+
+host squarez_max
+	HostName squarez.fauiwg.de
+	User maxfragg
+
+host squarez_git
+	HostName squarez.fauiwg.de
+	User git-annex
+
+host vulbox
+	HostName 10.23.31.2
+	User root
+	IdentityFile ~/.ssh/ructf
+
+host ctf00
+	HostName ctf00.informatik.uni-erlangen.de
+	User maxfragg
+	IdentityFile ~/.ssh/ctf00

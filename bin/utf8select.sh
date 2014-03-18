@@ -1,9 +1,9 @@
 #!/bin/bash
-source ~/.config/herbstluftwm/colors.sh
+
 source ~/.bash_settings
 
-utf8db="$HOME/.config/utf8db"
-if line=$(grep -v '^#' "$utf8db"|grep -v '^$'| ~/bin/dmenu -fn 'xft:Ubuntu:pixelsize=12' -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p 'Zeichen:' -l 8) ; then
+utf8db="$HOME/bin/utf8db"
+if line=$(grep -v '^#' "$utf8db"|grep -v '^$'| /usr/bin/dmenu -b  -fn 'xft:Ubuntu:pixelsize=12' -sb '#FF7600' -p 'Zeichen:' -l 8) ; then
     #echo you selected "$line"
     # char is everything after the last space
     char=${line##* }

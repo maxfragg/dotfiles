@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+function _update_ps1() {
+	error=$?
+	sshflag=0
+	[ -n "$SSH_CONNECTION" ] && sshflag=1
+
+	export PS1="$(~/.powerline-shell.py $error --sshflag $sshflag)"
+}
+   
+export PROMPT_COMMAND="_update_ps1"

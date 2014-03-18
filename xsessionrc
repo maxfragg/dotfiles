@@ -1,5 +1,10 @@
+#!/bin/bash
+#only meant for cip/ls4 env
+#echo $@ >xtest.log
+
 case $@ in
-	default)
+	herbstluftwm)
+	#exec xterm
 	# Start a D-Bus session
 	source /etc/X11/xinit/xinitrc.d/30-dbus
 	# Start GNOME Keyring
@@ -11,11 +16,15 @@ case $@ in
 	export GNOME_KEYRING_PID
 	#end of keyring stuff
 	
-    export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+    	export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 	setxkbmap -option '' 'us international' ',phonetic'
 	setxkbmap -option terminate:ctrl_alt_bksp
-	ssh-agent herbstluftwm -c ~/.config/herbstluftwm/autostart
+	exec ssh-agent herbstluftwm -c ~/.config/herbstluftwm/autostart
 	;;
-
 	*)
+	#exec $@
+	exec ssh-agent `dmenu <~/.wmlist`
+	exit 0
+	#exec /bin/bash -login /etc/X11/Xsession %session
 esac
+

@@ -15,8 +15,8 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Shift-Return spawn roxterm
-hc keybind $Mod-Return spawn xfce4-terminal
+hc keybind $Mod-Return spawn roxterm
+hc keybind $Mod-Shift-Return spawn xfce4-terminal
 hc keybind $Mod-Control-o spawn opera-next
 
 #script centering mouse
@@ -27,7 +27,7 @@ FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
 #TAG_KEYS=( {1..9} 0 )
 
 #TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
-TAG_NAMES=(irc term web ed im video pdf fm music mail )
+TAG_NAMES=(cip term web ed var video pdf fm music mail )
 TAG_KEYS=( {1..9} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
@@ -37,7 +37,10 @@ for i in ${!TAG_NAMES[@]} ; do
     if ! [ -z "$key" ] ; then
 
 		case "$HOSTNAME" in
-			faui49man*)   
+			faui49man*)
+				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
+    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+
 		    	;;
 			faui0*)
 				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
@@ -51,13 +54,17 @@ for i in ${!TAG_NAMES[@]} ; do
     fi
 done
 
+hc rename_monitor 0 intern
+
 #default layouts for some tags
 hc load web '(clients max:0)'
 hc load video '(clients max:0)'
 hc load pdf '(clients max:0)'
+hc load mail '(clients max:0)'
 hc load ed '(clients grid:0)'
 hc load term '(split vertical:0.550000:0 (split horizontal:0.500000:0 (clients vertical:0b248) (clients vertical:0)) (clients vertical:0))'
-hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
+#hc load im '(split horizontal:0.750000:0 (split horizontal:0.500000:0 (split vertical:0.500000:0 (clients vertical:0) (clients vertical:0)) (split vertical:0.500000:1 (clients vertical:0) (clients vertical:0))) (clients vertical:0))'
+hc load var '(split horizontal:0.500000:0 (clients max:0) (clients max:0))'
 
 # layouting
 hc keybind $Mod-r remove
@@ -110,6 +117,8 @@ hc set frame_bg_transparent 1
 hc set frame_border_width 2
 hc set window_border_width 2
 hc set focus_follows_mouse 1
+hc set focus_stealing_prevention 1
+
 
 # rules
 hc unrule -F
@@ -124,13 +133,14 @@ hc rule isFullscreen=on focus=on
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
+hc rule class=Chromium-browser tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
-hc rule class~Empathy tag=im
-hc rule windowrole~contact_list tag=im index=1/1
-hc rule windowrole~chat tag=im index=2/0
+#hc rule class~Empathy tag=im
+#hc rule windowrole~contact_list tag=im index=1/1
+#hc rule windowrole~chat tag=im index=2/0
 hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
@@ -139,17 +149,29 @@ hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
 hc rule class=Audience tag=video
 hc rule class~Geary tag=mail
+hc rule class~Xournal tag=ed
+hc rule class~gnome-mplayer tag=video
+hc rule class~Thunar tag=fm
+hc rule class~Thunderbird tag=mail
+hc rule class~Thunderbird focus=on
+hc rule windowrole~EventDialog pseudotile=on
+hc rule class='Pdfpc' windowrole='presenter' tag=pdf
+hc rule class='Pdfpc' windowrole='presentation' tag=video
+hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
 
 #custom add
 #hc set pad 0 "" "" 30
 
 #custom bindings
-
+hc keybind F1 spawn ~/.config/herbstluftwm/q3terminal.sh
+hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
-hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
+hc keybind $Mod-Shift-e spawn ~/.config/herbstluftwm/dmenu_run_fast
+hc keybind $Mod-e spawn ~/bin/dmenu-launch
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
+hc keybind $Mod-Print spawn ~/bin/display3.sh --dmenu
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
 hc keybind XF86AudioMute spawn amixer -q sset Master toggle
 hc keybind Shift-XF86AudioMute spawn ~/.config/herbstluftwm/unmute.sh
@@ -159,7 +181,7 @@ hc keybind $Mod-XF86Back spawn ~/.config/herbstluftwm/cycle.sh prev
 hc keybind $Mod-XF86Forward spawn ~/.config/herbstluftwm/cycle.sh next
 hc keybind $Mod-g toggle frame_gap
 hc keybind $Mod-Shift-a spawn ~/.config/herbstluftwm/urgent.sh
-
+hc keybind $Mod-l spawn xscreensaver-command -lock
 
 #sh ~/.config/herbstluftwm/restartpanels.sh
 #trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
@@ -174,54 +196,103 @@ killall synapse
 killall xfce4-power-manager
 
 sh ~/bin/sshk.sh
-sh ~/.config/herbstluftwm/dmenu_run_cache &
 (sleep 10 && xfsettingsd) &
 nm-applet &
-volumeicon &
+#volumeicon &
 xfce4-power-manager --no-daemon &
 gnome-keyring &
 #nitrogen --restore &
 dropbox start
 synapse &
 xsetroot -name hlwm
-
 #tint2
-hc pad 0 0 0 30 0
-#tint2 &
+hc pad 0 0 0 25 0
+
+dmenu_path >~/.cache/dmenu_run &
 
 #parcellite &
 
 #custom settings depending on if running in gnome session or not
 
 case "$HOSTNAME" in
-    max-x61-ub)
+    max-x61-xu)
     	#hc set frame_bg_transparent 0
     	#hc set always_show_frame 1
     	#hc set frame_normal_opacity 30
-    	#hc set frame_active_opacity 50
+    	#hc set frame_active_opacity 0
+        #xcompmgr -cC -r4 &
     	#hc spawn xcompmgr
-    	(while true ;do wallpaper; sleep 10m; done)&
-    	(sleep 12 && tint2) &
-    	gnome-screensaver-command -d &
-    	xset m 10 2
+    	sh ~/wheeel.sh &
+    	volumeicon &
+    	wallpaper nsfw &
+    	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
+    	(sleep 7 && tint2) &
+    	#gnome-screensaver-command -d &
+    	xscreensaver -no-splash &
+    	xset m 10 2 &
+    	pcscd &
+    	gpg-agent &
+        hc spawn ~/bin/display3.sh auto
+        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
+        #(sleep 15 && gigolo) &
+
+    	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
+        #xflux -l 49.563302 -g 11.032162 -k 4700 &
         ;;
     max-x61-f15)
-    	tint2 &
-	ssh-add ~/.ssh/mykey &
-	;;
+        tint2 &
+        ssh-add ~/.ssh/mykey &
+        ;;
     irene-ThinkPad)
     	(sleep 12 && tint2) &
+    	ssh-add ~/.ssh/mykey &
+    	dmenu_path >~/.cache/dmenu_run &
+    	nitrogen --restore &
     	;;
     taurus.uberspace.de)
         ;;
     faui49man*)
+    	ssh-add ~/.ssh/i4 &
+    	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
+    	dmenu_path >~/.cache/dmenu_run &
+    	(sleep 2 && tint2) &
+        hc keybind $Mod-l spawn i3lock
         ;;
     faui0*)
-    	(while true ;do wallpaper; sleep 10m; done)&
+    	(sleep 5 && wallpaper autum)&
     	(sleep 5 && tint2)&
     	ssh-add ~/.ssh/cipkey &
+    	dmenu_path >~/.cache/dmenu_run &
+    	hc keybind $Mod-l spawn xlock
         ;;
     faui3*)
+        ;;
+    phenux)
+    	nitrogen --restore &&
+    	xrandr --output DIN --off --output DVI-1 --mode 1680x1050 --pos 1280x0 --rotate normal --output DVI-0 --mode 1280x1024 --pos 0x0 --rotate normal
+    	tint2&
+    	ssh-add ~/.ssh/phenux &
+    	dmenu_path >~/.cache/dmenu_run &
+    	#volumeicon &
+    	pnmixer &
+    	#xfce4-volumed &
+    	hc add_monitor 1680x1050+1280+0 term wide
+    	hc pad wide 0 0 30 0
+    	;;
+    faui1-104)
+        tint2&
+        ssh-add ~/.ssh/cipkey &
+        (sleep 10 && wallpaper misc )&
+        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
+
+
+        hc set frame_bg_transparent 0
+        hc set always_show_frame 1
+        hc set frame_normal_opacity 30
+        hc set frame_active_opacity 30
+        hc set frame_bg_active_color $COLOR_FR_BG_N
+
+        compton --config ~/.compton.conf &
         ;;
     *)
         ;;

@@ -8,6 +8,10 @@ bashscripts
 #bin/display.sh
 #bin/nopaste
 #bin/sshk.sh
+#bin/utf8select.sh
+#bin/utf8db
+#bin/dmenu
+#bin/dmenu_run
 config/herbstluftwm
 config/roxterm.sourceforge.net
 config/tint2
@@ -16,5 +20,12 @@ config/Terminal
 fonts
 ip
 ssh/config
-xinitrc
-xsessionrc
+tmux.conf
+#bin/dropbox_uploader.sh
+#bin/display2.sh
+#bin/display_menu.sh
+#bin/display3.sh
+#bin/dmenu-launch
+powerline-shell.py 
+bash_powerline
+compton.conf

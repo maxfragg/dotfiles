@@ -1,15 +1,15 @@
 
 [roxterm profile]
-maximise=1
+maximise=0
 background_type=2
 true_translucence=1
-saturation=0,279231
+saturation=0,179487
 hide_menubar=1
 always_show_tabs=0
 audible_bell=0
 visible_bell=0
 scrollbar_pos=0
-font=Source Code Pro 11
+font=Source Code Pro for Powerline 10
 cursor_shape=0
 cursor_blink_mode=1
 disable_menu_access=1
@@ -18,9 +18,13 @@ disable_tab_menu_shortcuts=1
 sel_by_word=-A-Za-z0-9,./?%&#_
 color_term=xterm-256color
 term=xterm-256color
-browser=google-chrome
+browser=x-www-browser
 mailer=
 command=
 title_string=%s
 win_title=%s
-width=80
+width=100
+height=30
+show_resize_grip=0
+colour_scheme=
+scroll_on_keystroke=0

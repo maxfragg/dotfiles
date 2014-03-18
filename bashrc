@@ -17,7 +17,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)" 2>/dev/null
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
@@ -57,14 +57,14 @@ fi
 
 #default editor
 export EDITOR=nano
-
+export EDITOR2=nano
 #path
 
 
 export PATH=$PATH:$HOME/bin:/opt/intel/bin
 export PATH=/usr/local/games:$PATH
-export LANGUAGE=$LANGUAGE:de_DE:de 
-#export LC_ALL=en_US.utf8
+#export LANGUAGE=$LANGUAGE:de_DE:de 
+export LC_ALL=en_US.utf8
 
 if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
@@ -76,15 +76,19 @@ case "$HOSTNAME" in
         ;;
     max-x61-f15)
 		
-		;;
+	   ;;
+    max-x61-xu)
+    	export EDITOR2=sublime-text
+    	;;
     taurus.uberspace.de)
+    	export PATH=/package/host/localhost/nodejs-0.10.3/bin:$PATH
         export LC_ALL=en_US.utf8
         ;;
     faui49man*)
         
         ;;
     faui0*)
-        
+        addpackage herbstluftwm-git
         ;;
     faui3*)
        
@@ -101,4 +105,5 @@ case "$HOSTNAME" in
 
 
 #include prompt needed 
+#source ~/.bash_powerline
 source ~/.bashprompt

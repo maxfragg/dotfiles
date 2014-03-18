@@ -124,7 +124,6 @@ omega ω
 Omega Ω
 phi φ
 Phi Φ
-
 # dinbats
 flugzeug plane ✈
 schere ✂
@@ -171,7 +170,7 @@ king chess ♔
 queen chess ♕
 rook turm chess ♖
 bishop läufer chess ♗
-
+network
 #maxfragg added
 note music ♬
 recycle ♻
@@ -181,8 +180,11 @@ check box ☐
 checked box ☑
 snowman ☃
 3dot …
-interobang ‽
-trademark ™
+gear ⚙
+swords ⚔
+anchor ⚓
+hammer pick ⚒
+atom nuclear ⚛
 
 # TODO: http://en.wikipedia.org/wiki/Miscellaneous_Symbols
 recycling ♲

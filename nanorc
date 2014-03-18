@@ -1,0 +1,6 @@
+set mouse
+set autoindent
+set multibuffer
+set smarthome
+set smooth
+set tabsize 4
