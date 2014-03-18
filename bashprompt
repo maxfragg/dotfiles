@@ -170,7 +170,7 @@ function bash_prompt() {
     	HOST_S="vm"
     	;;
     squarez)
-    	UC=$EMC
+    	UC=$B
     	HC=$EMG
     	HOST_S="squarez"
     	;;
