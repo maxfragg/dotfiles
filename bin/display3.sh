@@ -88,11 +88,17 @@ os_xrandr_parse() {
     # extract
     local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
+    #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+
     # parse
     for result in $results; do
-        if [[ $result =~ connected ]]; then
-            continue
-        fi
+        #if [[ $result =~ connected ]]; then
+        #    result=$(echo $result | cut -d' ' -f1)
+        #    if [[ result == "" ]]; then
+        #    	continue
+        #    fi
+        #
+        #fi
 
         if [[ $result =~ [A-Z] ]]; then
             current_modes="os_xrandr_modes_${result}"

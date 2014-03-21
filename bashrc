@@ -68,8 +68,8 @@ export EDITOR2=nano
 
 export PATH=$PATH:$HOME/bin:/opt/intel/bin
 export PATH=/usr/local/games:$PATH
-export LANGUAGE=$LANGUAGE:de_DE:de 
-#export LC_ALL=en_US.utf8
+#export LANGUAGE=$LANGUAGE:de_DE:de 
+export LC_ALL=en_US.utf8
 
 if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
@@ -86,6 +86,7 @@ case "$HOSTNAME" in
     	export EDITOR2=sublime-text
     	;;
     taurus.uberspace.de)
+    	export PATH=/package/host/localhost/nodejs-0.10.3/bin:$PATH
         export LC_ALL=en_US.utf8
         ;;
     faui49man*)

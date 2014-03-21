@@ -167,7 +167,8 @@ hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
 hc keybind $Mod-w spawn ~/.config/herbstluftwm/herbstcommander.sh
-hc keybind $Mod-e spawn ~/.config/herbstluftwm/dmenu_run_fast
+hc keybind $Mod-Shift-e spawn ~/.config/herbstluftwm/dmenu_run_fast
+hc keybind $Mod-e spawn ~/bin/dmenu-launch
 hc keybind $Mod-q spawn ~/.config/herbstluftwm/wselect.sh
 hc keybind $Mod-Print spawn ~/bin/display3.sh --dmenu
 hc keybind Print spawn ~/.config/herbstluftwm/screenshot.sh
@@ -207,6 +208,7 @@ xset m 4 0 &
 #tint2
 hc pad 0 0 0 25 0
 
+dmenu_path >~/.cache/dmenu_run &
 
 #parcellite &
 
@@ -223,7 +225,6 @@ case "$HOSTNAME" in
     	sh ~/wheeel.sh &
     	volumeicon &
     	wallpaper nsfw &
-    	dmenu_path >~/.cache/dmenu_run &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
     	(sleep 7 && tint2) &
     	#gnome-screensaver-command -d &
@@ -280,6 +281,21 @@ case "$HOSTNAME" in
     	hc add_monitor 1680x1050+1280+0 term wide
     	hc pad wide 0 0 30 0
     	;;
+    faui1-104)
+        tint2&
+        ssh-add ~/.ssh/cipkey &
+        (sleep 10 && wallpaper misc )&
+        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
+
+
+        hc set frame_bg_transparent 0
+        hc set always_show_frame 1
+        hc set frame_normal_opacity 30
+        hc set frame_active_opacity 30
+        hc set frame_bg_active_color $COLOR_FR_BG_N
+
+        compton --config ~/.compton.conf &
+        ;;
     *)
         ;;
     esac

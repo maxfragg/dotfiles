@@ -141,6 +141,11 @@ function bash_prompt() {
         HC=$EMC
         HOST_S="uber"
         ;;
+    horologium.uberspace.de)
+    	UC=$R
+    	HC=$EMC
+        HOST_S="uber"
+        ;;
     faui49man*)
         UC=$B
         HC=$EMM
@@ -167,7 +172,7 @@ function bash_prompt() {
     	HOST_S="vm"
     	;;
     squarez)
-    	UC=$EMC
+    	UC=$B
     	HC=$EMG
     	HOST_S="squarez"
     	;;
@@ -175,6 +180,11 @@ function bash_prompt() {
 	   UC=$B
 	   HC=$EMY
 	   ;;
+    faui1*)
+    	UC=$B
+    	HC=$EMC
+    	HOST_S="i1"
+    	;;
     *)
         ;;
     esac
