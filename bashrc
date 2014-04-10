@@ -54,6 +54,11 @@ if [ -f /etc/bash_completion.d/herbstclient-completion ]; then
     source /etc/bash_completion.d/herbstclient-completion
 fi
 
+if [ -f /usr/local/lib/libcoloredstderr.so ]; then
+    LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
+    COLORED_STDERR_FDS=2,
+    export LD_PRELOAD COLORED_STDERR_FDS
+fi
 
 #default editor
 export EDITOR=nano
