@@ -81,6 +81,7 @@ case "$HOSTNAME" in
     	export EDITOR2=sublime-text
     	;;
     taurus.uberspace.de)
+    	export PATH=/package/host/localhost/nodejs-0.10.3/bin:$PATH
         export LC_ALL=en_US.utf8
         ;;
     faui49man*)
