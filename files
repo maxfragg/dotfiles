@@ -18,7 +18,6 @@ config/tint2
 config/utf8db
 config/Terminal
 fonts
-ip
 ssh/config
 tmux.conf
 #bin/dropbox_uploader.sh
@@ -29,3 +28,4 @@ tmux.conf
 powerline-shell.py 
 bash_powerline
 compton.conf
+jrnl_config

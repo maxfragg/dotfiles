@@ -68,8 +68,8 @@ Host shellz
 	User maxfragg
 
 Host uber
-	HostName taurus.uberspace.de
-	User maxfragg
+	HostName horologium.uberspace.de
+	User mxk
 
 Host uber2
 	HostName horologium.uberspace.de

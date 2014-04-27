@@ -23,10 +23,10 @@
 #remote="$login@faui0sr0.cs.fau.de"
 #remotefolder="$remote:$folder/"
 
-login="maxfragg"
+login="mxk"
 folder="/home/$login/html/p/"
 urlprefix="http://max.fauiwg.de/p"
-remote="$login@taurus.uberspace.de"
+remote="$login@horologium.uberspace.de"
 remotefolder="$remote:$folder/"
 
 # cmdlineoptions

@@ -20,6 +20,14 @@ man() {
     man "$@"
 }
 
+objdmp(){
+	objdump -d --disassembler-options=intel $@
+}
+
+md2pdf(){
+	pandoc -f markdown+grid_tables -s --highlight-style pygments "$@" -o "$@".pdf
+}
+
 alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ ~/tmp/'
 
 alias squarez='sshfs -o reconnect squarez_git:/home/git-annex ~/squarez/'
@@ -84,7 +92,7 @@ wallpaper(){
 		return
 	fi
 	if [[ $1 != "" ]]; then
-		WALLSET=$1
+		export WALLSET=$1
 	else
 		if [[ $WALLSET == "" ]]; then
 			WALLSET=misc
