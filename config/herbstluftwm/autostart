@@ -240,8 +240,9 @@ case "$HOSTNAME" in
         hc spawn ~/bin/display3.sh auto
         hc spawn light-locker
         hc keybind $Mod-Shift-l spawn ~/.config/herbstluftwm/i3lock.sh &
-        hc keybind $Mod-l light-locker-command -l
-         ~/bin/dmenu_deb/dmenu_path >~/.cache/dmenu_run &
+        hc keybind $Mod-l spawn light-locker-command -l
+        ~/bin/dmenu_deb/dmenu_path >~/.cache/dmenu_run &
+        hc spawn blueman-applet
         #(sleep 15 && gigolo) &
 
     	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
