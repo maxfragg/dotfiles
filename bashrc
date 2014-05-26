@@ -50,8 +50,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 #herbstclient autocompletion
-if [ -f /etc/bash_completion.d/herbstclient-completion ]; then
-    source /etc/bash_completion.d/herbstclient-completion
+if [ -d /etc/bash_completion.d ]; then
+    source /etc/bash_completion.d/*
 fi
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
