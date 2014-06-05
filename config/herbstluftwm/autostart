@@ -202,7 +202,7 @@ xfce4-power-manager --no-daemon &
 gnome-keyring &
 #nitrogen --restore &
 #dropbox start
-hc spawn seafile-applet
+#hc spawn seafile-applet
 synapse &
 xsetroot -name hlwm
 xset m 2 0 &
@@ -225,12 +225,14 @@ case "$HOSTNAME" in
     	#hc spawn xcompmgr
     	xset m 4 0 &
     	sh ~/wheeel.sh &
+        hc spawn seafile-applet
+        xset m 4 0 &
     	volumeicon &
     	wallpaper nsfw &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
     	(sleep 7 && tint2) &
     	#gnome-screensaver-command -d &
-    	xscreensaver -no-splash &
+    	#xscreensaver -no-splash &
     	#xset m 4 0 &
         #xinput set-prop 10 257 1 &
         #xinput set-prop 10 258 1 &
@@ -238,8 +240,8 @@ case "$HOSTNAME" in
     	gpg-agent &
         hc spawn ~/bin/display3.sh auto
         hc spawn light-locker
-        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
-        hc keybind $Mod-Shift-l light-locker-command -l
+        hc keybind $Mod-Shift-l spawn ~/.config/herbstluftwm/i3lock.sh &
+        hc keybind $Mod-l light-locker-command -l
          ~/bin/dmenu_deb/dmenu_path >~/.cache/dmenu_run &
         #(sleep 15 && gigolo) &
 

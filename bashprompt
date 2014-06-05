@@ -36,6 +36,7 @@ function _git_prompt() {
     fi
 }
 
+
 ## Fancy PWD display function
 ## The home directory (HOME) is replaced with a ~
 ## The last pwdmaxlen characters of the PWD are displayed
@@ -80,6 +81,7 @@ function bash_prompt_command() {
     fi
     
     [ $GIT = "1" ] && local GITPROMPT_=`_git_prompt`
+    [ $GIT = "2" ] && local GITPROMPT_=`echo $__git_ps1`
 
     PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${HC}[${UC}\u${W}${HC}$LOC$HOST_S${EMK}${UC}\${NEW_PWD}${HC}]${EMK}$GITPROMPT_$newline${UC}\\$ ${NONE}"
 
