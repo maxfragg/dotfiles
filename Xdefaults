@@ -1,3 +1,7 @@
+!
+! load definitions from shared file - you can override these values later
+!
+#include ".ENV/Xdefaults"
 
 
 !-- Xft settings -- !
@@ -10,8 +14,14 @@ Xft.hintstyle 			: hintfull
 
 ! -- Fonts -- !
 
-URxvt*.font 			: xft:Source Code Pro:regular:size=10:autohint=true
-URxvt*.boldFont 		: xft:Source Code Pro:bold:size=10:autohint=true
+URxvt*.font 			: xft:Source Code Pro:regular:size=10:autohint=true:antialias=true,\
+						  xft:Monospace::regular:size=10:autohint=true:antialias=true,\
+						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
+						  xft:Ubuntu:size=10:autohint=true:antialias=true
+URxvt*.boldFont 		: xft:Source Code Pro:bold:size=10:autohint=true:antialias=true,\
+						  xft:Monospace:bold:size=10:autohint=true:antialias=true,\
+						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
+						  xft:Ubuntu:size=10:autohint=true:antialias=true
 URxvt.letterSpace		: 0
 
 ! -- Transparency -- !
@@ -57,7 +67,7 @@ URxvt.colorBD 			: #EBEBEB
 URxvt.colorIT 			: #76B639
 
 ! url-color
-URxvt.colorUL 			: #B6A139
+URxvt.colorUL 			: #FFFFFF
 
 ! cursor-color
 URxvt.cursorColor 		: #FFA800
