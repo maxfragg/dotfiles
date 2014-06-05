@@ -10,9 +10,9 @@ Xft.hintstyle 			: hintfull
 
 ! -- Fonts -- !
 
-URxvt*.font 			: xft:Source Code Pro:regular:pixelsize=12:autohint=true
-URxvt*.boldFont 		: xft:Source Code Pro:bold:pixelsize=12:autohint=true
-URxvt.letterSpace		: -1
+URxvt*.font 			: xft:Source Code Pro:regular:size=10:autohint=true
+URxvt*.boldFont 		: xft:Source Code Pro:bold:size=10:autohint=true
+URxvt.letterSpace		: 0
 
 ! -- Transparency -- !
 ! fake
