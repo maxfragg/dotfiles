@@ -15,8 +15,8 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Return spawn roxterm
-hc keybind $Mod-Shift-Return spawn xfce4-terminal
+hc keybind $Mod-Return spawn start_urxvt
+hc keybind $Mod-Shift-Return spawn roxterm
 hc keybind $Mod-Control-o spawn opera-next
 
 #script centering mouse
@@ -223,6 +223,7 @@ case "$HOSTNAME" in
     	#hc set frame_active_opacity 0
         #xcompmgr -cC -r4 &
     	#hc spawn xcompmgr
+    	xset m 4 0 &
     	sh ~/wheeel.sh &
         hc spawn seafile-applet
         xset m 4 0 &
@@ -264,7 +265,7 @@ case "$HOSTNAME" in
     	ssh-add ~/.ssh/i4 &
     	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
     	dmenu_path >~/.cache/dmenu_run &
-    	(sleep 2 && tint2) &
+    	(sleep 4 && tint2) &
         hc keybind $Mod-l spawn i3lock
         ;;
     faui0*)

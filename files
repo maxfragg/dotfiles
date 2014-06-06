@@ -29,3 +29,5 @@ powerline-shell.py
 bash_powerline
 compton.conf
 jrnl_config
+Xdefaults
+#bin/start_urxvt
