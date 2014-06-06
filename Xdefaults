@@ -22,7 +22,7 @@ URxvt*.boldFont 		: xft:Source Code Pro:bold:size=10:autohint=true:antialias=tru
 						  xft:Monospace:bold:size=10:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
 						  xft:Ubuntu:size=10:autohint=true:antialias=true
-URxvt.letterSpace		: 0
+URxvt.letterSpace		: -1
 
 ! -- Transparency -- !
 ! fake

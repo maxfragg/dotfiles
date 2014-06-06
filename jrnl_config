@@ -1,7 +1,7 @@
 {
   "default_hour": 9, 
   "timeformat": "%Y-%m-%d %H:%M", 
-  "linewrap": 79, 
+  "linewrap": 81, 
   "encrypt": false, 
   "editor": "subl -w", 
   "default_minute": 0, 
