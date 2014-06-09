@@ -14,7 +14,7 @@ Xft.hintstyle 			: hintfull
 
 ! -- Fonts -- !
 
-URxvt*.font 			: xft:Source Code Pro:regular:size=10:autohint=true:antialias=true,\
+URxvt*.font 			: xft:Source Code Pro:size=10:autohint=true:antialias=true,\
 						  xft:Monospace::regular:size=10:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
 						  xft:Ubuntu:size=10:autohint=true:antialias=true
@@ -86,3 +86,11 @@ URxvt*.matcher.button	: 1
 URxvt*.saveLines		: 8192
 
 URxvt*.urgentOnBell		: true
+
+URxvt.perl-ext-common	: clipboard
+URxvt.keysym.C-C 		: perl:clipboard:copy
+URxvt.keysym.C-V 		: perl:clipboard:paste
+URxvt.keysym.M-C-v 		: perl:clipboard:paste_escaped
+URxvt.clipboard.autocopy: true
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard

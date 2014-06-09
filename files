@@ -30,3 +30,4 @@ powerline-shell.py
 ssh/config
 tmux.conf
 Xdefaults
+urxvt
