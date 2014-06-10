@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#######################################
+##       ___         _               ##
+##      | _ \__ _ __| |_ ___         ##
+##      |  _/ _` (_-<  _/ -_)        ##
+##      |_| \__,_/__/\__\___|        ##
+##                                   ##
+#######################################
+
+# copyright: thorsten wissmann
+# modivied: maximilian krueger, based on nopaste
+
+# settings
+login="mxk"
+folder="/home/$login/html/s/"
+urlprefix="http://max.fauiwg.de/s"
+remote="$login@horologium.uberspace.de"
+remotefolder="$remote:$folder/"
+
+# cmdlineoptions
+case "$1" in
+    -h|--help)
+        echo "usage: $0 [FILE...]"
+        echo "  copies all given FILEe to your $folder and prints the url to stderr for each FILE"
+        echo "  if no FILE is given, file-content is read from stdin"
+        echo "  -h --help   prints this help"
+        ;;
+    -*)
+        echo "unknown option \"$1\"" >&2
+        exit 1
+        ;;
+esac
+
+
+function filename() {
+    echo "$(date +%Y-%m-%d_%H-%M)_$*"
+}
+
+
+if [ -z "$1" ] ; then
+    echo "need to give a file name" >&2
+else
+    # just copy files to pastebin
+    for i in "$@" ; do
+        filename=$(filename "$i")
+        scp "$i" "$remotefolder/$filename" || continue
+        echo "$urlprefix/$filename"
+    done
+fi
+
+
+# vim: nobackup
