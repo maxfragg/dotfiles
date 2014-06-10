@@ -32,3 +32,4 @@ ssh/config
 tmux.conf
 Xdefaults
 urxvt
+gitconfig

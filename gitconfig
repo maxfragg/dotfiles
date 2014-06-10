@@ -1,0 +1,16 @@
+[user]
+	email = maxk@posteo.de
+	name = Max Krueger
+[push]
+	default = matching
+[alias]
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+[color]
+	diff = true
