@@ -15,7 +15,7 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Return spawn start_urxvt
+hc keybind $Mod-Return spawn ~/bin/start_urxvt
 hc keybind $Mod-Shift-Return spawn roxterm
 hc keybind $Mod-Control-o spawn opera-next
 
