@@ -19,6 +19,8 @@ bashscripts
 #bin/start_urxvt
 #bin/utf8db
 #bin/utf8select.sh
+#bin/nsa
+#bin/nsa.png
 compton.conf
 config/herbstluftwm
 config/roxterm.sourceforge.net
