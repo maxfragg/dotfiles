@@ -86,7 +86,7 @@ URxvt*.color5  			: #e91e63
 URxvt*.color13 			: #ad1457
 ! cyan
 URxvt*.color6  			: #009688
-URxvt*.color14 			: #004d40
+URxvt*.color14 			: #26a69a
 ! white
 URxvt*.color7  			: #cfd8dc
 URxvt*.color15 			: #eceff1
