@@ -223,3 +223,5 @@ fi
 if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
 fi
+
+hc spawn ~/bin/nsa &
