@@ -8,6 +8,8 @@
 #$HOSTNAME-not contains files excluded for this host,
 #overwrites everything else
 
+source bash_config
+
 DOTFILES="`cat files`"
 OPTIONAL="`cat files-opt`"
 
@@ -33,6 +35,15 @@ for name in $OPTIONAL; do
     echo "skipping "$name
   fi
 done
+
+
+#xdefaults is special
+if [ $config_hdpi == 1 ]; then
+  ln -s $PWD/Xdefaults_hdpi ~/.Xdefaults
+else 
+  ln -s $PWD/Xdefaults ~/.Xdefaults
+fi
+
 
 for name in $DOTFILES; do
   if [ `expr index "$name" "#"` == 1 ]; then

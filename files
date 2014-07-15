@@ -14,7 +14,7 @@ bashscripts
 #bin/dmenu_run
 #bin/dropbox_uploader.sh
 #bin/nopaste
-#bin/paste
+#bin/yespaste
 #bin/sshk.sh
 #bin/start_urxvt
 #bin/utf8db
@@ -30,6 +30,6 @@ jrnl_config
 powerline-shell.py 
 ssh/config
 tmux.conf
-Xdefaults
 urxvt
 gitconfig
+bash_config

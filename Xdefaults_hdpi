@@ -1,7 +1,7 @@
 !
 ! load definitions from shared file - you can override these values later
 !
-#include ".ENV/Xdefaults"
+!#include ".ENV/Xdefaults"
 
 
 !-- Xft settings -- !
@@ -31,7 +31,8 @@ URxvt.letterSpace		: -1
 !URxvt*.shading 			: 10
 ! true
 URxvt.depth 			: 32
-URxvt.background 		: [80]#000000
+URxvt.background 		: [80]#263238
+
 
 ! -- Colors -- !
 ! -- Neon   -- !
@@ -86,7 +87,7 @@ URxvt*.color5  			: #e91e63
 URxvt*.color13 			: #ad1457
 ! cyan
 URxvt*.color6  			: #009688
-URxvt*.color14 			: #004d40
+URxvt*.color14 			: #26a69a
 ! white
 URxvt*.color7  			: #cfd8dc
 URxvt*.color15 			: #eceff1
@@ -98,6 +99,9 @@ URxvt.colorIT 			: #76B639
 ! url-color
 URxvt.colorUL 			: #FFFFFF
 
+! cursor-color
+URxvt.cursorColor 		: #ff9800
+URxvt.pointerColor 		: #EBEBEB
 
 ! -- General Config -- !
 URxvt*.scrollBar 		: false

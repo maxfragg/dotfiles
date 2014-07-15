@@ -6,8 +6,7 @@ function hc() {
     herbstclient "$@"
 }
 
-#xsetroot -solid '#5A8E3A'
-
+source bash_config
 
 # keybindings
 Mod=Mod4
@@ -22,9 +21,6 @@ hc keybind $Mod-Control-o spawn opera-next
 #script centering mouse
 FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
 
-# tags
-#TAG_NAMES=( {1..9} )
-#TAG_KEYS=( {1..9} 0 )
 
 #TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
 TAG_NAMES=(cip term web ed var video pdf fm music mail )
@@ -121,9 +117,8 @@ hc set focus_stealing_prevention 1
 hc set tree_style  "╾│ ├└╼─┐"
 # rules
 hc unrule -F
-#hc rule class=XTerm tag=3 # move all xterms to tag 3
-hc rule focus=off # normally do not focus new clients
-# give focus to most common terminals
+
+hc rule focus=off
 hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole|Terminator|Roxterm)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
@@ -133,17 +128,15 @@ hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
 hc rule class=Chromium-browser tag=web
+hc rule class~Google-chrome-unstable tag=web
 hc rule class=Vlc tag=video
 hc rule class=Banshee tag=video
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
-#hc rule class~Empathy tag=im
-#hc rule windowrole~contact_list tag=im index=1/1
-#hc rule windowrole~chat tag=im index=2/0
 hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
-hc rule class=Sublime_text tag=ed
+hc rule class~Sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
 hc rule class=Audience tag=video
@@ -158,10 +151,8 @@ hc rule class='Pdfpc' windowrole='presenter' tag=pdf
 hc rule class='Pdfpc' windowrole='presentation' tag=video
 hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
 hc rule class~qemu-system-x86_64 tag=fm
+hc rule class~steam tag=var
 
-
-#custom add
-#hc set pad 0 "" "" 30
 
 #custom bindings
 hc keybind F1 spawn ~/.config/herbstluftwm/q3terminal.sh
@@ -188,44 +179,84 @@ hc keybind $Mod-l spawn xscreensaver-command -lock
 #trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
 
 
-killall trayer
 killall nm-applet
-killall parcellite
 killall tint2
 killall volumeicon
 killall synapse
 killall xfce4-power-manager
 
-sh ~/bin/sshk.sh
+
 (sleep 10 && xfsettingsd) &
 nm-applet &
 #volumeicon &
 xfce4-power-manager --no-daemon &
-gnome-keyring &
-#nitrogen --restore &
-#dropbox start
-#hc spawn seafile-applet
-synapse &
+vars=`gnome-keyring-deamon`
+for i in $vars ; do
+    hc setenv `echo $i | cut -d'=' -f'1'` `echo $i | cut -d'=' -f'2'`
+done
+
+
 xsetroot -name hlwm
 xset m 2 0 &
-#tint2
 hc pad 0 0 0 25 0
 
-dmenu_path >~/.cache/dmenu_run &
 
-#parcellite &
+
+setxkbmap  -layout us -variant altgr-intl &
+hc spawn "$config_dmenu_cache"
+hc spawn "$config_wallpaper_command"
+ssh-add "$config_ssh_keys"
+
+if [ $config_fancy_effects == 1 ]; then
+    hc set frame_bg_transparent 0
+    hc set always_show_frame 1
+    hc set frame_normal_opacity 30
+    hc set frame_active_opacity 30
+    hc set frame_bg_active_color $COLOR_FR_BG_N
+    compton --config ~/.compton.conf &
+fi
+
+if [ $config_hdpi == 1 ]; then
+    hc set frame_border_width 3
+    hc set window_border_width 3
+fi
+
+if [ $config_seafile == 1 ]; then
+    hc spawn seafile-applet
+fi
+
+
 
 #custom settings depending on if running in gnome session or not
 
 case "$HOSTNAME" in
+    stealthpad)
+        sleep 2
+        sh ~/bin/sshk.sh
+        hc spawn ~/.config/herbstluftwm/wallpaper.sh &
+        ~/config/herbstluftwm/dmenu_run_cache
+        #~/bin/dmenu_deb/dmenu_path >~/.cache/dmenu_run &
+        hc spawn light-locker
+        hc keybind $Mod-l spawn light-locker-command -l
+        gpg-agent &
+        volumeicon &
+        (sleep 7 && tint2) &
+
+        #true transparency
+        hc set frame_bg_transparent 0
+        hc set always_show_frame 1
+        hc set frame_normal_opacity 30
+        hc set frame_active_opacity 30
+        hc set frame_bg_active_color $COLOR_FR_BG_N
+        compton --config ~/.compton.conf &
+
+        hc set frame_border_width 3
+        hc set window_border_width 3
+
+        
+        hc spawn seafile-applet
+        ;;
     max-x61-xu)
-    	#hc set frame_bg_transparent 0
-    	#hc set always_show_frame 1
-    	#hc set frame_normal_opacity 30
-    	#hc set frame_active_opacity 0
-        #xcompmgr -cC -r4 &
-    	#hc spawn xcompmgr
-    	xset m 4 0 &
     	sh ~/wheeel.sh &
         hc spawn seafile-applet
         xset m 4 0 &
@@ -233,11 +264,7 @@ case "$HOSTNAME" in
     	wallpaper nsfw &
     	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
     	(sleep 7 && tint2) &
-    	#gnome-screensaver-command -d &
-    	#xscreensaver -no-splash &
-    	#xset m 4 0 &
-        #xinput set-prop 10 257 1 &
-        #xinput set-prop 10 258 1 &
+
     	pcscd &
     	gpg-agent &
         hc spawn ~/bin/display3.sh auto

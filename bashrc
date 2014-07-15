@@ -60,53 +60,17 @@ if [ -f /usr/local/lib/libcoloredstderr.so ]; then
     export LD_PRELOAD COLORED_STDERR_FDS
 fi
 
-#default editor
-export EDITOR=nano
-export EDITOR2=nano
-#path
 
+setxkbmap  -layout us -variant altgr-intl
 
-export PATH=$PATH:$HOME/bin:/opt/intel/bin
+#export PATH=$PATH:$HOME/bin:/opt/intel/bin
 export PATH=/usr/local/games:$PATH
 #export LANGUAGE=$LANGUAGE:de_DE:de 
-export LC_ALL=en_US.utf8
+#export LC_ALL=en_US.utf8
 
 if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
 fi
-
-case "$HOSTNAME" in
-    max-x61-ub)
-        export PATH=/usr/local/share/perl/5.14.2/auto/share/dist/Cope:$PATH
-        ;;
-    max-x61-f15)
-		
-	   ;;
-    max-x61-xu)
-    	export EDITOR2=sublime-text
-    	;;
-    taurus.uberspace.de)
-    	export PATH=/package/host/localhost/nodejs-0.10.3/bin:$PATH
-        export LC_ALL=en_US.utf8
-        ;;
-    faui49man*)
-        
-        ;;
-    faui0*)
-        addpackage herbstluftwm-git
-        ;;
-    faui3*)
-       
-        ;;
-    irene-ThinkPad)
-	
-	;;
-    debian-vm)
-    	
-    	;;
-    *)
-        ;;
-    esac
 
 
 #include prompt needed 
