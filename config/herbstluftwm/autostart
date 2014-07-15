@@ -182,13 +182,13 @@ hc keybind $Mod-l spawn xscreensaver-command -lock
 killall nm-applet
 killall tint2
 killall volumeicon
-killall synapse
+#killall synapse
 killall xfce4-power-manager
 
 
 (sleep 10 && xfsettingsd) &
 nm-applet &
-#volumeicon &
+volumeicon &
 xfce4-power-manager --no-daemon &
 vars=`gnome-keyring-deamon`
 for i in $vars ; do
@@ -199,7 +199,6 @@ done
 xsetroot -name hlwm
 xset m 2 0 &
 hc pad 0 0 0 25 0
-
 
 
 setxkbmap  -layout us -variant altgr-intl &
@@ -224,117 +223,3 @@ fi
 if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
 fi
-
-
-
-#custom settings depending on if running in gnome session or not
-
-case "$HOSTNAME" in
-    stealthpad)
-        sleep 2
-        sh ~/bin/sshk.sh
-        hc spawn ~/.config/herbstluftwm/wallpaper.sh &
-        ~/config/herbstluftwm/dmenu_run_cache
-        #~/bin/dmenu_deb/dmenu_path >~/.cache/dmenu_run &
-        hc spawn light-locker
-        hc keybind $Mod-l spawn light-locker-command -l
-        gpg-agent &
-        volumeicon &
-        (sleep 7 && tint2) &
-
-        #true transparency
-        hc set frame_bg_transparent 0
-        hc set always_show_frame 1
-        hc set frame_normal_opacity 30
-        hc set frame_active_opacity 30
-        hc set frame_bg_active_color $COLOR_FR_BG_N
-        compton --config ~/.compton.conf &
-
-        hc set frame_border_width 3
-        hc set window_border_width 3
-
-        
-        hc spawn seafile-applet
-        ;;
-    max-x61-xu)
-    	sh ~/wheeel.sh &
-        hc spawn seafile-applet
-        xset m 4 0 &
-    	volumeicon &
-    	wallpaper nsfw &
-    	hc spawn ~/.config/herbstluftwm/wallpaper.sh &
-    	(sleep 7 && tint2) &
-
-    	pcscd &
-    	gpg-agent &
-        hc spawn ~/bin/display3.sh auto
-        hc spawn light-locker
-        hc keybind $Mod-Shift-l spawn ~/.config/herbstluftwm/i3lock.sh &
-        hc keybind $Mod-l spawn light-locker-command -l
-        ~/bin/dmenu_deb/dmenu_path >~/.cache/dmenu_run &
-        hc spawn blueman-applet
-        #(sleep 15 && gigolo) &
-
-    	#(sleep 6 && encfs --extpass="zenity --password" /media/files/.files/ /home/maxfragg/files ) &
-        #xflux -l 49.563302 -g 11.032162 -k 4700 &
-        ;;
-    max-x61-f15)
-        tint2 &
-        ssh-add ~/.ssh/mykey &
-        ;;
-    irene-ThinkPad)
-    	(sleep 12 && tint2) &
-    	ssh-add ~/.ssh/mykey &
-    	dmenu_path >~/.cache/dmenu_run &
-    	nitrogen --restore &
-    	;;
-    taurus.uberspace.de)
-        ;;
-    faui49man*)
-    	ssh-add ~/.ssh/i4 &
-    	feh --bg-center /usr/share/backgrounds/Early_Morning_by_Robert_Katzki.jpg &
-    	dmenu_path >~/.cache/dmenu_run &
-    	(sleep 4 && tint2) &
-        hc keybind $Mod-l spawn i3lock
-        ;;
-    faui0*)
-    	(sleep 5 && wallpaper autum)&
-    	(sleep 5 && tint2)&
-    	ssh-add ~/.ssh/cipkey &
-    	dmenu_path >~/.cache/dmenu_run &
-    	hc keybind $Mod-l spawn xlock
-        ;;
-    faui3*)
-        ;;
-    phenux)
-    	nitrogen --restore &&
-    	xrandr --output DIN --off --output DVI-1 --mode 1680x1050 --pos 1280x0 --rotate normal --output DVI-0 --mode 1280x1024 --pos 0x0 --rotate normal
-    	tint2&
-    	ssh-add ~/.ssh/phenux &
-    	dmenu_path >~/.cache/dmenu_run &
-    	#volumeicon &
-    	pnmixer &
-    	#xfce4-volumed &
-    	hc add_monitor 1680x1050+1280+0 term wide
-    	hc pad wide 0 0 30 0
-    	;;
-    faui1-104)
-        tint2&
-        ssh-add ~/.ssh/cipkey &
-        (sleep 10 && wallpaper misc )&
-        hc keybind $Mod-l spawn ~/.config/herbstluftwm/i3lock.sh &
-
-
-        hc set frame_bg_transparent 0
-        hc set always_show_frame 1
-        hc set frame_normal_opacity 30
-        hc set frame_active_opacity 30
-        hc set frame_bg_active_color $COLOR_FR_BG_N
-
-        compton --config ~/.compton.conf &
-        ;;
-    *)
-        ;;
-    esac
-
-

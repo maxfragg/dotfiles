@@ -61,7 +61,7 @@ if [ -f /usr/local/lib/libcoloredstderr.so ]; then
 fi
 
 
-setxkbmap  -layout us -variant altgr-intl
+#setxkbmap  -layout us -variant altgr-intl
 
 #export PATH=$PATH:$HOME/bin:/opt/intel/bin
 export PATH=/usr/local/games:$PATH
