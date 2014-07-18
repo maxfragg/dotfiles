@@ -68,6 +68,8 @@ export PATH=/usr/local/games:$PATH
 #export LANGUAGE=$LANGUAGE:de_DE:de 
 #export LC_ALL=en_US.utf8
 
+export EDITOR="nano"
+
 if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
 fi

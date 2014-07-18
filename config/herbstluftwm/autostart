@@ -136,7 +136,7 @@ hc rule class=Zathura tag=pdf
 hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
-hc rule class~Sublime_text tag=ed
+hc rule class~sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
 hc rule class=Audience tag=video
@@ -173,7 +173,7 @@ hc keybind $Mod-XF86Back spawn ~/.config/herbstluftwm/cycle.sh prev
 hc keybind $Mod-XF86Forward spawn ~/.config/herbstluftwm/cycle.sh next
 hc keybind $Mod-g toggle frame_gap
 hc keybind $Mod-Shift-a spawn ~/.config/herbstluftwm/urgent.sh
-hc keybind $Mod-l spawn xscreensaver-command -lock
+
 
 #sh ~/.config/herbstluftwm/restartpanels.sh
 #trayer --SetDockType true --widthtype pixel --width 280 --edge top --align right --heighttype pixel --height 16 --transparent true --tint $COLOR_P_BG  --alpha 30 &
@@ -195,6 +195,9 @@ for i in $vars ; do
     hc setenv `echo $i | cut -d'=' -f'1'` `echo $i | cut -d'=' -f'2'`
 done
 
+if [ -f ~/.xbindkeysrc ]; then
+    hc spawn xbindkeys
+fi    
 
 xsetroot -name hlwm
 xset m 2 0 &
@@ -205,6 +208,8 @@ setxkbmap  -layout us -variant altgr-intl &
 hc spawn "$config_dmenu_cache"
 hc spawn "$config_wallpaper_command"
 ssh-add "$config_ssh_keys"
+
+hc spawn tint2
 
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0
@@ -223,5 +228,20 @@ fi
 if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
 fi
+
+case $config_locker in
+	light-locker)
+	hc spawn light-locker
+	hc keybind $Mod-l spawn light-locker-command -l
+	;;
+	xscreensaver)
+	hc spawn xscreensaver
+	hc keybind $Mod-l spawn xscreensaver-command -l
+	*)
+	hc keybind $Mod-l spawn $config_locker
+	;;
+esac
+
+
 
 hc spawn ~/bin/nsa &
