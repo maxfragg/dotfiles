@@ -210,6 +210,7 @@ hc spawn "$config_wallpaper_command"
 ssh-add "$config_ssh_keys"
 
 hc spawn tint2
+hc spawn thunar --deamon
 
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0
