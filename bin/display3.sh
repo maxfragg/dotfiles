@@ -86,7 +86,7 @@ os_xrandr_parse() {
     local current_modes=""
     
     # extract
-    local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+    local results="$(xrandr | grep -o -e '\([a-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
     #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
