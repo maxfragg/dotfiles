@@ -230,7 +230,7 @@ if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
 fi
 
-case $config_locker in
+case "$config_locker" in
 	light-locker)
 	hc spawn light-locker
 	hc keybind $Mod-l spawn light-locker-command -l
@@ -243,6 +243,4 @@ case $config_locker in
 	;;
 esac
 
-
-
-hc spawn ~/bin/nsa &
+hc spawn ~/bin/nsa

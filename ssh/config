@@ -37,15 +37,6 @@ Host faui36a
 Host faui33b
 	Hostname faui33b.informatik.uni-erlangen.de
 	User el79irih
-
-Host baronk
-	HostName dev-baron.de
-	User max
-	IdentityFile ~/.ssh/mykey
-	
-Host baron
-	HostName dev-baron.de
-	User max
 	
 Host man3
 	HostName faui49man3.informatik.uni-erlangen.de
@@ -87,7 +78,6 @@ host raspi
 	HostName raspi
 	User root
 
-
 host squarez_max
 	HostName squarez.fauiwg.de
 	User maxfragg
@@ -109,3 +99,8 @@ host ctf00
 host i1
 	HostName faui1-104.informatik.uni-erlangen.de
 	User maxfragg
+
+host icmp7
+	HostName bildschirmtext.icmp7.de
+	User btx
+	IdentityFile ~/.ssh/icmp7

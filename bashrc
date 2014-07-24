@@ -63,7 +63,7 @@ fi
 
 #setxkbmap  -layout us -variant altgr-intl
 
-#export PATH=$PATH:$HOME/bin:/opt/intel/bin
+export PATH=$PATH:$HOME/bin:/opt/intel/bin
 export PATH=/usr/local/games:$PATH
 #export LANGUAGE=$LANGUAGE:de_DE:de 
 #export LC_ALL=en_US.utf8
