@@ -1,7 +1,7 @@
 #!/bin/bash
-##################################
+##################
 ##	BASH PROMPT	##
-##################################
+##################
 
 function timer_start {
   timer=${timer:-$SECONDS}
@@ -10,30 +10,6 @@ function timer_start {
 function timer_stop {
   timer_show=$(($SECONDS - $timer))
   unset timer
-}
-
-#git prompt is form: 
-# http://www.opinionatedprogrammer.com/2011/01/colorful-bash-prompt-reflecting-git-status/
-function _git_prompt() {
-    local git_status="`git status -unormal 2>&1`"
-    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
-        if [[ "$git_status" =~ nothing\ to\ commit ]]; then
-            local ansi=42
-        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
-            local ansi=43
-        else
-            local ansi=45
-        fi
-        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
-            branch=${BASH_REMATCH[1]}
-            test "$branch" != master || branch=' '
-        else
-            # Detached HEAD.  (branch=HEAD is a faster alternative.)
-            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
-                echo HEAD`)"
-        fi
-        echo -n '\[\e[0;37;'"$ansi"';1m\]'"$branch"'\[\e[0m\]'
-    fi
 }
 
 
@@ -80,11 +56,15 @@ function bash_prompt_command() {
         NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
     fi
     
-    [ $GIT = "1" ] && local GITPROMPT_=`_git_prompt`
-    [ $GIT = "2" ] && local GITPROMPT_=`echo $__git_ps1`
-
-    PS1="$TITLEBAR${HC}${TIMES}${ERRPROMPT}${HC}[${UC}\u${W}${HC}$LOC$HOST_S${EMK}${UC}${NEW_PWD}${HC}]${EMK}$GITPROMPT_$newline${UC}\\$ ${NONE}"
-
+    PS1="${TITLEBAR}\
+${HC}${TIMES}${ERRPROMPT}\
+${HC}[\
+${UC}\u\
+${HC}${LOC}${HOST_S}\
+${UC}${NEW_PWD}\
+${HC}]\
+$newline${UC}\
+\$ ${NONE}"
 }
 
 #run once per sheell
@@ -144,7 +124,7 @@ function bash_prompt() {
     [ $UID -eq "0" ] && UC=$EMR && HC=$EMW
 
 }
-GIT="0"
+
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=bash_prompt_command
 bash_prompt
