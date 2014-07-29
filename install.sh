@@ -37,14 +37,6 @@ for name in $OPTIONAL; do
 done
 
 
-#xdefaults is special
-if [ $config_hdpi == 1 ]; then
-  ln -s $PWD/Xdefaults_hdpi ~/.Xdefaults
-else 
-  ln -s $PWD/Xdefaults ~/.Xdefaults
-fi
-
-
 for name in $DOTFILES; do
   if [ `expr index "$name" "#"` == 1 ]; then
   	name=${name/"#"/""}
