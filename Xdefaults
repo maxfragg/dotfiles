@@ -1,7 +1,7 @@
 !
 ! load definitions from shared file - you can override these values later
 !
-#include ".ENV/Xdefaults"
+!#include ".ENV/Xdefaults"
 
 
 !-- Xft settings -- !
@@ -14,6 +14,7 @@ Xft.hintstyle 			: hintfull
 
 ! -- Fonts -- !
 
+#ifdef x_hdpi
 URxvt*.font 			: xft:Source Code Pro:size=11:autohint=true:antialias=true,\
 						  xft:Monospace::regular:size=11:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true,\
@@ -22,74 +23,43 @@ URxvt*.boldFont 		: xft:Source Code Pro:bold:size=11:autohint=true:antialias=tru
 						  xft:Monospace:bold:size=11:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true,\
 						  xft:Ubuntu:size=11:autohint=true:antialias=true
+#endif
+#ifdef x_ldpi
+URxvt*.font 			: xft:Source Code Pro:size=10:autohint=true:antialias=true,\
+						  xft:Monospace::regular:size=10:autohint=true:antialias=true,\
+						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
+						  xft:Ubuntu:size=10:autohint=true:antialias=true
+URxvt*.boldFont 		: xft:Source Code Pro:bold:size=10:autohint=true:antialias=true,\
+						  xft:Monospace:bold:size=10:autohint=true:antialias=true,\
+						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
+						  xft:Ubuntu:size=10:autohint=true:antialias=true
+#endif
+
 URxvt.letterSpace		: -1
 
 ! -- Transparency -- !
 ! fake
-!URxvt*.transparent 		: true
-!URxvt*.shading 		: 0 to 99 darkens, 101 to 200 lightens
-!URxvt*.shading 			: 10
+#ifdef x_fake_transparency
+URxvt*.transparent 		: true
+URxvt*.shading 			: 10
+#endif
+
+#ifdef x_true_transparency
 ! true
 URxvt.depth 			: 32
-URxvt.background 		: [80]#000000
+URxvt.background 		: [80]#263238
+#endif
 
 ! -- Colors -- !
-! -- Neon   -- !
-!URxvt*background 		: #171717
-!URxvt*foreground 		: #F8F8F8
-! black
-!URxvt*.color0  			: #171717
-!URxvt*.color8  			: #38252C
-! red
-!URxvt*.color1  			: #D81765
-!URxvt*.color9  			: #FF0000
-! green
-!URxvt*.color2  			: #97D01A
-!URxvt*.color10 			: #76B639
-! yellow
-!URxvt*.color3  			: #FFA800
-!URxvt*.color11 			: #E1A126
-! blue
-!URxvt*.color4  			: #16B1FB
-!URxvt*.color12 			: #289CD5
-! magenta
-!URxvt*.color5  			: #FF2491
-!URxvt*.color13 			: #FF2491
-! cyan
-!URxvt*.color6  			: #0FDCB6
-!URxvt*.color14 			: #0A9B81
-! white
-!URxvt*.color7  			: #EBEBEB
-!URxvt*.color15 			: #F8F8F8
 
-! -- Google -- !
-URxvt*background 		: #263238
-URxvt*foreground 		: #eceff1
+#ifdef x_colortheme_neon
+#include ".xcolors/neon"
 
-! black
-URxvt*.color0  			: #263238
-URxvt*.color8  			: #37474f
-! red
-URxvt*.color1  			: #ff9800
-URxvt*.color9  			: #ffa74d
-! green
-URxvt*.color2  			: #8bc34a
-URxvt*.color10 			: #9ccc65
-! yellow
-URxvt*.color3  			: #ffc107
-URxvt*.color11 			: #ffa000
-! blue
-URxvt*.color4  			: #03a9f4
-URxvt*.color12 			: #81d4fa
-! magenta
-URxvt*.color5  			: #e91e63
-URxvt*.color13 			: #ad1457
-! cyan
-URxvt*.color6  			: #009688
-URxvt*.color14 			: #26a69a
-! white
-URxvt*.color7  			: #cfd8dc
-URxvt*.color15 			: #eceff1
+#endif
+
+#ifdef x_colortheme_material
+#include ".xcolors/material"
+#endif
 
 !Bold and Italics
 URxvt.colorBD 			: #EBEBEB

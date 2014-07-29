@@ -212,6 +212,8 @@ ssh-add $config_ssh_keys
 hc spawn tint2
 hc spawn thunar --deamon
 
+xrdb -merge -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
+
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0
     hc set always_show_frame 1

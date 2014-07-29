@@ -35,3 +35,5 @@ tmux.conf
 urxvt
 gitconfig
 bash_config
+xcolors
+Xdefaults

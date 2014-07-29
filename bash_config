@@ -43,6 +43,7 @@ export config_editor="nano"
 export config_prompt_user_color="$EMC"
 export config_prompt_host_color="$W"
 export config_prompt_hostname="$HOSTNAME"
+export config_x_colortheme="x_colortheme_material"
 
 case "$HOSTNAME" in
     stealthpad)
@@ -79,6 +80,7 @@ case "$HOSTNAME" in
         export config_prompt_user_color=$C
         export config_prompt_host_color=$EMG
         export config_prompt_hostname="$HOSTNAME"
+        export config_fake_transparency=1
         ;;
     squarez)
         export config_prompt_user_color=$B
@@ -92,3 +94,15 @@ case "$HOSTNAME" in
     *)
         ;;
 esac
+
+if [[ $config_fancy_effects == 1 ]]; then
+    export config_x_transparency="x_true_transparency"
+else
+    export config_x_transparency="x_fake_transparency"
+fi
+
+if [[ $config_hdpi == 1 ]]; then
+    export config_x_dpi="x_hdpi"
+else
+    export config_x_dpi="x_ldpi"
+fi
