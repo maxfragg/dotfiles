@@ -115,6 +115,9 @@ hc set window_border_width 2
 hc set focus_follows_mouse 1
 hc set focus_stealing_prevention 1
 hc set tree_style  "╾│ ├└╼─┐"
+hc attr theme.urgent.color $COLOR_W_BO_U
+hc attr theme.theme.padding_top 6
+
 # rules
 hc unrule -F
 
@@ -212,7 +215,7 @@ ssh-add $config_ssh_keys
 hc spawn tint2
 hc spawn thunar --deamon
 
-xrdb -merge -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
+xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
 
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0
