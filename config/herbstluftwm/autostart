@@ -236,15 +236,15 @@ if [ $config_seafile == 1 ]; then
 fi
 
 case "$config_locker" in
-	light-locker)
+	"light_locker")
 	hc spawn light-locker
 	hc keybind $Mod-l spawn light-locker-command -l
 	;;
-	xscreensaver)
+	"xscreensaver")
 	hc spawn xscreensaver
 	hc keybind $Mod-l spawn xscreensaver-command -l
 	*)
-	hc keybind $Mod-l spawn $config_locker
+	hc keybind $Mod-l spawn "$config_locker"
 	;;
 esac
 

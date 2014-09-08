@@ -82,7 +82,7 @@ rsyncpra(){ rsync --progress --recursive --append $@;}
 
 countdown(){ for j in `seq $1` ;do sleep 1$2; echo $j ; done; bell;}
 
-allpdf(){ for i in "$@"*.pdf ; do echo $i ; ~/bin/katarakt "$i" 2>/dev/null ; done }
+allpdf(){ for i in "$@"*.pdf ; do echo $i ; katarakt "$i" 2>/dev/null ; done }
 
 allxournal(){ for i in "$@"*/*.pdf ; do echo $i ; xournal $i ; done }
 
