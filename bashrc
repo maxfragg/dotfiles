@@ -46,7 +46,15 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+    source /etc/bash_completion
+fi
+
+if [ -f /usr/share/bash-completion/bash_completion ] && ! shopt -oq posix; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
+if [ -d /usr/share/bash-completion/completions ] && ! shopt -oq posix; then
+    source /usr/share/bash-completion/completions/*
 fi
 
 #herbstclient autocompletion

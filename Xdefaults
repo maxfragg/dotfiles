@@ -55,7 +55,7 @@ URxvt.colorBD 			: #EBEBEB
 URxvt.colorIT 			: #76B639
 
 ! url-color
-URxvt.colorUL 			: #FFFFFF
+URxvt.colorUL 			: #9ccc65
 
 ! -- Transparency -- !
 ! fake
@@ -76,16 +76,16 @@ URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
 !URxvt*.iconFile		: /home/maxfragg/terminal.svg
 
 ! open default webbrowser
-URxvt*.perl-ext-common	: default,matcher
-URxvt*.urlLauncher		: x-www-browser
-URxvt*.matcher.button	: 1
+URxvt.perl-ext-common: default,matcher,option-popup,clipboard
+URxvt.urlLauncher		: x-www-browser
+URxvt.matcher.button	: 1
 
 ! scrollbackbuffer
 URxvt*.saveLines		: 8192
 
 URxvt*.urgentOnBell		: true
 
-URxvt.perl-ext-common	: clipboard
+
 URxvt.keysym.C-C 		: perl:clipboard:copy
 URxvt.keysym.C-V 		: perl:clipboard:paste
 URxvt.keysym.M-C-v 		: perl:clipboard:paste_escaped

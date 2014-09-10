@@ -70,6 +70,11 @@ heute.txt(){
 	fi
 } 
 
+x_cfg_reload(){
+	source ~/.bash_config
+	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults
+}
+
 echoerr() { echo "$@" 1>&2; }
 
 finger_uni(){ ssh uni finger $@;}
