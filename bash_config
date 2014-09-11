@@ -32,6 +32,7 @@ BGW="\[\033[47m\]"
 
 
 export config_fancy_effects=0
+export config_fancy_borders=0
 export config_hdpi=0
 export config_ssh_keys=""
 export config_dmenu_cache="dmenu_path >$HOME/.cache/dmenu_run &"
@@ -48,6 +49,7 @@ export config_x_colortheme="x_colortheme_material"
 case "$HOSTNAME" in
     "stealthpad")
         export config_fancy_effects=1
+        export config_fancy_borders=1
         export config_hdpi=1
         export config_ssh_keys="$HOME/.ssh/mykey $HOME/.ssh/cipkey"
         export config_seafile=1
