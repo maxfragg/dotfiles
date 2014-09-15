@@ -23,7 +23,7 @@ FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
 
 
 #TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
-TAG_NAMES=(cip term web ed var video pdf fm music mail )
+TAG_NAMES=(cip term web ed var media pdf fm cal mail )
 TAG_KEYS=( {1..9} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
@@ -132,8 +132,8 @@ hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
 hc rule class=Chromium-browser tag=web
 hc rule class~Google-chrome-unstable tag=web
-hc rule class=Vlc tag=video
-hc rule class=Banshee tag=video
+hc rule class=Vlc tag=media
+hc rule class=Banshee tag=media
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
 hc rule class~Tilda manage=off
@@ -142,19 +142,20 @@ hc rule class=Scribes tag=ed
 hc rule class~sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
 hc rule class=sublime-text-2 tag=ed
-hc rule class=Audience tag=video
+hc rule class=Audience tag=media
 hc rule class~Geary tag=mail
 hc rule class~Xournal tag=ed
-hc rule class~gnome-mplayer tag=video
+hc rule class~gnome-mplayer tag=media
 hc rule class~Thunar tag=fm
 hc rule class~Thunderbird tag=mail
 hc rule class~Thunderbird focus=on
 hc rule windowrole~EventDialog pseudotile=on
 hc rule class='Pdfpc' windowrole='presenter' tag=pdf
-hc rule class='Pdfpc' windowrole='presentation' tag=video
+hc rule class='Pdfpc' windowrole='presentation' tag=media
 hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
 hc rule class~qemu-system-x86_64 tag=fm
 hc rule class~steam tag=var
+hc rule class~california tag=cal
 
 
 #custom bindings

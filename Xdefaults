@@ -78,7 +78,7 @@ URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
 
 ! open default webbrowser
 URxvt.perl-ext-common: default,matcher,option-popup,clipboard
-URxvt.urlLauncher		: x-www-browser
+URxvt.url-launcher		: x-www-browser
 URxvt.matcher.button	: 1
 
 ! scrollbackbuffer
