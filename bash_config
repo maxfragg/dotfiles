@@ -45,9 +45,11 @@ export config_prompt_user_color="$EMC"
 export config_prompt_host_color="$W"
 export config_prompt_hostname="$HOSTNAME"
 export config_x_colortheme="x_colortheme_material"
+export config_wallpaper_folder="misc"
 
 case "$HOSTNAME" in
     "stealthpad")
+        export config_wallpaper_folder="chromeos"
         export config_fancy_effects=1
         export config_fancy_borders=1
         export config_hdpi=1

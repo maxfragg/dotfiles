@@ -6,7 +6,7 @@ function hc() {
     herbstclient "$@"
 }
 
-source bash_config
+source ~/.bash_config
 
 # keybindings
 Mod=Mod4
