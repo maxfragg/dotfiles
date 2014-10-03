@@ -46,6 +46,10 @@ Host man4
 	HostName faui49man4.informatik.uni-erlangen.de
 	User el79irih
 
+Host faui49r
+	HostName faui49r.informatik.uni-erlangen.de
+	User el79irih
+
 Host scalar
 	HostName 131.188.33.176
 	User el79irih

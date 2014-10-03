@@ -68,7 +68,7 @@ URxvt*.shading 			: 20
 #ifdef x_true_transparency
 URxvt*.transparent 		: false
 URxvt*.depth 			: 32
-!URxvt*.background 		: [80]#263238
+URxvt*.background 		: [80]#263238
 #endif
 
 ! -- General Config -- !

@@ -35,7 +35,7 @@ export config_fancy_effects=0
 export config_fancy_borders=0
 export config_hdpi=0
 export config_ssh_keys=""
-export config_dmenu_cache="dmenu_path >$HOME/.cache/dmenu_run &"
+export config_dmenu_cache="dmenu_path >$HOME/.cache/dmenu_run"
 export config_seafile=0
 export config_locker="light_locker"
 export config_wallpaper_command="$HOME/.config/herbstluftwm/wallpaper.sh"
@@ -58,7 +58,7 @@ case "$HOSTNAME" in
         export config_prompt_user_color=$EMY
         export config_prompt_host_color=$EMM
         export config_prompt_hostname="x240"
-        export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache &"
+        export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache"
         ;;
     "irene-ThinkPad")
     	export config_ssh_keys="$HOME/.ssh/mykey"
