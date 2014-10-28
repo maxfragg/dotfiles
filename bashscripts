@@ -9,6 +9,36 @@ lt(){
     ~/bin/LightTable/LightTable "$@"
 }
 
+a(){
+	if [[ `id -u` != "0" ]]; then
+		SU="sudo"
+	else
+		SU=""
+	fi
+
+	if [[ "$1" == "au" ]]; then
+		$SU aura -Ayu
+	elif [[ "$1" == "ru" ]]; then
+		$SU aura -Syu
+	elif [[ "$1" == "ri" ]]; then
+		$SU aura -S "$2"
+	elif [[ "$1" == "ai" ]]; then
+		$SU aura -A "$2"
+	elif [[ "$1" == "h" ]]; then
+		echo -e "my aura wrapper\n"
+		if [[ "$SU" == "sudo" ]]; then
+			echo -e "commands will be prefixed with sudo, since you are not root!\n"
+		fi
+		echo "au: aur update"
+		echo "ru: repo update"
+		echo "ai: aur install"
+		echo "ri: repo install"
+	else
+		$SU aura "$@"
+	fi
+
+		
+}
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -75,11 +105,11 @@ x_cfg_reload(){
 	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults
 }
 
-echoerr() { echo "$@" 1>&2; }
+echoerr() { /usr/bin/echo "$@" 1>&2; }
 
 finger_uni(){ ssh uni finger $@;}
 
-mancell(){ man -M ~/.man $@;}
+#mancell(){ man -M ~/.man $@;}
 
 kueche(){ ssh squarez mpc $@;}
 

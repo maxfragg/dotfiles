@@ -108,3 +108,8 @@ host icmp7
 	HostName bildschirmtext.icmp7.de
 	User btx
 	IdentityFile ~/.ssh/icmp7
+
+host i2
+	HostName faui2hg.cs.fau.de
+	User hg
+	IdentityFile ~/.ssh/cb_rsa

@@ -242,7 +242,7 @@ if [ $config_seafile == 1 ]; then
 fi
 
 case "$config_locker" in
-	light_locker)
+	lightlocker)
 	hc spawn light-locker
 	hc keybind $Mod-l spawn light-locker-command -l
 	;;

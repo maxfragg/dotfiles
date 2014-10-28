@@ -63,9 +63,11 @@ if [ -d /etc/bash_completion.d ]; then
 fi
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
-    LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
-    COLORED_STDERR_FDS=2,
-    export LD_PRELOAD COLORED_STDERR_FDS
+    # echo "ld preload active"
+    export COLORED_STDERR_PRE=$'\033[91m' # bright red
+    export COLORED_STDERR_POST=$'\033[0m' # default
+    export LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
+    export COLORED_STDERR_FDS=2,
 fi
 
 
