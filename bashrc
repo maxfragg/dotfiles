@@ -68,6 +68,7 @@ if [ -f /usr/local/lib/libcoloredstderr.so ]; then
     export COLORED_STDERR_POST=$'\033[0m' # default
     export LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
     export COLORED_STDERR_FDS=2,
+    export COLORED_STDERR_IGNORED_BINARIES=/usr/bin/yaourt
 fi
 
 

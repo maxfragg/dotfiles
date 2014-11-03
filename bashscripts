@@ -55,7 +55,7 @@ objdmp(){
 }
 
 md2pdf(){
-	pandoc -f markdown+grid_tables -s --highlight-style pygments "$@" -o "$@".pdf
+	pandoc --latex-engine=lualatex -f markdown+grid_tables+tex_math_dollars -s --highlight-style pygments "$@" -o "$@".pdf
 }
 
 xor(){
@@ -96,7 +96,7 @@ heute.txt(){
 		git add $title
 		date +%Y-%m-%d>>$title
 		echo $t2>>$title
-		$EDITOR2 $title 2>/dev/null &
+		$config_gui_editor $title 2>/dev/null &
 	fi
 } 
 
@@ -105,7 +105,7 @@ x_cfg_reload(){
 	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults
 }
 
-echoerr() { /usr/bin/echo "$@" 1>&2; }
+echoerr() { /usr/bin/echo "$@" >&2; }
 
 finger_uni(){ ssh uni finger $@;}
 
