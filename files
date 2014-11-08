@@ -21,6 +21,7 @@ bashscripts
 #bin/utf8select.sh
 #bin/nsa
 #bin/nsa.png
+#bin/msmtp-gnome-tool.py
 compton.conf
 config/herbstluftwm
 config/roxterm.sourceforge.net
@@ -37,3 +38,4 @@ gitconfig
 bash_config
 xcolors
 Xdefaults
+msmtprc
