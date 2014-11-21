@@ -35,7 +35,7 @@ export config_fancy_effects=0
 export config_fancy_borders=0
 export config_hdpi=0
 export config_ssh_keys=""
-export config_dmenu_cache="dmenu_path >$HOME/.cache/dmenu_run &"
+export config_dmenu_cache="dmenu_path >$HOME/.cache/dmenu_run"
 export config_seafile=0
 export config_locker="light_locker"
 export config_wallpaper_command="$HOME/.config/herbstluftwm/wallpaper.sh"
@@ -58,7 +58,7 @@ case "$HOSTNAME" in
         export config_prompt_user_color=$EMY
         export config_prompt_host_color=$EMM
         export config_prompt_hostname="x240"
-        export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache &"
+        export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache"
         ;;
     irene-ThinkPad)
     	export config_ssh_keys="$HOME/.ssh/mykey"
@@ -69,16 +69,16 @@ case "$HOSTNAME" in
     	;;
     faui49man*)
     	export config_ssh_keys="$HOME/.ssh/i4 $HOME/.ssh/i4github $HOME/.ssh/cipkey"
-    	export config_wallpaper_command="feh --bg-center /usr/share/backgrounds/Backyard_Mushrooms_by_Kurt_Zitzelman.jpg &"
+    	export config_wallpaper_command="feh --bg-center /usr/share/backgrounds/Backyard_Mushrooms_by_Kurt_Zitzelman.jpg"
         export config_locker="i3lock"
         export config_gui_editor="subl"
         export config_prompt_user_color=$B
         export config_prompt_host_color=$EMM
         export config_prompt_hostname=`echo $HOSTNAME | cut -d9 -f2`
-        export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache &"
+        export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache"
         ;;
     faui0*)
-        export config_wallpaper_command="(sleep 5 && wallpaper autum)&"
+        export config_wallpaper_command="(sleep 5 && wallpaper autum)"
     	export config_ssh_keys="$HOME/.ssh/cipkey"
     	export config_locker="xlock"
         export config_prompt_user_color=$C
