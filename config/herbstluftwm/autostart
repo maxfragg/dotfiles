@@ -218,11 +218,6 @@ hc spawn thunar --deamon
 
 xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
 
-if [ $config_is_notebook == 1]; then
-	hc spawn cbatticon BAT0
-	hc spawn cbatticon BAT1
-fi
-
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0
     hc set always_show_frame 1
@@ -242,8 +237,16 @@ if [ $config_hdpi == 1 ]; then
     herbstclient set_attr settings.frame_gap 10
 fi
 
+sleep $config_startup_sleep
+
 if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
+fi
+
+if [ $config_is_notebook == 1]; then
+	hc spawn cbatticon -i notification BAT0
+	hc spawn cbatticon -i notification BAT1
+	#hc spawn batti
 fi
 
 case "$config_locker" in

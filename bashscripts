@@ -9,6 +9,8 @@ lt(){
     ~/bin/LightTable/LightTable "$@"
 }
 
+calc(){ echo "scale=2; $@" | bc -l ;}
+
 a(){
 	if [[ `id -u` != "0" ]]; then
 		SU="sudo"
@@ -37,8 +39,21 @@ a(){
 		$SU aura "$@"
 	fi
 
-		
 }
+
+bat(){
+
+	full=`cat /sys/class/power_supply/BAT0/energy_full`
+	now=`cat /sys/class/power_supply/BAT0/energy_now` 
+	echo -n "Battery 0: " 
+	echo "scale=2; $now / $full" | bc -l | sed 's/^\./0./'
+
+	full=`cat /sys/class/power_supply/BAT1/energy_full`
+	now=`cat /sys/class/power_supply/BAT1/energy_now` 
+	echo -n "Battery 1: " 
+	echo "scale=2; $now / $full" | bc -l | sed 's/^\./0./'
+}
+
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -173,8 +188,6 @@ wget http://whatthecommit.com/ -O - 2>/dev/null | grep -o '<p>.*$' | sed 's/<[^>
 alias mymutt='mutt; sleep 10; rm -f ~/.sec/goobookrc'
 
 alarm(){ sleep "$@" ; mplayer ~/Musik/bcc-break/machine_lullaby_1.ogg >/dev/null ;}
-
-calc(){ echo "scale=2; $@" | bc -l ;}
 
 ipof(){ grep "$@" ~/.ip | cut -d" " -f2 ;}
 
