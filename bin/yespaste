@@ -46,6 +46,7 @@ else
         filename=$(filename "$i")
         scp "$i" "$remotefolder/$filename" || continue
         echo "$urlprefix/$filename"
+        echo "$urlprefix/$filename" | xclip
     done
 fi
 

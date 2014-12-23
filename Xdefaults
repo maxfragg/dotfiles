@@ -77,8 +77,8 @@ URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
 !URxvt*.iconFile		: /home/maxfragg/terminal.svg
 
 ! open default webbrowser
-URxvt.perl-ext-common: default,matcher,option-popup,clipboard
-URxvt.url-launcher		: /home/maxfragg/bin/google-chrome-unstable
+URxvt.perl-ext-common 	: default,matcher,option-popup,clipboard
+URxvt.url-launcher		: x-www-browser
 URxvt.matcher.button	: 1
 
 ! scrollbackbuffer

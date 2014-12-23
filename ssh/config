@@ -95,6 +95,15 @@ host vulbox
 	User root
 	IdentityFile ~/.ssh/ructf
 
+host ructftest 
+	HostName 192.168.42.30
+	User faust
+	IdentityFile ~/.ssh/ructf2014
+
+host 10.60.*.*
+	User root	
+	IdentityFile ~/.ssh/ructf2014
+
 host ctf00
 	HostName ctf00.informatik.uni-erlangen.de
 	User maxfragg
