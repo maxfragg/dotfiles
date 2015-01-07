@@ -5,6 +5,26 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
+
+# script to add files to my dotfiles git repo and
+# replace them by a symlink
+dotfiles(){
+	local P=`realpath --relative-to=$HOME "$1"`
+	mkdir -p `dirname "$config_dotfiles_path/$P"`
+	mv "$1" "$config_dotfiles_path/$P"
+	local tkn=`echo $1 | rev | cut -d'/' -f1 | rev`
+	if [[ $tkn != "."* ]]; then
+		local P1="#$P"
+	else
+		local P1="$P"
+	fi
+	echo "$P1" >> "$config_dotfiles_path/files"
+	ln -s "$config_dotfiles_path/$P" `realpath "$1"`
+	cd $config_dotfiles_path
+	git add $P
+}
+
+
 lt(){
     ~/bin/LightTable/LightTable "$@"
 }

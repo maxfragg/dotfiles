@@ -48,6 +48,7 @@ export config_x_colortheme="x_colortheme_material"
 export config_wallpaper_folder="misc"
 export config_startup_sleep=4
 export config_is_notebook=0
+export config_dotfiles_path="$HOME/git/dotfiles"
 
 case "$HOSTNAME" in
     "stealthpad")
