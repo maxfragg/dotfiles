@@ -139,9 +139,9 @@ hc rule class=Zathura tag=pdf
 hc rule class~Tilda manage=off
 hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
-hc rule class~sublime_text tag=ed
+hc rule class~"sublime-text" tag=ed
 hc rule class=Katarakt tag=pdf
-hc rule class=sublime-text-2 tag=ed
+hc rule class="sublime-text-2" tag=ed
 hc rule class=Audience tag=media
 hc rule class~Geary tag=mail
 hc rule class~Xournal tag=ed

@@ -46,9 +46,11 @@ export config_prompt_host_color="$W"
 export config_prompt_hostname="$HOSTNAME"
 export config_x_colortheme="x_colortheme_material"
 export config_wallpaper_folder="misc"
+export config_startup_sleep="4"
 
 case "$HOSTNAME" in
     stealthpad)
+		export config_startup_sleep="0"
         export config_wallpaper_folder="chromeos"
         export config_fancy_effects=1
         export config_fancy_borders=1
@@ -56,7 +58,7 @@ case "$HOSTNAME" in
         export config_ssh_keys="$HOME/.ssh/mykey $HOME/.ssh/cipkey"
         export config_seafile=1
         export config_prompt_user_color=$EMY
-        export config_prompt_host_color=$EMM
+        export config_prompt_host_color=$B
         export config_prompt_hostname="x240"
         export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache"
         ;;
@@ -70,7 +72,7 @@ case "$HOSTNAME" in
     faui49man*)
     	export config_ssh_keys="$HOME/.ssh/i4 $HOME/.ssh/i4github $HOME/.ssh/cipkey"
     	export config_wallpaper_command="feh --bg-center /usr/share/backgrounds/Backyard_Mushrooms_by_Kurt_Zitzelman.jpg"
-        export config_locker="i3lock"
+        export config_locker="gnome-screensaver-command --lock"
         export config_gui_editor="subl"
         export config_prompt_user_color=$B
         export config_prompt_host_color=$EMM
