@@ -251,16 +251,16 @@ if [ $config_is_notebook == 1 ]; then
 fi
 
 case "$config_locker" in
-	light_locker)
-		hc spawn "light-locker"
-		hc keybind $Mod-l spawn "light-locker-command -l"
+	lightlocker)
+		hc spawn light-locker
+		hc keybind $Mod-l spawn light-locker-command -l
 		;;
 	xscreensaver)
 		hc spawn xscreensaver
-		hc keybind $Mod-l spawn "xscreensaver-command -l"
+		hc keybind $Mod-l spawn xscreensaver-command -l
 		;;
 	*)
-		hc keybind $Mod-l spawn "$config_locker"
+		hc keybind $Mod-l spawn $config_locker
 		;;
 esac
 
