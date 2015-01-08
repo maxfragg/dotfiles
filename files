@@ -39,3 +39,5 @@ bash_config
 xcolors
 Xdefaults
 msmtprc
+#bin/passdialog.sh
+#bin/print-c-expression

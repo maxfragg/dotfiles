@@ -46,11 +46,13 @@ export config_prompt_host_color="$W"
 export config_prompt_hostname="$HOSTNAME"
 export config_x_colortheme="x_colortheme_material"
 export config_wallpaper_folder="misc"
-export config_startup_sleep="4"
+export config_startup_sleep=4
+export config_is_notebook=0
+export config_dotfiles_path="$HOME/git/dotfiles"
 
 case "$HOSTNAME" in
-    stealthpad)
-		export config_startup_sleep="0"
+    "stealthpad")
+		export config_startup_sleep=1
         export config_wallpaper_folder="chromeos"
         export config_fancy_effects=1
         export config_fancy_borders=1
@@ -61,6 +63,7 @@ case "$HOSTNAME" in
         export config_prompt_host_color=$B
         export config_prompt_hostname="x240"
         export config_dmenu_cache="$HOME/.config/herbstluftwm/dmenu_run_cache"
+        export config_is_notebook=1
         ;;
     irene-ThinkPad)
     	export config_ssh_keys="$HOME/.ssh/mykey"

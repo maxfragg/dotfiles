@@ -141,7 +141,8 @@ hc rule class~Synapse manage=off pseudotile=on
 hc rule class=Scribes tag=ed
 hc rule class~"sublime-text" tag=ed
 hc rule class=Katarakt tag=pdf
-hc rule class="sublime-text-2" tag=ed
+hc rule class~"sublime-text-2" tag=ed
+hc rule class~"subl3" tag=ed
 hc rule class=Audience tag=media
 hc rule class~Geary tag=mail
 hc rule class~Xournal tag=ed
@@ -237,8 +238,16 @@ if [ $config_hdpi == 1 ]; then
     herbstclient set_attr settings.frame_gap 10
 fi
 
+sleep $config_startup_sleep
+
 if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
+fi
+
+if [ $config_is_notebook == 1 ]; then
+	hc spawn cbatticon -i notification BAT0
+	hc spawn cbatticon -i notification BAT1
+	#hc spawn batti
 fi
 
 case "$config_locker" in
