@@ -210,8 +210,8 @@ hc pad 0 0 0 25 0
 
 
 setxkbmap  -layout us -variant altgr-intl &
-hc spawn "$config_dmenu_cache"
-hc spawn "$config_wallpaper_command"
+hc spawn $config_dmenu_cache
+( sleep $config_startup_sleep && $config_wallpaper_command )&
 ssh-add $config_ssh_keys
 
 hc spawn tint2
