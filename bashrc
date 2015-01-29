@@ -85,6 +85,10 @@ if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
 fi
 
+if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
+    export TERM=xterm-256color
+fi
+
 
 #include prompt needed 
 #source ~/.bash_powerline

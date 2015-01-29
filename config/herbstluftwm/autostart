@@ -14,7 +14,7 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Return spawn ~/bin/start_urxvt
+hc keybind $Mod-Return spawn $config_term
 hc keybind $Mod-Shift-Return spawn roxterm
 hc keybind $Mod-Control-o spawn opera-next
 
@@ -120,47 +120,61 @@ hc set_attr theme.urgent.color $COLOR_W_BO_U
 
 # rules
 hc unrule -F
-
+# General Rules
 hc rule focus=off
 hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole|Terminator|Roxterm)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 hc rule isFullscreen=on focus=on
+hc rule windowrole~EventDialog pseudotile=on
+hc rule class~Synapse manage=off pseudotile=on
+hc rule class~Tilda manage=off
+hc rule class~Thunderbird focus=on
+hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
+
+#Tag Rules
+#Tag 1: Terminal
+#Tag 2: 3 Terminals
+#Tag 3: web
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
 hc rule class=Chromium-browser tag=web
 hc rule class~Google-chrome-unstable tag=web
+#Tag 4: editor
+hc rule class=Scribes tag=ed
+hc rule class~sublime-text tag=ed
+hc rule class~sublime-text-2 tag=ed
+hc rule class~subl3 tag=ed
+hc rule class~Xournal tag=ed
+#Tag 5: various
+hc rule class~steam tag=var
+#Tag 6: media
 hc rule class=Vlc tag=media
 hc rule class=Banshee tag=media
+hc rule class=Audience tag=media
+hc rule class~gnome-mplayer tag=media
+#Tag 7: pdf-viewer
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
-hc rule class~Tilda manage=off
-hc rule class~Synapse manage=off pseudotile=on
-hc rule class=Scribes tag=ed
-hc rule class~"sublime-text" tag=ed
 hc rule class=Katarakt tag=pdf
-hc rule class~"sublime-text-2" tag=ed
-hc rule class~"subl3" tag=ed
-hc rule class=Audience tag=media
-hc rule class~Geary tag=mail
-hc rule class~Xournal tag=ed
-hc rule class~gnome-mplayer tag=media
-hc rule class~Thunar tag=fm
-hc rule class~Thunderbird tag=mail
-hc rule class~Thunderbird focus=on
-hc rule windowrole~EventDialog pseudotile=on
 hc rule class='Pdfpc' windowrole='presenter' tag=pdf
 hc rule class='Pdfpc' windowrole='presentation' tag=media
-hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
+#Tag 8: filemanager and VM
+hc rule class~Thunar tag=fm
 hc rule class~qemu-system-x86_64 tag=fm
-hc rule class~steam tag=var
+#Tag 9: calendar, if any
 hc rule class~california tag=cal
+#Tag 10: mail
+hc rule class~Geary tag=mail
+hc rule class~Thunderbird tag=mail
+
 
 
 #custom bindings
 hc keybind F1 spawn ~/.config/herbstluftwm/q3terminal.sh
+hc keybind F2 spawn ~/.config/herbstluftwm/notepad.sh
 hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
@@ -216,6 +230,7 @@ ssh-add $config_ssh_keys
 
 hc spawn tint2
 hc spawn thunar --deamon
+hc spawn synapse
 
 xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
 
@@ -248,6 +263,7 @@ if [ $config_is_notebook == 1 ]; then
 	hc spawn cbatticon -i notification BAT0
 	hc spawn cbatticon -i notification BAT1
 	#hc spawn batti
+	hc spawn syndaemon -t -k -i 2
 fi
 
 case "$config_locker" in
