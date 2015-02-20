@@ -20,10 +20,7 @@ dotfiles(){
 		P="$tknpath/$P1"
 	fi
 
-	echo $P1
-	echo $P
-
-	mkdir -p `dirname "$config_dotfiles_path/$P"`
+	mkdir -p `dirname "$config_dotfiles_path/`echo $1 | rev | cut -d'/' -f2- | rev`"`
 	mv "$1" "$config_dotfiles_path/$P"
 
 	echo "$P1" >> "$config_dotfiles_path/files"
