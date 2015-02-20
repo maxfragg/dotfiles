@@ -147,6 +147,7 @@ hc rule class=Scribes tag=ed
 hc rule class~sublime-text tag=ed
 hc rule class~sublime-text-2 tag=ed
 hc rule class~subl3 tag=ed
+hc rule class~Subl3 tag=ed
 hc rule class~Xournal tag=ed
 #Tag 5: various
 hc rule class~steam tag=var
@@ -174,7 +175,7 @@ hc rule class~Thunderbird tag=mail
 
 #custom bindings
 hc keybind F1 spawn ~/.config/herbstluftwm/q3terminal.sh
-hc keybind F2 spawn ~/.config/herbstluftwm/notepad.sh
+#hc keybind F2 spawn ~/.config/herbstluftwm/notepad.sh
 hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh

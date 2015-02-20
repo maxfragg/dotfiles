@@ -40,7 +40,9 @@ if [ -f ~/.bashscripts ]; then
     source ~/.bashscripts
 fi
 
-
+if [ -f ~/.z.sh ]; then
+    source ~/.z.sh
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
