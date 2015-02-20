@@ -5,7 +5,6 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
-
 # script to add files to my dotfiles git repo and
 # replace them by a symlink
 dotfiles(){
@@ -13,14 +12,14 @@ dotfiles(){
 	local P=`realpath --relative-to=$HOME "$1"`
 	local tkn=`echo $1 | rev | cut -d'/' -f1 | rev`
 	local tknpath=`echo $1 | rev | cut -d'/' -f2- | rev`
-	if [[ $tkn != "."* ]]; then
-		local P1="#$tkn" 
+	if [[ $P != "."* ]]; then
+		local P1="#$P" 
 	else
-		local P1=`echo $tkn | cut -d'.' -f2-`
-		P="$tknpath/$P1"
+		local P1=`echo $P | cut -d'.' -f2-`
+		P="$P1"
 	fi
 
-	mkdir -p `dirname "$config_dotfiles_path/`echo $1 | rev | cut -d'/' -f2- | rev`"`
+	mkdir -p `dirname "$config_dotfiles_path/$P`
 	mv "$1" "$config_dotfiles_path/$P"
 
 	echo "$P1" >> "$config_dotfiles_path/files"
