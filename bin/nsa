@@ -2,7 +2,9 @@
 
 from gi.repository import Gtk, Gdk, GObject
 import random
+import fnmatch
 from os.path import dirname, join, realpath
+from os import listdir
 
 class ProgressBarWindow(Gtk.Window):
 
@@ -14,7 +16,15 @@ class ProgressBarWindow(Gtk.Window):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.add(vbox)
 
-        self.logo = Gtk.Image.new_from_file(join(dirname(realpath(__file__)), 'nsa.png'))
+        # randomize logo
+        logos = listdir(dirname(realpath(__file__))+ '/nsa_img')
+        while True:
+            logo = random.choice(logos)
+            if fnmatch.fnmatch(logo,"*.png"):
+                self.logo = Gtk.Image.new_from_file(dirname(realpath(__file__))+'/nsa_img/'+logo)
+                break
+
+        
         vbox.pack_start(self.logo, True, True, 0)
 
         self.progressbar = Gtk.ProgressBar()

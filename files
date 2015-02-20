@@ -40,5 +40,6 @@ xcolors
 Xdefaults
 msmtprc
 #bin/passdialog.sh
+<<<<<<< HEAD
 #bin/print-c-expression
 z.sh
