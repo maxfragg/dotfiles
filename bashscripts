@@ -158,7 +158,7 @@ heute.txt(){
 
 x_cfg_reload(){
 	source ~/.bash_config
-	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults
+	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" -D"$config_x_global_terminal_icon" .Xdefaults
 }
 
 echoerr() { /usr/bin/echo "$@" >&2; }

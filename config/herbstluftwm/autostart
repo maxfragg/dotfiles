@@ -232,8 +232,9 @@ ssh-add $config_ssh_keys
 hc spawn tint2
 hc spawn thunar --deamon
 hc spawn synapse
+hc spawn redshift-gtk
 
-xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
+xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" -D"$config_x_global_terminal_icon" .Xdefaults 
 
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0

@@ -73,8 +73,12 @@ URxvt*.background 		: [80]#263238
 
 ! -- General Config -- !
 URxvt*.scrollBar 		: false
-URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
+!URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
+#ifdef x_global_terminal_icon
+URxvt*.iconFile			: /usr/share/icons/elementary/apps/48/utilities-terminal.svg
+#else
 !URxvt*.iconFile		: /home/maxfragg/terminal.svg
+#endif
 
 ! open default webbrowser
 URxvt.perl-ext-common 	: default,matcher,option-popup,clipboard

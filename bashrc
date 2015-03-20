@@ -47,32 +47,31 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
+
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
-fi
+	if [ -f /usr/share/bash-completion/bash_completion ] && ! shopt -oq posix; then
+    	source /usr/share/bash-completion/bash_completion
+	fi
 
-if [ -f /usr/share/bash-completion/bash_completion ] && ! shopt -oq posix; then
-    source /usr/share/bash-completion/bash_completion
-fi
+	if [ -d /usr/share/bash-completion/completions ] && ! shopt -oq posix; then
+    	source /usr/share/bash-completion/completions/*
+	fi
 
-if [ -d /usr/share/bash-completion/completions ] && ! shopt -oq posix; then
-    source /usr/share/bash-completion/completions/*
-fi
-
-#herbstclient autocompletion
-if [ -d /etc/bash_completion.d ]; then
-    source /etc/bash_completion.d/*
+	#herbstclient autocompletion
+	if [ -d /etc/bash_completion.d ]; then
+    	source /etc/bash_completion.d/*
+	fi
 fi
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
-    # echo "ld preload active"
+    #echo "ld preload active"
     export COLORED_STDERR_PRE=$'\033[91m' # bright red
     export COLORED_STDERR_POST=$'\033[0m' # default
     export LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
     export COLORED_STDERR_FDS=2,
     export COLORED_STDERR_IGNORED_BINARIES=/usr/bin/yaourt
 fi
-
 
 #setxkbmap  -layout us -variant altgr-intl
 
