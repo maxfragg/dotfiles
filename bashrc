@@ -50,19 +50,17 @@ fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
-	if [ -f /usr/share/bash-completion/bash_completion ] && ! shopt -oq posix; then
-    	source /usr/share/bash-completion/bash_completion
-	fi
-
-	if [ -d /usr/share/bash-completion/completions ] && ! shopt -oq posix; then
-    	source /usr/share/bash-completion/completions/*
-	fi
-
-	#herbstclient autocompletion
-	if [ -d /etc/bash_completion.d ]; then
-    	source /etc/bash_completion.d/*
-	fi
 fi
+# if [ -d /etc/bash_completion.d ]; then
+#         source /etc/bash_completion.d/*
+# fi
+if [ -f /usr/share/bash-completion/bash_completion ]&& ! shopt -oq posix; then
+    	source /usr/share/bash-completion/bash_completion
+fi
+# if [ -d /usr/share/bash-completion/completions ]&& ! shopt -oq posix; then
+#     	source /usr/share/bash-completion/completions/*
+# fi
+
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
     #echo "ld preload active"
