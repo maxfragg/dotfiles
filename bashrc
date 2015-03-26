@@ -77,6 +77,7 @@ export PATH=$HOME/bin:$PATH
 #export PATH=/usr/local/games:$PATH
 export LANGUAGE=$LANGUAGE:de_DE:de 
 export LC_ALL=en_US.utf8
+
 export NO_AT_BRIDGE=1
 export EDITOR="nano"
 
