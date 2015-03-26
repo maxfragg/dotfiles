@@ -90,6 +90,7 @@ case "$HOSTNAME" in
         export config_prompt_user_color=$R
         export config_prompt_host_color=$EMC
         export config_prompt_hostname="uber"
+        #export TMPDIR=$HOME/tmp
         ;;   
     *)
         ;;
