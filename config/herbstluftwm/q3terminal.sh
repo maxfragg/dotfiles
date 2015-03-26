@@ -20,8 +20,8 @@ hc() {
 }
 
 mrect=( $(hc monitor_rect -p "" ) )
-termwidth=$(((${mrect[2]}*9)/10))
-termheight=550
+termwidth=$(((${mrect[2]}*85)/100))
+termheight=600
 
 rect=(
     $termwidth

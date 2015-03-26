@@ -46,6 +46,10 @@ Host man4
 	HostName faui49man4.informatik.uni-erlangen.de
 	User el79irih
 
+Host faui49r
+	HostName faui49r.informatik.uni-erlangen.de
+	User el79irih
+
 Host scalar
 	HostName 131.188.33.176
 	User el79irih
@@ -91,6 +95,15 @@ host vulbox
 	User root
 	IdentityFile ~/.ssh/ructf
 
+host ructftest 
+	HostName 192.168.42.30
+	User faust
+	IdentityFile ~/.ssh/ructf2014
+
+host 10.60.*.*
+	User root	
+	IdentityFile ~/.ssh/ructf2014
+
 host ctf00
 	HostName ctf00.informatik.uni-erlangen.de
 	User maxfragg
@@ -104,3 +117,8 @@ host icmp7
 	HostName bildschirmtext.icmp7.de
 	User btx
 	IdentityFile ~/.ssh/icmp7
+
+host i2
+	HostName faui2hg.cs.fau.de
+	User hg
+	IdentityFile ~/.ssh/cb_rsa

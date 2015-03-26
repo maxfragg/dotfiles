@@ -55,40 +55,58 @@ URxvt.colorBD 			: #EBEBEB
 URxvt.colorIT 			: #76B639
 
 ! url-color
-URxvt.colorUL 			: #FFFFFF
+URxvt.colorUL 			: #9ccc65
 
 ! -- Transparency -- !
 ! fake
 #ifdef x_fake_transparency
 URxvt*.transparent 		: true
-URxvt*.shading 			: 10
+URxvt*.shading 			: 20
 #endif
 
 ! true
 #ifdef x_true_transparency
+URxvt*.transparent 		: false
 URxvt*.depth 			: 32
-URxvt*.background 		: [70]#263238
+URxvt*.background 		: [80]#263238
 #endif
 
 ! -- General Config -- !
 URxvt*.scrollBar 		: false
-URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
+!URxvt*.iconFile 		: /usr/share/icons/Tango/scalable/apps/terminal.svg
+#ifdef x_global_terminal_icon
+URxvt*.iconFile			: /usr/share/icons/elementary/apps/48/utilities-terminal.svg
+#else
 !URxvt*.iconFile		: /home/maxfragg/terminal.svg
+#endif
 
 ! open default webbrowser
-URxvt*.perl-ext-common	: default,matcher
-URxvt*.urlLauncher		: x-www-browser
-URxvt*.matcher.button	: 1
+URxvt.perl-ext-common 	: default,matcher,option-popup,clipboard
+URxvt.url-launcher		: x-www-browser
+URxvt.matcher.button	: 1
 
 ! scrollbackbuffer
 URxvt*.saveLines		: 8192
 
 URxvt*.urgentOnBell		: true
 
-URxvt.perl-ext-common	: clipboard
+
 URxvt.keysym.C-C 		: perl:clipboard:copy
 URxvt.keysym.C-V 		: perl:clipboard:paste
 URxvt.keysym.M-C-v 		: perl:clipboard:paste_escaped
 URxvt.clipboard.autocopy: true
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
+
+! xclock
+
+XClock*foreground: #fbfbfb
+XClock*background: #000018
+XClock*update: 1
+XClock*geometry:          210x210+1020+12
+XClock.Clock.majorColor:  rgba:f0/f0/19/7b
+XClock.Clock.minorColor:  rgba:a0/c0/f0/c0
+XClock.Clock.hourColor:   rgba:c9/66/11/72
+XClock.Clock.minuteColor: rgba:00/82/9f/72
+XClock.Clock.secondColor: rgba:50/93/30/6f

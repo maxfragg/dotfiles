@@ -40,38 +40,55 @@ if [ -f ~/.bashscripts ]; then
     source ~/.bashscripts
 fi
 
-
+if [ -f ~/.z.sh ]; then
+    source ~/.z.sh
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
 
-#herbstclient autocompletion
-if [ -d /etc/bash_completion.d ]; then
-    source /etc/bash_completion.d/*
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    source /etc/bash_completion
+	if [ -f /usr/share/bash-completion/bash_completion ] && ! shopt -oq posix; then
+    	source /usr/share/bash-completion/bash_completion
+	fi
+
+	if [ -d /usr/share/bash-completion/completions ] && ! shopt -oq posix; then
+    	source /usr/share/bash-completion/completions/*
+	fi
+
+	#herbstclient autocompletion
+	if [ -d /etc/bash_completion.d ]; then
+    	source /etc/bash_completion.d/*
+	fi
 fi
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
-    LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
-    COLORED_STDERR_FDS=2,
-    export LD_PRELOAD COLORED_STDERR_FDS
+    #echo "ld preload active"
+    export COLORED_STDERR_PRE=$'\033[91m' # bright red
+    export COLORED_STDERR_POST=$'\033[0m' # default
+    export LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
+    export COLORED_STDERR_FDS=2,
+    export COLORED_STDERR_IGNORED_BINARIES=/usr/bin/yaourt
 fi
-
 
 #setxkbmap  -layout us -variant altgr-intl
 
-export PATH=$HOME/bin:/opt/intel/bin:$PATH
-export PATH=/usr/local/games:$PATH
+export PATH=$HOME/bin:$PATH
+#export PATH=/usr/local/games:$PATH
 export LANGUAGE=$LANGUAGE:de_DE:de 
-export LC_ALL=en_US.utf-8
+export LC_ALL=en_US.utf8
+
 export NO_AT_BRIDGE=1
 export EDITOR="nano"
 
 if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
+fi
+
+if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
+    export TERM=xterm-256color
 fi
 
 

@@ -1,4 +1,5 @@
 #!/bin/bash
 source ~/.bashscripts
-while true ;do wallpaper spring; sleep 10m; done
+source ~/.bash_config
+while true ;do wallpaper "$config_wallpaper_folder"; sleep 10m; done
 

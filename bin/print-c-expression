@@ -1,0 +1,19 @@
+#!/bin/sh
+
+TEMP_FILE=$(mktemp /tmp/tmp.XXXXXXXXXX) || exit 1
+printf \
+"#include <climits>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <pthread.h>
+#include <sys/syscall.h>
+int main(int argc, char *argv[]) {
+  std::cout << (%s) << std::endl;
+  return EXIT_SUCCESS;
+}
+" "$@" \
+    | c++ -o $TEMP_FILE -x c++ - \
+    && $TEMP_FILE
+rm -f $TEMP_FILE

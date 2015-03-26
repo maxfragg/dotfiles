@@ -6,7 +6,7 @@ function hc() {
     herbstclient "$@"
 }
 
-source bash_config
+source ~/.bash_config
 
 # keybindings
 Mod=Mod4
@@ -14,7 +14,7 @@ hc keybind $Mod-Control-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Shift-r close_or_remove
-hc keybind $Mod-Return spawn ~/bin/start_urxvt
+hc keybind $Mod-Return spawn $config_term
 hc keybind $Mod-Shift-Return spawn roxterm
 hc keybind $Mod-Control-o spawn opera-next
 
@@ -23,7 +23,7 @@ FCMOUSE=~/.config/herbstluftwm/mousecenter.sh
 
 
 #TAG_NAMES=(α β γ δ ε ζ η θ λ μ)
-TAG_NAMES=(cip term web ed var video pdf fm music mail )
+TAG_NAMES=(cip term web ed var media pdf fm cal mail )
 TAG_KEYS=( {1..9} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
@@ -110,55 +110,72 @@ hc set frame_bg_active_color $COLOR_FR_BG_A
 hc set window_border_normal_color $COLOR_W_BO_N
 hc set window_border_active_color $COLOR_W_BO_A
 hc set frame_bg_transparent 1
-hc set frame_border_width 2
-hc set window_border_width 2
+hc set frame_border_width 1
+hc set window_border_width 1
 hc set focus_follows_mouse 1
 hc set focus_stealing_prevention 1
 hc set tree_style  "╾│ ├└╼─┐"
-hc attr theme.urgent.color $COLOR_W_BO_U
-hc attr theme.theme.padding_top 6
+hc set_attr theme.urgent.color $COLOR_W_BO_U
+
 
 # rules
 hc unrule -F
-
+# General Rules
 hc rule focus=off
 hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole|Terminator|Roxterm)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 hc rule isFullscreen=on focus=on
+hc rule windowrole~EventDialog pseudotile=on
+hc rule class~Synapse manage=off pseudotile=on
+hc rule class~Tilda manage=off
+hc rule class~Thunderbird focus=on
+hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
+
+#Tag Rules
+#Tag 1: Terminal
+#Tag 2: 3 Terminals
+#Tag 3: web
 hc rule class~OperaNext tag=web
 hc rule class~Opera tag=web
 hc rule class~Google-chrome tag=web
 hc rule class=Chromium-browser tag=web
 hc rule class~Google-chrome-unstable tag=web
-hc rule class=Vlc tag=video
-hc rule class=Banshee tag=video
+#Tag 4: editor
+hc rule class=Scribes tag=ed
+hc rule class~sublime-text tag=ed
+hc rule class~sublime-text-2 tag=ed
+hc rule class~subl3 tag=ed
+hc rule class~Subl3 tag=ed
+hc rule class~Xournal tag=ed
+#Tag 5: various
+hc rule class~steam tag=var
+#Tag 6: media
+hc rule class=Vlc tag=media
+hc rule class=Banshee tag=media
+hc rule class=Audience tag=media
+hc rule class~gnome-mplayer tag=media
+#Tag 7: pdf-viewer
 hc rule class=Evince tag=pdf
 hc rule class=Zathura tag=pdf
-hc rule class~Tilda manage=off
-hc rule class~Synapse manage=off pseudotile=on
-hc rule class=Scribes tag=ed
-hc rule class~sublime_text tag=ed
 hc rule class=Katarakt tag=pdf
-hc rule class=sublime-text-2 tag=ed
-hc rule class=Audience tag=video
-hc rule class~Geary tag=mail
-hc rule class~Xournal tag=ed
-hc rule class~gnome-mplayer tag=video
-hc rule class~Thunar tag=fm
-hc rule class~Thunderbird tag=mail
-hc rule class~Thunderbird focus=on
-hc rule windowrole~EventDialog pseudotile=on
 hc rule class='Pdfpc' windowrole='presenter' tag=pdf
-hc rule class='Pdfpc' windowrole='presentation' tag=video
-hc rule class~Thunderbird windowrole~Msgcompose pseudotile=on focus=on
+hc rule class='Pdfpc' windowrole='presentation' tag=media
+#Tag 8: filemanager and VM
+hc rule class~Thunar tag=fm
 hc rule class~qemu-system-x86_64 tag=fm
-hc rule class~steam tag=var
+#Tag 9: calendar, if any
+hc rule class~california tag=cal
+#Tag 10: mail
+hc rule class~Geary tag=mail
+hc rule class~Thunderbird tag=mail
+
 
 
 #custom bindings
 hc keybind F1 spawn ~/.config/herbstluftwm/q3terminal.sh
+#hc keybind F2 spawn ~/.config/herbstluftwm/notepad.sh
 hc keybind $Mod-z spawn ~/bin/wallpaper.sh
 hc keybind $Mod-d spawn ~/.config/herbstluftwm/herbstlayout.sh
 hc keybind $Mod-a spawn ~/.config/herbstluftwm/utf8select_hlwm.sh
@@ -208,44 +225,61 @@ hc pad 0 0 0 25 0
 
 
 setxkbmap  -layout us -variant altgr-intl &
-hc spawn "$config_dmenu_cache"
-hc spawn "$config_wallpaper_command"
+hc spawn $config_dmenu_cache
+( sleep $config_startup_sleep && $config_wallpaper_command )&
 ssh-add $config_ssh_keys
 
 hc spawn tint2
 hc spawn thunar --deamon
+hc spawn synapse
+hc spawn redshift-gtk
 
-xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" .Xdefaults 
+xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" -D"$config_x_global_terminal_icon" .Xdefaults 
 
 if [ $config_fancy_effects == 1 ]; then
     hc set frame_bg_transparent 0
     hc set always_show_frame 1
-    hc set frame_normal_opacity 30
-    hc set frame_active_opacity 30
+    hc set frame_normal_opacity 70
+    hc set frame_active_opacity 70
     hc set frame_bg_active_color $COLOR_FR_BG_N
     compton --config ~/.compton.conf &
 fi
 
-if [ $config_hdpi == 1 ]; then
-    hc set frame_border_width 3
-    hc set window_border_width 3
+if [ $config_fancy_borders == 1 ]; then
+	hc set_attr theme.padding_top 8
 fi
+
+if [ $config_hdpi == 1 ]; then
+    hc set frame_border_width 2
+    hc set window_border_width 2
+    herbstclient set_attr settings.frame_gap 10
+fi
+
+sleep $config_startup_sleep
 
 if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
 fi
 
+if [ $config_is_notebook == 1 ]; then
+	hc spawn cbatticon -i notification BAT0
+	hc spawn cbatticon -i notification BAT1
+	#hc spawn batti
+	hc spawn syndaemon -t -k -i 2
+fi
+
 case "$config_locker" in
-	"light_locker")
-	hc spawn light-locker
-	hc keybind $Mod-l spawn light-locker-command -l
-	;;
-	"xscreensaver")
-	hc spawn xscreensaver
-	hc keybind $Mod-l spawn xscreensaver-command -l
+	lightlocker)
+		hc spawn light-locker
+		hc keybind $Mod-l spawn light-locker-command -l
+		;;
+	xscreensaver)
+		hc spawn xscreensaver
+		hc keybind $Mod-l spawn xscreensaver-command -l
+		;;
 	*)
-	hc keybind $Mod-l spawn "$config_locker"
-	;;
+		hc keybind $Mod-l spawn $config_locker
+		;;
 esac
 
 hc spawn ~/bin/nsa

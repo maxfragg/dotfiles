@@ -5,8 +5,94 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
+# script to add files to my dotfiles git repo and
+# replace them by a symlink
+dotfiles(){
+	local PWD=`pwd`
+	local P=`realpath --relative-to=$HOME "$1"`
+	local tkn=`echo $1 | rev | cut -d'/' -f1 | rev`
+	local tknpath=`echo $1 | rev | cut -d'/' -f2- | rev`
+	if [[ $P != "."* ]]; then
+		local P1="#$P" 
+	else
+		local P1=`echo $P | cut -d'.' -f2-`
+		P="$P1"
+	fi
+
+	mkdir -p `dirname "$config_dotfiles_path/$P`
+	mv "$1" "$config_dotfiles_path/$P"
+
+	echo "$P1" >> "$config_dotfiles_path/files"
+	ln -s "$config_dotfiles_path/$P" `realpath "$1"`
+	cd $config_dotfiles_path
+	git add $P
+	cd $PWD
+}
+
+
 lt(){
     ~/bin/LightTable/LightTable "$@"
+}
+
+calc(){ echo "scale=2; $@" | bc -l ;}
+
+a(){
+	if [[ `id -u` != "0" ]]; then
+		SU="sudo"
+	else
+		SU=""
+	fi
+
+	if [[ "$1" == "au" ]]; then
+		$SU aura -Ayu
+	elif [[ "$1" == "ru" ]]; then
+		$SU aura -Syu
+	elif [[ "$1" == "ri" ]]; then
+		$SU aura -S "$2"
+	elif [[ "$1" == "ai" ]]; then
+		$SU aura -A "$2"
+	elif [[ "$1" == "s" ]]; then
+		echo "$(tput setaf 2)repo:$(tput sgr 0)"
+		aura -Ss $2
+		echo "$(tput setaf 2)aur:$(tput sgr 0)"
+		aura -As $2
+	elif [[ "$1" == "v" ]]; then
+		echo "$(tput setaf 2)installed packages:$(tput sgr 0)"
+		aura -Ss $2 2>/dev/null | grep -F [Installiert]
+		aura -As $2 2>/dev/null | grep -F [Installiert]
+
+	elif [[ "$1" == "h" || "$#" == "0" ]]; then
+		echo -e "$(tput setaf 4)my aura wrapper$(tput sgr 0)\n"
+		if [[ "$SU" == "sudo" ]]; then
+			echo -e "commands will be prefixed with sudo, since you are not root!\n"
+		fi
+		echo "    $(tput setaf 2)au:$(tput sgr 0) aur update"
+		echo "    $(tput setaf 2)ru:$(tput sgr 0) repo update"
+		echo "    $(tput setaf 2)ai:$(tput sgr 0) aur install"
+		echo "    $(tput setaf 2)ri:$(tput sgr 0) repo install"
+		echo "    $(tput setaf 2)s:$(tput sgr 0) search repo and aur"
+		echo "    $(tput setaf 2)v:$(tput sgr 0) installed package version"
+		echo "    $(tput setaf 2)h:$(tput sgr 0) show this help"
+
+		#echo -e "\n$(tput setaf 4)aura commands:$(tput sgr 0)"
+		#aura -h
+	else
+		$SU aura "$@"
+	fi
+
+}
+
+bat(){
+
+	full=`cat /sys/class/power_supply/BAT0/energy_full`
+	now=`cat /sys/class/power_supply/BAT0/energy_now` 
+	echo -n "Battery 0: " 
+	echo "scale=2; $now / $full" | bc -l | sed 's/^\./0./'
+
+	full=`cat /sys/class/power_supply/BAT1/energy_full`
+	now=`cat /sys/class/power_supply/BAT1/energy_now` 
+	echo -n "Battery 1: " 
+	echo "scale=2; $now / $full" | bc -l | sed 's/^\./0./'
 }
 
 man() {
@@ -25,7 +111,7 @@ objdmp(){
 }
 
 md2pdf(){
-	pandoc -f markdown+grid_tables -s --highlight-style pygments "$@" -o "$@".pdf
+	pandoc --latex-engine=lualatex -f markdown+grid_tables+tex_math_dollars -s --highlight-style pygments "$@" -o "$@".pdf
 }
 
 xor(){
@@ -66,15 +152,20 @@ heute.txt(){
 		git add $title
 		date +%Y-%m-%d>>$title
 		echo $t2>>$title
-		$EDITOR2 $title 2>/dev/null &
+		$config_gui_editor $title 2>/dev/null &
 	fi
 } 
 
-echoerr() { echo "$@" 1>&2; }
+x_cfg_reload(){
+	source ~/.bash_config
+	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" -D"$config_x_global_terminal_icon" .Xdefaults
+}
+
+echoerr() { /usr/bin/echo "$@" >&2; }
 
 finger_uni(){ ssh uni finger $@;}
 
-mancell(){ man -M ~/.man $@;}
+#mancell(){ man -M ~/.man $@;}
 
 kueche(){ ssh squarez mpc $@;}
 
@@ -138,8 +229,6 @@ wget http://whatthecommit.com/ -O - 2>/dev/null | grep -o '<p>.*$' | sed 's/<[^>
 alias mymutt='mutt; sleep 10; rm -f ~/.sec/goobookrc'
 
 alarm(){ sleep "$@" ; mplayer ~/Musik/bcc-break/machine_lullaby_1.ogg >/dev/null ;}
-
-calc(){ echo "scale=2; $@" | bc -l ;}
 
 ipof(){ grep "$@" ~/.ip | cut -d" " -f2 ;}
 
@@ -206,46 +295,46 @@ alias appson="netstat -lantp | grep -i stab | awk -F/ '{print $2}' | sort | uniq
 alias bandwidth='dd if=/dev/zero of=/dev/null bs=1M count=32768'			# processor / memory bandwidthd? in GB/s
 alias browse_bonjour='dns-sd -B'							# browse services advertised via Bonjour
 alias hdinfo='hdparm -i[I] /dev/sda'							# hard disk information - model/serial no.
-#alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
-#alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
-alias http_trace='pkt_trace port 80'							# to show all HTTP packets
-alias iftop='sudo iftop -i eth0' 							# start "iftop" program (sudo apt-get install iftop)
-alias ip4grep="grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'"					# look for IPv4 address in files
-#alias ip='curl www.whatismyip.org'
-alias ip_info='ipconfig getpacket en1'							# info on DHCP server, router, DNS server, etc (for en0 or en1)
-alias ipt80='sudo iptstate -D 80'							# check out only iptables state of http port 80 (requires iptstate)
-alias ip_trace='pkt_trace ip'								# to show all IP packets
-alias ipttrans='sudo iptstate -D 51413'							# iptables state of Transmission-Daemon port (requires iptstate)
-alias listen='sudo netstat -pnutl' 							# lists all listening ports together with PID of associated process
-alias lsock='sudo /usr/sbin/lsof -i -P'							# to display open sockets ( -P option to lsof disables port names)
-alias netapps="lsof -P -i -n | cut -f 1 -d ' '| uniq | tail -n +2"
-alias nethogs='sudo nethogs eth0' 							# start "nethogs" program (sudo apt-get install nethogs)
-alias netl='sudo nmap -sT -O localhost'
-alias netscan='sudo iwlist wlan0 scan'							# to scan your environment for available networks, do the following
-alias netstats='sudo iwspy wlan0'							# if card supports it, you can collect wireless statistics by using
-alias network='sudo lshw -C network' 							# view network device info
-alias networkdump='sudo tcpdump not port 22' 						# dump all the network activity except ssh stuff
-alias nsl='netstat -f inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'		# show all programs connected or listening on a network port
-alias ns='netstat -alnp --protocol=inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'
-alias openports='sudo netstat -nape --inet' 						# view open ports
-alias pkt_trace='sudo tcpflow -i `active_net_iface` -c'
-alias ports='lsof -i -n -P' 								# view programs using an internet connection
-alias portstats='sudo netstat -s' 							# show statistics for all ports
-alias ramvalue='sudo dd if=/dev/mem | cat | strings'					# will show you all the string (plain text) values in ram
-alias randommac='python -c "from itertools import imap; from random import randint; print ':'.join(['%02x'%x for x in imap(lambda x:randint(0,255), range(6))])"'										# generate random valid mac addresses
-alias remote='ssh -p 1234 12.34.56.78'							# access some remote host
-alias restartnet='sudo /etc/rc.d/network restart;sudo /etc/rc.d/wicd restart'
-alias rssup='php /srv/http/rssupdate.php'
-alias setessid='sudo iwconfig wlan0 essid network-essid'				# set the essid, which identifies the network access point you want
-alias smtp_trace='pkt_trace port smtp'							# to show all SMTP packets
-alias tcpstats='sudo netstat -st' 							# show statistics for tcp ports
-alias tcp_='sudo netstat -atp' 								# list all TCP ports
-alias tcp_trace='pkt_trace tcp'								# to show all TCP packets
-alias topsites='curl -s -O http://s3.amazonaws.com/alexa-static/top-1m.csv.zip ; unzip -q -o top-1m.csv.zip top-1m.csv ; head -1000 top-1m.csv | cut -d, -f2 | cut -d/ -f1 > topsites.txt'							# get a list of top 1000 sites from alexa
-alias tproxy='ssh -ND 8118 user@server&; export LD_PRELOAD="/usr/lib/libtsocks.so"'	# creates a proxy based on tsocks
-alias udpstats='sudo netstat -su' 							# show statistics for udp ports
-alias udp='sudo netstat -aup' 								# list all UDP ports
-alias udp_trace='pkt_trace udp'								# to show all UDP packets
-alias website_dl='wget --random-wait -r -p -e robots=off -U mozilla "$1"'		# download an entire website
-alias website_images='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg" "$1"'	# download all images from a site
-alias whois='whois -H'
+# alias hostip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
+# alias hostname_lookup='lookupd -d'							# interactive debugging mode for lookupd (use tab-completion)
+# alias http_trace='pkt_trace port 80'							# to show all HTTP packets
+# alias iftop='sudo iftop -i eth0' 							# start "iftop" program (sudo apt-get install iftop)
+# alias ip4grep="grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'"					# look for IPv4 address in files
+# alias ip='curl www.whatismyip.org'
+# alias ip_info='ipconfig getpacket en1'							# info on DHCP server, router, DNS server, etc (for en0 or en1)
+# alias ipt80='sudo iptstate -D 80'							# check out only iptables state of http port 80 (requires iptstate)
+# alias ip_trace='pkt_trace ip'								# to show all IP packets
+# alias ipttrans='sudo iptstate -D 51413'							# iptables state of Transmission-Daemon port (requires iptstate)
+# alias listen='sudo netstat -pnutl' 							# lists all listening ports together with PID of associated process
+# alias lsock='sudo /usr/sbin/lsof -i -P'							# to display open sockets ( -P option to lsof disables port names)
+# alias netapps="lsof -P -i -n | cut -f 1 -d ' '| uniq | tail -n +2"
+# alias nethogs='sudo nethogs eth0' 							# start "nethogs" program (sudo apt-get install nethogs)
+# alias netl='sudo nmap -sT -O localhost'
+# alias netscan='sudo iwlist wlan0 scan'							# to scan your environment for available networks, do the following
+# alias netstats='sudo iwspy wlan0'							# if card supports it, you can collect wireless statistics by using
+# alias network='sudo lshw -C network' 							# view network device info
+# alias networkdump='sudo tcpdump not port 22' 						# dump all the network activity except ssh stuff
+# alias nsl='netstat -f inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'		# show all programs connected or listening on a network port
+# alias ns='netstat -alnp --protocol=inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'
+# alias openports='sudo netstat -nape --inet' 						# view open ports
+# alias pkt_trace='sudo tcpflow -i `active_net_iface` -c'
+# alias ports='lsof -i -n -P' 								# view programs using an internet connection
+# alias portstats='sudo netstat -s' 							# show statistics for all ports
+# alias ramvalue='sudo dd if=/dev/mem | cat | strings'					# will show you all the string (plain text) values in ram
+# alias randommac='python -c "from itertools import imap; from random import randint; print ':'.join(['%02x'%x for x in imap(lambda x:randint(0,255), range(6))])"'										# generate random valid mac addresses
+# alias remote='ssh -p 1234 12.34.56.78'							# access some remote host
+# alias restartnet='sudo /etc/rc.d/network restart;sudo /etc/rc.d/wicd restart'
+# alias rssup='php /srv/http/rssupdate.php'
+# alias setessid='sudo iwconfig wlan0 essid network-essid'				# set the essid, which identifies the network access point you want
+# alias smtp_trace='pkt_trace port smtp'							# to show all SMTP packets
+# alias tcpstats='sudo netstat -st' 							# show statistics for tcp ports
+# alias tcp_='sudo netstat -atp' 								# list all TCP ports
+# alias tcp_trace='pkt_trace tcp'								# to show all TCP packets
+# alias topsites='curl -s -O http://s3.amazonaws.com/alexa-static/top-1m.csv.zip ; unzip -q -o top-1m.csv.zip top-1m.csv ; head -1000 top-1m.csv | cut -d, -f2 | cut -d/ -f1 > topsites.txt'							# get a list of top 1000 sites from alexa
+# alias tproxy='ssh -ND 8118 user@server&; export LD_PRELOAD="/usr/lib/libtsocks.so"'	# creates a proxy based on tsocks
+# alias udpstats='sudo netstat -su' 							# show statistics for udp ports
+# alias udp='sudo netstat -aup' 								# list all UDP ports
+# alias udp_trace='pkt_trace udp'								# to show all UDP packets
+# alias website_dl='wget --random-wait -r -p -e robots=off -U mozilla "$1"'		# download an entire website
+# alias website_images='wget -r -l1 --no-parent -nH -nd -P/tmp -A".gif,.jpg" "$1"'	# download all images from a site
+# alias whois='whois -H'

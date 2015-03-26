@@ -80,8 +80,10 @@ else
         # but only if it has an extension
         [ "${i##*.}" != "${i}" ] && ext=".${i##*.}"
         filename=$(filename "$i")"$ext"
+        chmod +r "$i"
         scp "$i" "$remotefolder/$filename" || continue
         echo "$urlprefix/$filename"
+        echo "$urlprefix/$filename" | xclip
     done
 fi
 
