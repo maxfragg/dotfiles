@@ -57,9 +57,9 @@ fi
 if [ -f /usr/share/bash-completion/bash_completion ]&& ! shopt -oq posix; then
     	source /usr/share/bash-completion/bash_completion
 fi
-# if [ -d /usr/share/bash-completion/completions ]&& ! shopt -oq posix; then
-#     	source /usr/share/bash-completion/completions/*
-# fi
+if [ -d /usr/share/bash-completion/completions ]&& ! shopt -oq posix; then
+     	source /usr/share/bash-completion/completions/*
+fi
 
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
