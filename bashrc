@@ -64,8 +64,11 @@ fi
 
 if [ -f /usr/local/lib/libcoloredstderr.so ]; then
     #echo "ld preload active"
-    export COLORED_STDERR_PRE=$'\033[91m' # bright red
-    export COLORED_STDERR_POST=$'\033[0m' # default
+    # export COLORED_STDERR_PRE=$'\033[91m' # bright red
+    # export COLORED_STDERR_POST=$'\033[0m' # default
+
+    export COLORED_STDERR_PRE="$(tput sgr0)$(tput setaf 1)"
+    export COLORED_STDERR_POST="$(tput sgr0)"
     export LD_PRELOAD=/usr/local/lib/libcoloredstderr.so
     export COLORED_STDERR_FDS=2,
     export COLORED_STDERR_IGNORED_BINARIES=/usr/bin/yaourt

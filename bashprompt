@@ -79,8 +79,6 @@ function bash_prompt() {
           ;;
     esac
 
-    NONE="\[$(tput sgr0)\]"    # unsets color to term's fg color
-
     source ~/.bash_config
 
     # user's color
