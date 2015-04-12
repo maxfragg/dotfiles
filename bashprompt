@@ -57,7 +57,7 @@ function bash_prompt_command() {
     fi
     
     PS1="${TITLEBAR}\
-${HC}${TIMES}${ERRPROMPT}\
+${R}${TIMES}${ERRPROMPT}\
 ${HC}[\
 ${UC}\u\
 ${HC}${LOC}${HOST_S}\
@@ -78,36 +78,8 @@ function bash_prompt() {
          TITLEBAR=""
           ;;
     esac
-    # NONE="\[\033[0m\]"    # unsets color to term's fg color
-    NONE="\[$(tput sgr0)\]"    # unsets color to term's fg color
 
-    # regular colors
-    local K="\[$(tput sgr0)\]\[$(tput setaf 0)\]" # black
-    local R="\[$(tput sgr0)\]\[$(tput setaf 1)\]"    # red
-    local G="\[$(tput sgr0)\]\[$(tput setaf 2)\]"    # green
-    local Y="\[$(tput sgr0)\]\[$(tput setaf 3)\]"    # yellow
-    local B="\[$(tput sgr0)\]\[$(tput setaf 4)\]"    # blue
-    local M="\[$(tput sgr0)\]\[$(tput setaf 5)\]"    # magenta
-    local C="\[$(tput sgr0)\]\[$(tput setaf 6)\]"    # cyan
-    local W="\[$(tput sgr0)\]\[$(tput setaf 7)\]"    # white
-    # emphasized (bolded) colors
-    local EMK="\[$(tput bold)\]\[$(tput setaf 0)\]"
-    local EMR="\[$(tput bold)\]\[$(tput setaf 1)\]"
-    local EMG="\[$(tput bold)\]\[$(tput setaf 2)\]"
-    local EMY="\[$(tput bold)\]\[$(tput setaf 3)\]"
-    local EMB="\[$(tput bold)\]\[$(tput setaf 4)\]"
-    local EMM="\[$(tput bold)\]\[$(tput setaf 5)\]"
-    local EMC="\[$(tput bold)\]\[$(tput setaf 6)\]"
-    local EMW="\[$(tput bold)\]\[$(tput setaf 7)\]"
-    # background colors
-    local BGK="\[$(tput setab 0)\]" # black
-    local BGR="\[$(tput setab 1)\]"    # red
-    local BGG="\[$(tput setab 2)\]"    # green
-    local BGY="\[$(tput setab 3)\]"    # yellow
-    local BGB="\[$(tput setab 4)\]"    # blue
-    local BGM="\[$(tput setab 5)\]"    # magenta
-    local BGC="\[$(tput setab 6)\]"    # cyan
-    local BGW="\[$(tput setab 7)\]"    # white
+    NONE="\[$(tput sgr0)\]"    # unsets color to term's fg color
 
     source ~/.bash_config
 
