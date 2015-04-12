@@ -90,10 +90,30 @@ host squarez_git
 	HostName squarez.fauiwg.de
 	User git-annex
 
-host vulbox
-	HostName 10.23.31.2
+host vulnbox
+	HostName vulnbox
 	User root
-	IdentityFile ~/.ssh/ructf
+	IdentityFile ~/.ssh/team14_key
+
+host vulnbox2
+	HostName 10.7.14.3
+	User root
+	IdentityFile ~/.ssh/team14_key
+
+host ctf_debian
+	HostName debian.ctf.faui2k9.de
+	User root
+	IdentityFile ~/.ssh/team14_key
+
+host ctf_centos
+	HostName centos.ctf.faui2k9.de
+	User root
+	IdentityFile ~/.ssh/team14_key
+
+host ctf_freebsd
+	HostName freebsd.ctf.faui2k9.de
+	User root
+	IdentityFile ~/.ssh/team14_key
 
 host ructftest 
 	HostName 192.168.42.30
@@ -107,7 +127,7 @@ host 10.60.*.*
 host ctf00
 	HostName ctf00.informatik.uni-erlangen.de
 	User maxfragg
-	IdentityFile ~/.ssh/ctf00
+	IdentityFile ~/.ssh/ctf00	
 
 host i1
 	HostName faui1-104.informatik.uni-erlangen.de
