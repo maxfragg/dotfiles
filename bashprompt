@@ -26,7 +26,7 @@ function bash_prompt_command() {
     if [ $? -eq 0 ]; then
         local ERRPROMPT=""
     else
-        local ERRPROMPT='->$[$?]\n\a'
+        local ERRPROMPT='➜ $[$?]\n\a'
     fi
 
     # echo a bell-character if execution took more than 3 seconds
@@ -58,11 +58,11 @@ function bash_prompt_command() {
     
     PS1="${TITLEBAR}\
 ${R}${TIMES}${ERRPROMPT}\
-${HC}[\
+${HC}❰\
 ${UC}\u\
 ${HC}${LOC}${HOST_S}\
 ${UC}${NEW_PWD}\
-${HC}]\
+${HC}❱\
 $newline${UC}\
 \$ ${NONE}"
 }

@@ -5,6 +5,7 @@ equivalent ≡
 # arrows
 about rightwards squiggle arrow ⇝
 about leftwards squiggle arrow ⇝⇜
+right arrow round ➜
 
 # logical
 not neg ¬
@@ -72,6 +73,10 @@ nabla gradient ∇
 partial derivative ∂
 in element ∈
 not in not element ∉
+pointy bracket open ❰
+pointy bracket close ❱
+medium round parathesis open ❨
+medium round parathesis close ❩
 
 # greek alphabet
 alpha α
@@ -171,9 +176,9 @@ king chess ♔
 queen chess ♕
 rook turm chess ♖
 bishop läufer chess ♗
-
-#maxfragg added
+caducaeus aeskulap apotheke ☤
 note music ♬
+note music small ♫
 recycle ♻
 warning warnung ⚠
 telephone ☎
@@ -183,11 +188,12 @@ snowman ☃
 3dot …
 interobang ‽
 trademark ™
-
-# TODO: http://en.wikipedia.org/wiki/Miscellaneous_Symbols
 recycling ♲
+rocket 🚀
 
 # fancy font
 ^i superscript ⁱ
 _i subscript ᵢ
+double quote open ❝
+double quote close ❞
 
