@@ -44,9 +44,9 @@ a(){
 	fi
 
 	if [[ "$1" == "au" ]]; then
-		$SU aura -Ayu
+		$SU aura -Akua "$2"
 	elif [[ "$1" == "ru" ]]; then
-		$SU aura -Syu
+		$SU aura -Syu "$2"
 	elif [[ "$1" == "ri" ]]; then
 		$SU aura -S "$2"
 	elif [[ "$1" == "ai" ]]; then

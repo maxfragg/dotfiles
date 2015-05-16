@@ -75,11 +75,22 @@ if [ -f /usr/local/lib/libcoloredstderr.so ]; then
 fi
 
 #setxkbmap  -layout us -variant altgr-intl
-
 export PATH=$HOME/bin:$PATH
+
+if [ -d $HOME/git/sp_svn/bin ]; then
+    export PATH=$HOME/git/sp_svn/bin/:$PATH
+fi
+
+if [ -d $HOME/lib ]; then
+    export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
+fi
+
 #export PATH=/usr/local/games:$PATH
-export LANGUAGE=$LANGUAGE:de_DE:de 
-export LC_ALL=en_US.utf8
+#export LANGUAGE=$LANGUAGE:de_DE:de
+export LANG=de_DE.UTF-8
+export LC_TIME=en_DK.UTF-8
+export LC_MESSAGES=POSIX
+#export LC_COLLATE=C
 
 export NO_AT_BRIDGE=1
 export EDITOR="nano"

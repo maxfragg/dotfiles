@@ -13,6 +13,10 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+# You can use whatever you want as an alias, like for Mondays:
+alias FUCK='fuck'
+
 # some more ls aliases
 alias ll='ls -l -h'
 alias la='ls -A'
