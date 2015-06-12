@@ -20,7 +20,7 @@ class ProgressBarWindow(Gtk.Window):
         logos = listdir(dirname(realpath(__file__))+ '/nsa_img')
         while True:
             logo = random.choice(logos)
-            if fnmatch.fnmatch(logo,"*.png"):
+            if fnmatch.fnmatch(logo, "*.png"):
                 self.logo = Gtk.Image.new_from_file(dirname(realpath(__file__))+'/nsa_img/'+logo)
                 break
 
