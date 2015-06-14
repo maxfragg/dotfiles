@@ -32,6 +32,8 @@ config/Terminal
 config/tint2
 config/utf8db
 config/vdirsyncer/config
+config/gtk-3.0
+config/redshift.conf
 fonts
 gitconfig
 jrnl_config
