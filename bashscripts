@@ -29,6 +29,15 @@ dotfiles(){
 	cd $PWD
 }
 
+default-app(){
+	xdg-mime query default `xdg-mime query filetype "$@"` | cut -d. -f1
+}
+
+o(){
+	(xdg-open "$@" 2>/dev/null &)
+}
+
+alias open=o
 
 lt(){
     ~/bin/LightTable/LightTable "$@"

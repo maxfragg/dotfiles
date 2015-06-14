@@ -66,9 +66,10 @@ Host uber
 	HostName horologium.uberspace.de
 	User mxk
 
-Host uber2
+Host maxfragg.de
 	HostName horologium.uberspace.de
 	User mxk
+	IdentityFile ~/.ssh/uberspace_gitshell
 
 host faui32h
 	HostName faui32h.informatik.uni-erlangen.de
