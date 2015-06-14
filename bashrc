@@ -107,3 +107,6 @@ fi
 #include prompt needed 
 #source ~/.bash_powerline
 source ~/.bashprompt
+export GOROOT=$HOME/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

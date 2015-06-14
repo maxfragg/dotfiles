@@ -23,3 +23,5 @@
     t = !tig
 [color]
 	diff = true
+[core]
+	quotepath = false
