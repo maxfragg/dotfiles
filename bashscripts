@@ -29,6 +29,49 @@ dotfiles(){
 	cd $PWD
 }
 
+current_x_display(){
+	TARGET_DISPLAY=()
+	while read id uid user seat; do
+	    while IFS='=' read property value; do
+	        case "$property" in
+	        Active)
+	            if [[ "$value" != "yes" ]]; then continue; fi
+	            ;;
+	        Display)
+	            if [[ "$value" ]]; then
+	                TARGET_DISPLAY+=( "$value" )
+	            fi
+	            # else the session isn't graphical
+	            ;;
+	        esac
+	    done < <(loginctl show-session -p Display -p Active "$id")
+	done < <(loginctl list-sessions --no-legend)
+	echo $TARGET_DISPLAY
+}
+
+session_status(){
+	STATUS=()
+	while read id uid user seat; do
+	    while IFS='=' read property value; do
+	        case "$property" in
+	        Class)
+	            if [[ "$value" != "user" ]]; then
+	            	break
+	            fi
+	            ;;
+	        State)
+	            if [[ "$value" ]]; then
+	                STATUS+=( "$value" )
+	                #loginctl show-session $id
+	            fi
+	            # else the session isn't graphical
+	            ;;
+	        esac
+	    done < <(loginctl show-session -p State -p Class "$id")
+	done < <(loginctl list-sessions --no-legend)
+	echo $STATUS
+}
+
 memuse(){
 	free | grep Mem | awk '{print $3/$2 * 100.0}'
 }
@@ -172,6 +215,7 @@ heute.txt(){
 x_cfg_reload(){
 	source ~/.bash_config
 	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" -D"$config_x_global_terminal_icon" .Xdefaults
+	xrdb -merge .XCompose
 }
 
 echoerr() { /usr/bin/echo "$@" >&2; }

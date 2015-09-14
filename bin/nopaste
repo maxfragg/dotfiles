@@ -25,7 +25,7 @@
 
 login="mxk"
 folder="/home/$login/html/p/"
-urlprefix="http://max.fauiwg.de/p"
+urlprefix="https://maxfragg.de/p"
 remote="$login@horologium.uberspace.de"
 remotefolder="$remote:$folder/"
 

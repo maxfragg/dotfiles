@@ -225,6 +225,7 @@ hc pad 0 0 0 25 0
 
 
 setxkbmap  -layout us -variant altgr-intl &
+setxkbmap -option compose:rctrl
 hc spawn $config_dmenu_cache
 ( sleep $config_startup_sleep && $config_wallpaper_command )&
 ssh-add $config_ssh_keys
@@ -267,6 +268,7 @@ if [ $config_is_notebook == 1 ]; then
 	#hc spawn batti
 	hc spawn syndaemon -t -k -i 2
 fi
+
 
 case "$config_locker" in
 	lightlocker)
