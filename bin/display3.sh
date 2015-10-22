@@ -67,6 +67,12 @@ ex(){
 	fi
 }
 
+containsElement () {
+	local e
+	for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+	return 1
+}
+
 getnum(){
 	MONS=0
 	MONSU=0
@@ -86,7 +92,7 @@ os_xrandr_parse() {
     local current_modes=""
     
     # extract
-    local results="$(xrandr | grep -o -e '\([a-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+    local results="$(xrandr | grep -o -e '\([A-z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
     #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
@@ -105,7 +111,9 @@ os_xrandr_parse() {
             eval "$current_modes=()"
             os_xrandr_displays+="$result\n"
         else
-            eval "$current_modes+=(\"$result\n\")"
+            if [[ $result != "connected" ]]; then
+                eval "$current_modes+=(\"$result\n\")"
+            fi
         fi
     done
 }
@@ -250,6 +258,22 @@ if [[ $MONSU == 0 || $MONS == 0 ]]; then
 	exit 255
 fi
 
+#monitors to disable:
+i=1
+for out in `echo -e "${os_xrandr_displays[@]}"` ; do
+	if containsElement "$out" "${output[@]}"; then
+		#echo "on: $out"
+		true
+	else
+		#echo "off: $i $out"
+		output_off[$i]=$out
+		i=`expr $i + 1`
+	fi
+done
+
+# echo -e "XRANDR-DISPLAYS ${os_xrandr_displays[@]}"
+# echo -e "OUTPUTS: ${output[@]}"
+# echo -e "OUTPUTS_OFF: ${output_off[@]}"
 
 ###################
 # Breaking things #
@@ -337,11 +361,11 @@ case $MODE in
 		ex herbstclient remove_monitor "extern" 2>/dev/null
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
-		ex xrandr --output VGA1 --off
+		#ex xrandr --output VGA1 --off
 		;;
 	"extern" )
 		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
-		ex xrandr --output LVDS1 --off
+		#ex xrandr --output LVDS1 --off
 		ex herbstclient remove_monitor "intern" 2>/dev/null
 		ex herbstclient remove_monitor "intern2" 2>/dev/null
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
@@ -366,5 +390,9 @@ case $MODE in
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
 esac
+
+for out in `echo -e "${output_off[@]}"`; do
+	ex xrandr --output $out --off
+done
 
 ex herbstclient unlock

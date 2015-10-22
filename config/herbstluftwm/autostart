@@ -70,6 +70,7 @@ hc keybind $Mod-o split horizontal 0.5
 hc keybind $Mod-s floating toggle
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-p pseudotile toggle
+hc keybind $Mod-m spawn ~/.config/herbstluftwm/maximize.sh
 
 # resizing
 RESIZESTEP=0.05
