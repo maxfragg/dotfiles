@@ -5,12 +5,13 @@
 ###########################
 #
 # Author: 	Max Krueger
-# Date: 	2013-11-05 
+# Date: 	2015-10-31 
 # License:  MIT
 #
 # # TODO:
 # # Half width resolutions for 2in1 mode as suggestion
-# # Spliting functionality up for easyer maintainance
+# # Spliting functionality up 
+# # rewrite in anything but bash!
 #
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
@@ -73,6 +74,7 @@ containsElement () {
 	return 1
 }
 
+# magic mapping from names to the number of logical and xrandr monitors
 getnum(){
 	MONS=0
 	MONSU=0
@@ -94,18 +96,8 @@ os_xrandr_parse() {
     # extract
     local results="$(xrandr | grep -o -e '\([A-z]\+[0-9]\+-\?[0-9]\? connected\)\|\([0-9]\+x[0-9]\+  \)' | tr '-' '_' )"
 
-    #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
-
     # parse
     for result in $results; do
-        #if [[ $result =~ connected ]]; then
-        #    result=$(echo $result | cut -d' ' -f1)
-        #    if [[ result == "" ]]; then
-        #    	continue
-        #    fi
-        #
-        #fi
-
         if [[ $result =~ [A-Z] ]]; then
             current_modes="os_xrandr_modes_${result}"
             eval "$current_modes=()"
@@ -271,6 +263,8 @@ for out in `echo -e "${os_xrandr_displays[@]}"` ; do
 	fi
 done
 
+
+# fix names of outputs, which where renamed to make propper bash-variable-names
 i=1
 for each in `echo -e "${output[@]}"` ; do
 	output[$i]=$(echo $each | tr '_' '-')
@@ -400,6 +394,8 @@ case $MODE in
 		;;
 esac
 
+
+# turn of all unused outputs
 for out in `echo -e "${output_off[@]}"`; do
 	ex xrandr --output $out --off
 done
