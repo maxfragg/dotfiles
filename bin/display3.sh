@@ -92,7 +92,7 @@ os_xrandr_parse() {
     local current_modes=""
     
     # extract
-    local results="$(xrandr | grep -o -e '\([A-z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+    local results="$(xrandr | grep -o -e '\([A-z]\+[0-9]\+-\?[0-9]\? connected\)\|\([0-9]\+x[0-9]\+  \)' | tr '-' '_' )"
 
     #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
 
@@ -271,6 +271,15 @@ for out in `echo -e "${os_xrandr_displays[@]}"` ; do
 	fi
 done
 
+i=1
+for each in `echo -e "${output[@]}"` ; do
+	output[$i]=$(echo $each | tr '_' '-')
+done
+
+i=1
+for each in `echo -e "${output_off[@]}"` ; do
+	output_off[$i]=$(echo $each | tr '_' '-')
+done
 # echo -e "XRANDR-DISPLAYS ${os_xrandr_displays[@]}"
 # echo -e "OUTPUTS: ${output[@]}"
 # echo -e "OUTPUTS_OFF: ${output_off[@]}"

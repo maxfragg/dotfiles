@@ -1,3 +1,8 @@
+### default for all ##
+Host *
+     ForwardAgent yes
+     ForwardX11 yes
+
 Host cip
 	HostName faui00m.informatik.uni-erlangen.de
 	User el79irih
