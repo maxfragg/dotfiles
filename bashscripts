@@ -80,6 +80,10 @@ default-app(){
 	xdg-mime query default `xdg-mime query filetype "$@"` | cut -d. -f1
 }
 
+spelltex(){
+	find . -name "*.tex" -exec aspell --lang="$1" --mode=tex check "{}" \;
+}
+
 o(){
 	(xdg-open "$@" 2>/dev/null &)
 }

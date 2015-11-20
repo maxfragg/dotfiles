@@ -13,6 +13,7 @@
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
 	l = log --pretty=format:'%C(yellow)%h%Cred%d%Creset - %C(cyan)%an %Creset: %s %Cgreen(%cr)'
+    prettylog = log --graph --decorate --oneline $(git rev-list -g --all)
 	changes = diff --name-status -r
     diffstat =diff --stat -r
     new = !sh -c 'git log $1@{1}..$1@{0} "$@"'

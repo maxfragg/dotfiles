@@ -1,7 +1,12 @@
 ### default for all ##
 Host *
-     ForwardAgent yes
-     ForwardX11 yes
+	ForwardAgent yes
+	ForwardX11 yes
+
+
+Host gitlab.cs.fau.de
+	ForwardX11 no
+	User git
 
 Host cip
 	HostName faui00m.informatik.uni-erlangen.de
@@ -74,6 +79,7 @@ Host uber
 Host maxfragg.de
 	HostName horologium.uberspace.de
 	User mxk
+	ForwardX11 no
 	IdentityFile ~/.ssh/uberspace_gitshell
 
 host faui32h

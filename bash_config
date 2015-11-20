@@ -59,7 +59,7 @@ case "$HOSTNAME" in
         export config_fancy_effects=1
         export config_fancy_borders=1
         export config_hdpi=1
-        export config_ssh_keys="$HOME/.ssh/mykey $HOME/.ssh/cipkey $HOME/.ssh/cb_rsa $HOME/.ssh/uberspace_gitshell"
+        export config_ssh_keys="$HOME/.ssh/mykey $HOME/.ssh/cipkey $HOME/.ssh/cb_rsa $HOME/.ssh/uberspace_gitshell $HOME/.ssh/gitlab-cs-fau"
         export config_seafile=1
         export config_prompt_user_color=$EMY
         export config_prompt_host_color=$B

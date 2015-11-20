@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ###########################
-# display setup script v3.1 #
+# display setup script v3.2 #
 ###########################
 #
 # Author: 	Max Krueger
-# Date: 	2015-10-31 
+# Date: 	2015-11-20 
 # License:  MIT
 #
 # # TODO:
@@ -173,7 +173,6 @@ if [[ $1 == "--dmenu" || $1 == "-d" ]]; then
     		output[$i]=`echo -e "${os_xrandr_displays[@]}" | dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select monitor $i"`
     		CUR_MODES=$(eval "echo \${os_xrandr_modes_${output[$i]}[@]}")
     		XY=`echo -e $CUR_MODES | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Resolution for monitor $i"`
-
     		X[$i]=`echo $XY | cut -d'x' -f1`
     		Y[$i]=`echo $XY | cut -d'x' -f2`
     	done
@@ -268,11 +267,13 @@ done
 i=1
 for each in `echo -e "${output[@]}"` ; do
 	output[$i]=$(echo $each | tr '_' '-')
+	i=`expr $i + 1`
 done
 
 i=1
 for each in `echo -e "${output_off[@]}"` ; do
 	output_off[$i]=$(echo $each | tr '_' '-')
+	i=`expr $i + 1`
 done
 # echo -e "XRANDR-DISPLAYS ${os_xrandr_displays[@]}"
 # echo -e "OUTPUTS: ${output[@]}"
