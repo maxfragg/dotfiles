@@ -302,8 +302,8 @@ case $MODE in
 		MNAME[1]="extern"
 		;;
 	"beamer" )
-		ex xrandr --output ${output[1]} ${X[1]}x${Y[1]}
-		ex xrandr --output ${output[2]} ${X[2]}x${Y[2]}
+		ex xrandr --output ${output[1]} --mode ${X[1]}x${Y[1]}
+		ex xrandr --output ${output[2]} --mode ${X[2]}x${Y[2]}
 		XTMP=${X[1]}
 		YTMP=${Y[1]}
 		X[1]=${X[2]}
