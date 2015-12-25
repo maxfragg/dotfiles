@@ -29,6 +29,15 @@ dotfiles(){
 	cd $PWD
 }
 
+
+github_key(){
+	URL="https://github.com/$1.key"
+	echo $URL
+	key=`curl $URL`
+	echo $key
+}
+
+
 current_x_display(){
 	TARGET_DISPLAY=()
 	while read id uid user seat; do
