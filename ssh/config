@@ -2,6 +2,7 @@
 Host *
 	ForwardAgent yes
 	ForwardX11 yes
+	UseRoaming no
 
 
 Host gitlab.cs.fau.de
