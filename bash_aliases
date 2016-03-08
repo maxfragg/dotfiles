@@ -18,10 +18,19 @@ alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias FUCK='fuck'
 
 # some more ls aliases
-alias ll='ls -l -h'
-alias la='ls -A'
-alias l='ls -CF'
-alias .sh='ls | grep ".sh"'
+if [ -f `which exa` ]; then 
+	alias l='exa --group-directories-first'
+	alias ll='exa -l -h --git --group-directories-first'
+	alias la='exa -a --group-directories-first'
+	alias tree='exa --tree'
+else
+	alias ll='ls -l -h'
+	alias la='ls -A'
+	alias l='ls -CF'
+	alias .sh='ls | grep ".sh"'
+fi
+
+
 
 #alias ack=ack-grep
 #alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 

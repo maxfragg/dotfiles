@@ -45,7 +45,7 @@ function bash_prompt_command() {
     [[ `tput cols` -lt 85 ]] && newline="\n"
 
     # Indicate that there has been dir truncation
-    local trunc_symbol=".."
+    local trunc_symbol="…"
     local dir=${PWD##*/}
     pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
     NEW_PWD=${PWD/#$HOME/\~}

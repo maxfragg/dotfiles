@@ -34,6 +34,8 @@ config/utf8db
 config/vdirsyncer/config
 config/gtk-3.0
 config/redshift.conf
+config/fontconfig
+local/share/konsole
 fonts
 gitconfig
 jrnl_config

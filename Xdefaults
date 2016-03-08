@@ -18,21 +18,26 @@ Xft.hintstyle 			: hintfull
 URxvt*.font 			: xft:Source Code Pro:size=11:autohint=true:antialias=true,\
 						  xft:Monospace::regular:size=11:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true,\
-						  xft:Ubuntu:size=11:autohint=true:antialias=true
+						  xft:Ubuntu:size=11:autohint=true:antialias=true,\
+						  xft:FontAwesome:style=Regular:size=11:autohint=true:antialias=true
 URxvt*.boldFont 		: xft:Source Code Pro:bold:size=11:autohint=true:antialias=true,\
 						  xft:Monospace:bold:size=11:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true,\
-						  xft:Ubuntu:size=11:autohint=true:antialias=true
+						  xft:Ubuntu:size=11:autohint=true:antialias=true,\
+						  xft:FontAwesome:style=Regular:size=11:autohint=true:antialias=true
 #endif
 #ifdef x_ldpi
 URxvt*.font 			: xft:Source Code Pro:size=10:autohint=true:antialias=true,\
 						  xft:Monospace::regular:size=10:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
-						  xft:Ubuntu:size=10:autohint=true:antialias=true
+						  xft:Ubuntu:size=10:autohint=true:antialias=true,\
+						  xft:FontAwesome:style=Regular:size=10:autohint=true:antialias=true
+
 URxvt*.boldFont 		: xft:Source Code Pro:bold:size=10:autohint=true:antialias=true,\
 						  xft:Monospace:bold:size=10:autohint=true:antialias=true,\
 						  xft:Bitstream Vera Sans Mono:size=10:autohint=true:antialias=true,\
-						  xft:Ubuntu:size=10:autohint=true:antialias=true
+						  xft:Ubuntu:size=10:autohint=true:antialias=true,\
+						  xft:FontAwesome:style=Regular:size=10:autohint=true:antialias=true
 #endif
 
 URxvt.letterSpace		: -1
@@ -84,7 +89,7 @@ URxvt*.iconFile		: .terminal.svg
 #endif
 
 ! open default webbrowser
-URxvt.perl-ext-common 	: default,matcher,option-popup,clipboard
+URxvt.perl-ext-common 	: default,matcher,option-popup,clipboard,resize-font
 URxvt.url-launcher		: x-www-browser
 URxvt.matcher.button	: 1
 
@@ -97,6 +102,10 @@ URxvt*.urgentOnBell		: true
 URxvt.keysym.C-C 		: perl:clipboard:copy
 URxvt.keysym.C-V 		: perl:clipboard:paste
 URxvt.keysym.M-C-v 		: perl:clipboard:paste_escaped
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.clipboard.autocopy: true
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
