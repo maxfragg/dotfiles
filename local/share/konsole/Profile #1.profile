@@ -10,10 +10,10 @@ UseCustomCursorColor=true
 
 [General]
 Environment=TERM=xterm-256color
-Icon=/usr/share/icons/breeze/apps/48/utilities-terminal.svg
+Icon=utilities-terminal
 Name=Profile #1
 Parent=FALLBACK/
-ShowTerminalSizeHint=true
+ShowTerminalSizeHint=false
 
 [Interaction Options]
 OpenLinksByDirectClickEnabled=true

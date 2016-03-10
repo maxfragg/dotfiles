@@ -36,6 +36,7 @@ export config_hdpi=0
 export config_ssh_keys=""
 export config_dmenu_cache="dmenu_path >$HOME/.cache/dmenu_run"
 export config_seafile=0
+export config_owncloud=0
 export config_locker="lightlocker"
 export config_wallpaper_command="$HOME/.config/herbstluftwm/wallpaper.sh"
 export config_gui_editor="subl3"
@@ -50,6 +51,7 @@ export config_wallpaper_folder="misc"
 export config_startup_sleep=4
 export config_is_notebook=0
 export config_dotfiles_path="$HOME/git/dotfiles"
+export QT_QPA_PLATFORMTHEME="qt5ct" #use qt5ct to set the qt-style
 
 case "$HOSTNAME" in
     "stealthpad")
@@ -60,7 +62,7 @@ case "$HOSTNAME" in
         export config_fancy_borders=1
         export config_hdpi=1
         export config_ssh_keys="$HOME/.ssh/mykey $HOME/.ssh/cipkey $HOME/.ssh/cb_rsa $HOME/.ssh/uberspace_gitshell $HOME/.ssh/gitlab-cs-fau"
-        export config_seafile=1
+        export config_owncloud=1
         export config_prompt_user_color=$EMY
         export config_prompt_host_color=$B
         export config_prompt_hostname="x240"

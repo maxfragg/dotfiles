@@ -258,6 +258,10 @@ if [ $config_seafile == 1 ]; then
     hc spawn seafile-applet
 fi
 
+if [ $config_owncloud == 1 ]; then
+    hc spawn owncloud
+fi
+
 if [ $config_is_notebook == 1 ]; then
 	hc spawn cbatticon -i notification BAT0
 	hc spawn cbatticon -i notification BAT1
