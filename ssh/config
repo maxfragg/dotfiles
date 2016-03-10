@@ -1,7 +1,7 @@
 ### default for all ##
 Host *
 	ForwardAgent yes
-	ForwardX11 yes
+	ForwardX11 no
 	UseRoaming no
 
 
