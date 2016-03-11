@@ -43,6 +43,7 @@ git_status() {
     [[ -n $(egrep '^\?\?' <<<"$status") ]] && output="$output?"
     [[ -n $(git stash list) ]] && output="${output}✍"
     [[ -n $(git log --branches --not --remotes) ]] && output="${output}➜"
+    [[ -z $output ]] && output="✔"
     echo $output
 }
 
@@ -58,11 +59,11 @@ git_color() {
     if [[ -n $staged ]] && [[ -n $dirty ]]; then
         echo -e '\033[1;33m'  # bold yellow
     elif [[ -n $staged ]]; then
-        echo -e '\033[1;32m'  # bold green
+        echo -e '\033[1;34m'  # bold blue
     elif [[ -n $dirty ]]; then
         echo -e '\033[1;31m'  # bold red
     else
-        echo -e '\033[1;37m'  # bold white
+        echo -e '\033[1;32m'  # bold green
     fi
 }
 
