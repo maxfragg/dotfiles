@@ -120,6 +120,11 @@ a(){
 		$SU aura -S "$2"
 	elif [[ "$1" == "ai" ]]; then
 		$SU aura -A "$2"
+	elif [[ "$1" == "o" ]]; then
+		$SU aura -O "$2"
+	elif [[ "$1" == "c" ]]; then
+		$SU aura -Oj
+		$SU aura -Ccc
 	elif [[ "$1" == "s" ]]; then
 		echo "$(tput setaf 2)repo:$(tput sgr 0)"
 		aura -Ss $2
@@ -141,6 +146,8 @@ a(){
 		echo "    $(tput setaf 2)ri:$(tput sgr 0) repo install"
 		echo "    $(tput setaf 2)s:$(tput sgr 0) search repo and aur"
 		echo "    $(tput setaf 2)v:$(tput sgr 0) installed package version"
+		echo "    $(tput setaf 2)o:$(tput sgr 0) show/own orphants"
+		echo "    $(tput setaf 2)c:$(tput sgr 0) cleanup"
 		echo "    $(tput setaf 2)h:$(tput sgr 0) show this help"
 
 		#echo -e "\n$(tput setaf 4)aura commands:$(tput sgr 0)"
