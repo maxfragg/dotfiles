@@ -10,7 +10,7 @@ The configs are all designed to be either universal or be customicable for singl
 Feels free to use, some files, which are not written by me, contain special licence notices, please respect those, everything else if free to use as WTFPL
 
 ##current shell-prompt:
-<a><img src="https://raw.githubusercontent.com/maxfragg/dotfiles/master/prompt.svg"/></a>
+![bashprompt](https://raw.githubusercontent.com/maxfragg/dotfiles/master/prompt.svg)
 
 TODO:
 * add dependencies
