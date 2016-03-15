@@ -1,0 +1,11 @@
+<svg version="1.1" 
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="340" height="32"
+	style="background:#263238"
+	>
+	<text font-size="16" font-family="Source Code Pro" x="10" y="20">
+		<tspan fill="#03a9f4">❰</tspan><tspan fill="#ffa000">maxfragg</tspan><tspan fill="#03a9f4">•x240</tspan><tspan fill="#ffa000">~/git/dotfiles</tspan><tspan fill="#8bc34a">✔</tspan><tspan fill="#03a9f4">❱</tspan><tspan fill="#ffa000">$</tspan>
+
+	</text>
+</svg>
