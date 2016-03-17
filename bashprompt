@@ -67,6 +67,23 @@ git_color() {
     fi
 }
 
+displaytime(){
+    T=$1
+    D=$((T/60/60/24))
+    H=$((T/60/60%24))
+    M=$((T/60%60))
+    S=$((T%60))
+    if [[ ${D} == 0 && ${H} == 0 && ${M} == 0 ]]; then
+        printf '%d s' $S
+    elif [[ ${D} == 0 && ${H} == 0 ]]; then
+        printf '%02d:%02d' $M $S
+    elif [[ ${D} == 0 ]]; then
+        printf '%02d:%02d:%02d' $H $M $S
+    else
+        printf '%d days %02d:%02d:%02d' $D $H $M $S
+    fi
+}
+
 git_prompt() {
     # First, get the branch name...
     local branch=$(git_branch)
@@ -99,7 +116,7 @@ function bash_prompt_command() {
     timer_stop
     if [ $timer_show -gt 3 ]; then
         #echo -e
-        local TIMES='[$timer_show s]\n\a'
+        local TIMES='[$(displaytime $timer_show )]\n\a'
     else
         local TIMES=""
     fi

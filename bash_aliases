@@ -19,6 +19,7 @@ alias FUCK='fuck'
 
 # some more ls aliases
 if [ -f `which exa` ]; then 
+	alias ls='exa --group-directories-first'
 	alias l='exa --group-directories-first'
 	alias ll='exa -l -h --git --group-directories-first'
 	alias la='exa -a --group-directories-first'
