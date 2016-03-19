@@ -1,3 +1,14 @@
+### default for all ##
+Host *
+	ForwardAgent yes
+	ForwardX11 no
+	UseRoaming no
+
+
+Host gitlab.cs.fau.de
+	ForwardX11 no
+	User git
+
 Host cip
 	HostName faui00m.informatik.uni-erlangen.de
 	User el79irih
@@ -66,9 +77,11 @@ Host uber
 	HostName horologium.uberspace.de
 	User mxk
 
-Host uber2
+Host maxfragg.de
 	HostName horologium.uberspace.de
 	User mxk
+	ForwardX11 no
+	IdentityFile ~/.ssh/uberspace_gitshell
 
 host faui32h
 	HostName faui32h.informatik.uni-erlangen.de
@@ -127,7 +140,7 @@ host 10.60.*.*
 host ctf00
 	HostName ctf00.informatik.uni-erlangen.de
 	User maxfragg
-	IdentityFile ~/.ssh/ctf00	
+	#IdentityFile ~/.ssh/ctf00	
 
 host i1
 	HostName faui1-104.informatik.uni-erlangen.de
@@ -142,3 +155,8 @@ host i2
 	HostName faui2hg.cs.fau.de
 	User hg
 	IdentityFile ~/.ssh/cb_rsa
+
+host faust.ninja
+	HostName faust.ninja
+	User git
+	IdentityFile ~/.ssh/ctf00

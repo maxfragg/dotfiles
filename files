@@ -32,6 +32,10 @@ config/Terminal
 config/tint2
 config/utf8db
 config/vdirsyncer/config
+config/gtk-3.0
+config/redshift.conf
+config/fontconfig
+local/share/konsole
 fonts
 gitconfig
 jrnl_config
@@ -42,6 +46,8 @@ tmux.conf
 urxvt
 xcolors
 Xdefaults
+XCompose
 z.sh
 nanorc
 nano
+git-prompt.sh

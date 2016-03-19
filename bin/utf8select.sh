@@ -2,7 +2,7 @@
 
 source ~/.bash_settings
 
-utf8db="$HOME/bin/utf8db"
+utf8db="$HOME/.config/utf8db"
 if line=$(grep -v '^#' "$utf8db"|grep -v '^$'| /usr/bin/dmenu -b  -fn 'xft:Ubuntu:pixelsize=12' -sb '#FF7600' -p 'Zeichen:' -l 8) ; then
     #echo you selected "$line"
     # char is everything after the last space

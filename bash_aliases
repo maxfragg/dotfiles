@@ -13,18 +13,30 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+# You can use whatever you want as an alias, like for Mondays:
+alias FUCK='fuck'
+
 # some more ls aliases
-alias ll='ls -l -h'
-alias la='ls -A'
-alias l='ls -CF'
-alias .sh='ls | grep ".sh"'
+if [ -f `which exa` ]; then 
+	alias ls='exa --group-directories-first'
+	alias l='exa --group-directories-first'
+	alias ll='exa -l -h --git --group-directories-first'
+	alias la='exa -a --group-directories-first'
+	alias tree='exa --tree'
+else
+	alias ll='ls -l -h'
+	alias la='ls -A'
+	alias l='ls -CF'
+	alias .sh='ls | grep ".sh"'
+fi
+
 #alias ack=ack-grep
 #alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
 alias prompt_git='GIT=1'
 alias prompt_fast='GIT=0'
 alias rootpath='PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH'
-#alias uberspace='mosh --server=/home/maxfragg/tmp/mosh-1.2.2/src/frontend/mosh-server --port=51988 uber'
-alias uberspace='mosh --server=/usr/local/bin/mosh-server --port=62011 uber2'
+alias uberspace='mosh --server=/usr/local/bin/mosh-server --port=62011 uber'
 alias ping='ping -c 4'
 alias openports='netstat -nape --inet'
 alias valgrind='valgrind --leak-check=full'
@@ -43,7 +55,7 @@ alias hlwm='herbstluftwm'
 alias exec_on_tag='~/.config/herbstluftwm/exec_on_tag.sh'
 alias difff='diff -urNp'
 alias sshtunnel='ssh -D 8080 -f -C -N uni'
-alias ucrypt='encfs ~/Seafile/private/enc ~/private'
+alias ucrypt='encfs ~/ownCloud/Documents/enc ~/private'
 alias bluetooth_off="sudo rfkill block bluetooth"
 alias bluetooth_on="sudo rfkill unblock bluetooth"
 alias tint2rs='pkill tint2 && herbstclient spawn tint2'

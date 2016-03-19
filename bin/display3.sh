@@ -1,16 +1,17 @@
 #!/bin/bash
 
 ###########################
-# display setup script v3.1 #
+# display setup script v3.2 #
 ###########################
 #
 # Author: 	Max Krueger
-# Date: 	2013-11-05 
+# Date: 	2015-11-20 
 # License:  MIT
 #
 # # TODO:
 # # Half width resolutions for 2in1 mode as suggestion
-# # Spliting functionality up for easyer maintainance
+# # Spliting functionality up 
+# # rewrite in anything but bash!
 #
 # this is a script for setting up different multimonitor
 # configurations with hlwm and xrandr
@@ -61,16 +62,23 @@ auto"
 
 ex(){
 	if [[ $DRYRUN == "1" ]]; then
-		echo "$@"
+		echo "$*"
 	else
-		`$@`
+		$( "$@" )
 	fi
 }
 
+containsElement () {
+	local e
+	for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+	return 1
+}
+
+# magic mapping from names to the number of logical and xrandr monitors
 getnum(){
 	MONS=0
 	MONSU=0
-	[[ $MODE == auto ]] && MONS=`xrandr | grep " connected" | cut -d' ' -f1| wc -l` && MONSU=$MONS
+	[[ $MODE == auto ]] && MONS=$(xrandr | grep " connected" | cut -d' ' -f1| wc -l) && MONSU=$MONS
 	[[ $MODE == "2in1" ]] 	&& TWOINONE=1 && MODE="dual"
 	[[ $MODE == "single" ]] && MONS=1 && MONSU=1
 	[[ $MODE == "extern" ]] && MONS=1 && MONSU=1
@@ -86,33 +94,25 @@ os_xrandr_parse() {
     local current_modes=""
     
     # extract
-    local results="$(xrandr | grep -o -e '\([a-Z]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
-
-    #local results="$(xrandr | grep -o -e '\([A-Z]\+[0-9]\+ connected\)\|\([A-Z]\+[-]\+[A-Z]\+[-]\+[0-9]\+ connected\)\|\([0-9]\+x[0-9]\+  \)')"
+    local results="$(xrandr | grep -o -e '\([A-z]\+[0-9]\+-\?[0-9]\? connected\)\|\([0-9]\+x[0-9]\+  \)' | tr '-' '_' )"
 
     # parse
     for result in $results; do
-        #if [[ $result =~ connected ]]; then
-        #    result=$(echo $result | cut -d' ' -f1)
-        #    if [[ result == "" ]]; then
-        #    	continue
-        #    fi
-        #
-        #fi
-
         if [[ $result =~ [A-Z] ]]; then
             current_modes="os_xrandr_modes_${result}"
             eval "$current_modes=()"
             os_xrandr_displays+="$result\n"
         else
-            eval "$current_modes+=(\"$result\n\")"
+            if [[ $result != "connected" ]]; then
+                eval "$current_modes+=(\"$result\n\")"
+            fi
         fi
     done
 }
 
 os_xrandr_reset() {
     # reset
-    for display in ${os_xrandr_displays[@]}; do
+    for display in "${os_xrandr_displays[@]}"; do
         unset "os_xrandr_modes_${display}"
     done
 
@@ -145,7 +145,7 @@ if [[ $1 == "--dmenu" || $1 == "-d" ]]; then
 		echo "Dryrun mode, no changes!"
 	fi
 
-	MODE=`dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select mode" <<< "$MODES"`
+	MODE=$(dmenu -nf "$COLOR_P_FG1" -sb "$COLOR_P_HI" -nb "$COLOR_P_BG" -p "Select mode" <<< "$MODES")
 
 	getnum
 
@@ -153,14 +153,14 @@ if [[ $1 == "--dmenu" || $1 == "-d" ]]; then
     # dryrun as aditional argument 
     if [[ $MODE == "auto" ]]; then
     	i=1
-    	for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
+    	for outputs in $(echo -e "${os_xrandr_displays[@]}") ; do
     		output[$i]=$outputs
     		XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
-    		XY=`echo $XY | cut -d'\' -f1`
-    		echo $XY
-    		X[$i]=`echo $XY | cut -d'x' -f1`
-    		Y[$i]=`echo $XY | cut -d'x' -f2`
-    		i=`expr $i + 1` 
+    		XY=$(echo "$XY" | cut -d'\' -f1)
+    		echo "$XY"
+    		X[$i]=$(echo "$XY" | cut -d'x' -f1)
+    		Y[$i]=$(echo "$XY" | cut -d'x' -f2)
+    		i=$((i+1))
     	done
     	if [[ $i == 2 ]]; then
     		MODE="single"
@@ -169,13 +169,12 @@ if [[ $1 == "--dmenu" || $1 == "-d" ]]; then
     	fi
     else
     # Conventional dmenu mode, we need to ask for more settings
-    	for i in `seq $MONSU` ; do
-    		output[$i]=`echo -e "${os_xrandr_displays[@]}" | dmenu -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Select monitor $i"`
+    	for i in $(seq $MONSU) ; do
+    		output[$i]=$(echo -e "${os_xrandr_displays[@]}" | dmenu -nf "$COLOR_P_FG1" -sb "$COLOR_P_HI" -nb "$COLOR_P_BG" -p "Select monitor $i")
     		CUR_MODES=$(eval "echo \${os_xrandr_modes_${output[$i]}[@]}")
-    		XY=`echo -e $CUR_MODES | dmenu -i -nf $COLOR_P_FG1 -sb $COLOR_P_HI -nb $COLOR_P_BG -p "Resolution for monitor $i"`
-
-    		X[$i]=`echo $XY | cut -d'x' -f1`
-    		Y[$i]=`echo $XY | cut -d'x' -f2`
+    		XY=$(echo -e "$CUR_MODES" | dmenu -i -nf "$COLOR_P_FG1" -sb "$COLOR_P_HI" -nb "$COLOR_P_BG" -p "Resolution for monitor $i")
+    		X[$i]=$(echo "$XY" | cut -d'x' -f1)
+    		Y[$i]=$(echo "$XY" | cut -d'x' -f2)
     	done
     fi
 else
@@ -194,7 +193,7 @@ else
 		
 		getnum
 
-		for i in `seq $MONSU` ; do
+		for i in $(seq $MONSU) ; do
 			echo "Choose output for monitor $i:"
 			echo -e -n "${os_xrandr_displays[@]}"
 			read output[$i]
@@ -218,14 +217,14 @@ else
 		# dryrun as aditional argument 
 		if [[ $MODE == "auto" ]]; then
 			i=1
-			for outputs in `echo -e "${os_xrandr_displays[@]}"` ; do
+			for outputs in $(echo -e "${os_xrandr_displays[@]}") ; do
 				output[$i]=$outputs
 				XY=$(eval "echo \${os_xrandr_modes_$outputs[@]}")
-				XY=`echo $XY | cut -d'\' -f1`
-				echo $XY
-				X[$i]=`echo $XY | cut -d'x' -f1`
-				Y[$i]=`echo $XY | cut -d'x' -f2`
-				i=`expr $i + 1` 
+				XY=$(echo "$XY" | cut -d'\' -f1)
+				echo "$XY"
+				X[$i]=$(echo "$XY" | cut -d'x' -f1)
+				Y[$i]=$(echo "$XY" | cut -d'x' -f2)
+				i=$((i+1)) 
 			done
 			if [[ $i == 2 ]]; then
 				MODE="single"
@@ -234,13 +233,13 @@ else
 			fi
 		else
 
-			for i in `seq $MONSU` ; do
-				indoutput=$(( ($i * 2) + $DRYRUN ))
-				indres=$((1+ ($i * 2) + $DRYRUN ))
+			for i in $(seq $MONSU) ; do
+				indoutput=$(( (i * 2) + DRYRUN ))
+				indres=$((1+ (i * 2) + DRYRUN ))
 				eval output[$i]=\$$indoutput
 				eval XY=\$$indres
-				X[$i]=`echo $XY | cut -d'x' -f1`
-				Y[$i]=`echo $XY | cut -d'x' -f2`
+				X[$i]=$(echo "$XY" | cut -d'x' -f1)
+				Y[$i]=$(echo "$XY" | cut -d'x' -f2)
 			done
 		fi
 	fi
@@ -250,6 +249,30 @@ if [[ $MONSU == 0 || $MONS == 0 ]]; then
 	exit 255
 fi
 
+#monitors to disable:
+i=1
+for out in $(echo -e "${os_xrandr_displays[@]}") ; do
+	if containsElement "$out" "${output[@]}"; then
+		true
+	else
+		output_off[$i]="$out"
+		i=$((i+1))
+	fi
+done
+
+
+# fix names of outputs, which where renamed to make propper bash-variable-names
+i=1
+for each in $(echo -e "${output[@]}") ; do
+	output[$i]=$(echo "$each" | tr '_' '-')
+	i=$((i+1))
+done
+
+i=1
+for each in $(echo -e "${output_off[@]}") ; do
+	output_off[$i]=$(echo "$each" | tr '_' '-')
+	i=$((i+1))
+done
 
 ###################
 # Breaking things #
@@ -264,32 +287,32 @@ case $MODE in
 		YOFF[1]=0
 
 		MNAME[1]="intern"
-		ex xrandr --output ${output[1]} --mode ${X[1]}x${Y[1]}
+		ex xrandr --output "${output[1]}" --mode "${X[1]}x${Y[1]}"
 		;;
 	"extern" )
 		XOFF[1]=0
 		YOFF[1]=0
-		ex xrandr --output ${output[1]} --mode ${X[1]}x${Y[1]}
+		ex xrandr --output "${output[1]}" --mode "${X[1]}x${Y[1]}"
 
 		MNAME[1]="extern"
 		;;
 	"beamer" )
-		ex xrandr --output ${output[1]} ${X[1]}x${Y[1]}
-		ex xrandr --output ${output[2]} ${X[2]}x${Y[2]}
-		XTMP=${X[1]}
-		YTMP=${Y[1]}
-		X[1]=${X[2]}
-		Y[1]=${Y[2]}
-		X[2]=$((XTMP - ${X[1]}))
-		Y[2]=$YTMP
-		X[3]=${X[1]}
-		Y[3]=$((YTMP - ${Y[1]}))
+		ex xrandr --output "${output[1]}" --mode "${X[1]}x${Y[1]}"
+		ex xrandr --output "${output[2]}" --mode "${X[2]}x${Y[2]}"
+		XTMP="${X[1]}"
+		YTMP="${Y[1]}"
+		X[1]="${X[2]}"
+		Y[1]="${Y[2]}"
+		X[2]="$((XTMP - X[1]))"
+		Y[2]="$YTMP"
+		X[3]="${X[1]}"
+		Y[3]="$((YTMP - Y[1]))"
 		XOFF[1]=0
 		YOFF[1]=0
-		XOFF[2]=${X[1]}
+		XOFF[2]="${X[1]}"
 		YOFF[2]=0
 		XOFF[3]=0
-		YOFF[3]=${Y[1]}
+		YOFF[3]="${Y[1]}"
 		MNAME[1]="intern"
 		MNAME[2]="sidebar"
 		MNAME[3]="bottom"
@@ -297,15 +320,15 @@ case $MODE in
 	"dual" )
 		XOFF[1]=0
 		YOFF[1]=0
-		XOFF[2]=${X[1]}
+		XOFF[2]="${X[1]}"
 		YOFF[2]=0
 		if [[ $TWOINONE != "1" ]]; then
-			ex xrandr --output ${output[1]} --auto
-			ex xrandr --output ${output[1]} ${X[1]}x${Y[1]}
-			ex xrandr --output ${output[1]} --pos "${XOFF[1]}x${YOFF[1]}"
-			ex xrandr --output ${output[2]} --auto
-			ex xrandr --output ${output[2]} ${X[2]}x${Y[2]}
-			ex xrandr --output ${output[2]} --pos "${XOFF[2]}x${YOFF[2]}"
+			ex xrandr --output "${output[1]}" --auto
+			ex xrandr --output "${output[1]}" "${X[1]}x${Y[1]}"
+			ex xrandr --output "${output[1]}" --pos "${XOFF[1]}x${YOFF[1]}"
+			ex xrandr --output "${output[2]}" --auto
+			ex xrandr --output "${output[2]}" "${X[2]}x${Y[2]}"
+			ex xrandr --output "${output[2]}" --pos "${XOFF[2]}x${YOFF[2]}"
 			MNAME[1]="intern"
 			MNAME[2]="extern"
 		else
@@ -320,11 +343,11 @@ esac
 
 ex herbstclient rename_monitor 0 "${MNAME[1]}" 2>/dev/null
 
-for i in `seq $MONS` ; do
+for i in $(seq $MONS) ; do
 	if [[ $i == "1" ]]; then
 		ex herbstclient move_monitor "${MNAME[$i]}" "${X[$i]}x${Y[$i]}+${XOFF[$i]}+${YOFF[$i]}"
 	else
-		ex herbstclient add_monitor "${X[$i]}x${Y[$i]}+${XOFF[$i]}+${YOFF[$i]}" "${tags[$(( ( $activetag+$i ) % ${#tags[@]} ))]:1}"  "${MNAME[$i]}"
+		ex herbstclient add_monitor "${X[$i]}x${Y[$i]}+${XOFF[$i]}+${YOFF[$i]}" "${tags[$(( ( activetag+i ) % ${#tags[@]} ))]:1}"  "${MNAME[$i]}"
 	fi
 done
 
@@ -332,31 +355,29 @@ done
 
 case $MODE in
 	"single" )
-		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient pad "${MNAME[1]}" "$PADUP" 0 "$PADDOWN" 0
 		ex herbstclient remove_monitor "intern2" 2>/dev/null
 		ex herbstclient remove_monitor "extern" 2>/dev/null
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
-		ex xrandr --output VGA1 --off
 		;;
 	"extern" )
-		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
-		ex xrandr --output LVDS1 --off
+		ex herbstclient pad "${MNAME[1]}" "$PADUP" 0 "$PADDOWN" 0
 		ex herbstclient remove_monitor "intern" 2>/dev/null
 		ex herbstclient remove_monitor "intern2" 2>/dev/null
 		ex herbstclient remove_monitor "sidebar" 2>/dev/null
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
 	"beamer" )
-		ex herbstclient pad "${MNAME[1]}" $PADUP 0 0 0
-		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient pad "${MNAME[3]}" 0 0 $PADDOWN 0
+		ex herbstclient pad "${MNAME[1]}" "$PADUP" 0 0 0
+		ex herbstclient pad "${MNAME[2]}" "$PADUP" 0 "$PADDOWN" 0
+		ex herbstclient pad "${MNAME[3]}" 0 0 "$PADDOWN" 0
 		ex herbstclient remove_monitor "intern2" 2>/dev/null
 		ex herbstclient remove_monitor "extern" 2>/dev/null
 		;;
 	"dual" )
-		ex herbstclient pad "${MNAME[1]}" $PADUP 0 $PADDOWN 0
-		ex herbstclient pad "${MNAME[2]}" $PADUP 0 $PADDOWN 0
+		ex herbstclient pad "${MNAME[1]}" "$PADUP" 0 "$PADDOWN" 0
+		ex herbstclient pad "${MNAME[2]}" "$PADUP" 0 "$PADDOWN" 0
 		if [[ $TWOINONE != "1" ]]; then
 			ex herbstclient remove_monitor "intern2" 2>/dev/null
 		else
@@ -366,5 +387,11 @@ case $MODE in
 		ex herbstclient remove_monitor "bottom" 2>/dev/null
 		;;
 esac
+
+
+# turn of all unused outputs
+for out in $(echo -e "${output_off[@]}"); do
+	ex xrandr --output "$out" --off
+done
 
 ex herbstclient unlock
