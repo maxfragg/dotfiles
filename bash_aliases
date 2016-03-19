@@ -18,7 +18,6 @@ alias ll='ls -l -h'
 alias la='ls -A'
 alias l='ls -CF'
 alias .sh='ls | grep ".sh"'
-
 #alias ack=ack-grep
 #alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
 alias prompt_git='GIT=1'
@@ -32,6 +31,8 @@ alias valgrind='valgrind --leak-check=full'
 alias install='sudo apt-get install'
 alias add='sudo apt-add-repository'
 alias svnpng='for i in *; do rsvg-convert $i -o `echo $i | sed -e 's/svg$/png/'`; done'
+
+alias bitlbee='bitlbee -c ~/.toast/armed/etc/bitlbee/bitlbee.conf -d ~/.bitlbee/'
 
 alias flatten='find . -type f -exec mv '{}' . \;'
 alias nano='nano -cmiF'
