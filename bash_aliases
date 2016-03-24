@@ -18,7 +18,7 @@ alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias FUCK='fuck'
 
 # some more ls aliases
-if [ -f `which exa` ]; then 
+if hash exa 2>/dev/null; then 
 	alias ls='exa --group-directories-first'
 	alias l='exa --group-directories-first'
 	alias ll='exa -l -h --git --group-directories-first'
