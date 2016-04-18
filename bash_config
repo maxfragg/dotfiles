@@ -78,7 +78,7 @@ case "$HOSTNAME" in
     	;;
     faui49man*)
     	export config_ssh_keys="$HOME/.ssh/i4 $HOME/.ssh/i4github $HOME/.ssh/cipkey"
-    	export config_wallpaper_command="feh --bg-center /usr/share/backgrounds/Backyard_Mushrooms_by_Kurt_Zitzelman.jpg"
+    	export config_wallpaper_command="feh --bg-center  $HOME/git/wallpaper/2016/wallhaven-313179.jpg"
         export config_locker="gnome-screensaver-command --lock"
         export config_gui_editor="subl"
         export config_prompt_user_color=$B

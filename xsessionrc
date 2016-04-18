@@ -2,6 +2,9 @@
 #only meant for cip/ls4 env
 #echo $@ >xtest.log
 
+setxkbmap -option '' 'us international' ',phonetic'
+setxkbmap -option terminate:ctrl_alt_bksp
+
 case $@ in
 	herbstluftwm)
 	#exec xterm
@@ -16,9 +19,8 @@ case $@ in
 	export GNOME_KEYRING_PID
 	#end of keyring stuff
 	
-    	export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-	setxkbmap -option '' 'us international' ',phonetic'
-	setxkbmap -option terminate:ctrl_alt_bksp
+    export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
 	exec ssh-agent herbstluftwm -c ~/.config/herbstluftwm/autostart
 	;;
 	*)
