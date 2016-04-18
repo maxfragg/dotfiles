@@ -29,31 +29,42 @@ dotfiles(){
 	cd $PWD
 }
 
-
 github_key(){
-	URL="https://github.com/$1.key"
-	echo $URL
-	key=`curl $URL`
+	local URL="https://github.com/$1.key"
+	local key=`curl $URL`
 	echo $key
+}
+
+function displaytime {
+	local T=$1
+	local D=$((T/60/60/24))
+	local H=$((T/60/60%24))
+	local M=$((T/60%60))
+	local S=$((T%60))
+	(( $D > 0 )) && printf '%d d ' $D
+	(( $H > 0 )) && printf '%d h ' $H
+	(( $M > 0 )) && printf '%d m ' $M
+	(( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
+	printf '%d s\n' $S
 }
 
 
 current_x_display(){
 	TARGET_DISPLAY=()
 	while read id uid user seat; do
-	    while IFS='=' read property value; do
-	        case "$property" in
-	        Active)
-	            if [[ "$value" != "yes" ]]; then continue; fi
-	            ;;
-	        Display)
-	            if [[ "$value" ]]; then
-	                TARGET_DISPLAY+=( "$value" )
-	            fi
-	            # else the session isn't graphical
-	            ;;
-	        esac
-	    done < <(loginctl show-session -p Display -p Active "$id")
+		while IFS='=' read property value; do
+			case "$property" in
+			Active)
+				if [[ "$value" != "yes" ]]; then continue; fi
+				;;
+			Display)
+				if [[ "$value" ]]; then
+					TARGET_DISPLAY+=( "$value" )
+				fi
+				# else the session isn't graphical
+				;;
+			esac
+		done < <(loginctl show-session -p Display -p Active "$id")
 	done < <(loginctl list-sessions --no-legend)
 	echo $TARGET_DISPLAY
 }
@@ -61,22 +72,22 @@ current_x_display(){
 session_status(){
 	STATUS=()
 	while read id uid user seat; do
-	    while IFS='=' read property value; do
-	        case "$property" in
-	        Class)
-	            if [[ "$value" != "user" ]]; then
-	            	break
-	            fi
-	            ;;
-	        State)
-	            if [[ "$value" ]]; then
-	                STATUS+=( "$value" )
-	                #loginctl show-session $id
-	            fi
-	            # else the session isn't graphical
-	            ;;
-	        esac
-	    done < <(loginctl show-session -p State -p Class "$id")
+		while IFS='=' read property value; do
+			case "$property" in
+			Class)
+				if [[ "$value" != "user" ]]; then
+					break
+				fi
+				;;
+			State)
+				if [[ "$value" ]]; then
+					STATUS+=( "$value" )
+					#loginctl show-session $id
+				fi
+				# else the session isn't graphical
+				;;
+			esac
+		done < <(loginctl show-session -p State -p Class "$id")
 	done < <(loginctl list-sessions --no-legend)
 	echo $STATUS
 }
@@ -100,7 +111,7 @@ o(){
 alias open=o
 
 lt(){
-    ~/bin/LightTable/LightTable "$@"
+	~/bin/LightTable/LightTable "$@"
 }
 
 calc(){ echo "scale=2; $@" | bc -l ;}
@@ -120,6 +131,11 @@ a(){
 		$SU aura -S "$2"
 	elif [[ "$1" == "ai" ]]; then
 		$SU aura -A "$2"
+	elif [[ "$1" == "o" ]]; then
+		$SU aura -O "$2"
+	elif [[ "$1" == "c" ]]; then
+		$SU aura -Oj
+		$SU aura -Ccc
 	elif [[ "$1" == "s" ]]; then
 		echo "$(tput setaf 2)repo:$(tput sgr 0)"
 		aura -Ss $2
@@ -141,6 +157,8 @@ a(){
 		echo "    $(tput setaf 2)ri:$(tput sgr 0) repo install"
 		echo "    $(tput setaf 2)s:$(tput sgr 0) search repo and aur"
 		echo "    $(tput setaf 2)v:$(tput sgr 0) installed package version"
+		echo "    $(tput setaf 2)o:$(tput sgr 0) show/own orphants"
+		echo "    $(tput setaf 2)c:$(tput sgr 0) cleanup"
 		echo "    $(tput setaf 2)h:$(tput sgr 0) show this help"
 
 		#echo -e "\n$(tput setaf 4)aura commands:$(tput sgr 0)"
@@ -165,14 +183,14 @@ bat(){
 }
 
 man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
+	env LESS_TERMCAP_mb=$'\E[01;31m' \
+	LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+	LESS_TERMCAP_me=$'\E[0m' \
+	LESS_TERMCAP_se=$'\E[0m' \
+	LESS_TERMCAP_so=$'\E[38;5;246m' \
+	LESS_TERMCAP_ue=$'\E[0m' \
+	LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+	man "$@"
 }
 
 objdmp(){
@@ -184,22 +202,22 @@ md2pdf(){
 }
 
 xor(){
-      local res=(`echo "$1" | sed "s/../0x& /g"`)
-      shift 1
-      while [[ "$1" ]]; do
-            local one=(`echo "$1" | sed "s/../0x& /g"`)
-            local count1=${#res[@]}
-            if [ $count1 -lt ${#one[@]} ]
-            then
-                  count1=${#one[@]}
-            fi
-            for (( i = 0; i < $count1; i++ ))
-            do
-                  res[$i]=$((${one[$i]:-0} ^ ${res[$i]:-0}))
-            done
-            shift 1
-      done
-      printf "%02x" "${res[@]}"
+	  local res=(`echo "$1" | sed "s/../0x& /g"`)
+	  shift 1
+	  while [[ "$1" ]]; do
+			local one=(`echo "$1" | sed "s/../0x& /g"`)
+			local count1=${#res[@]}
+			if [ $count1 -lt ${#one[@]} ]
+			then
+				  count1=${#one[@]}
+			fi
+			for (( i = 0; i < $count1; i++ ))
+			do
+				  res[$i]=$((${one[$i]:-0} ^ ${res[$i]:-0}))
+			done
+			shift 1
+	  done
+	  printf "%02x" "${res[@]}"
 }
 
 alias thalia='ssh -D 8080 -f -C -N uni ;curlftpfs -o proxy=127.0.0.1:8080,socks5  ftp://thalia.hofmann.stw.uni-erlangen.de/ ~/tmp/'
@@ -228,7 +246,6 @@ heute.txt(){
 x_cfg_reload(){
 	source ~/.bash_config
 	xrdb -merge -I"$HOME" -D"$config_x_transparency" -D"$config_x_colortheme" -D"$config_x_dpi" -D"$config_x_global_terminal_icon" .Xdefaults
-	xrdb -merge .XCompose
 }
 
 echoerr() { /usr/bin/echo "$@" >&2; }
@@ -345,13 +362,13 @@ alias futurama='curl -Is slashdot.org | sed -n '5p' | sed 's/^X-//''				# get Fu
 ###### from Uzi's bashrc
 function swap()
 {
-    local TMPFILE=tmp.$$
-    [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
-    [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
-    [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
-    mv "$1" $TMPFILE
-    mv "$2" "$1"
-    mv $TMPFILE "$2"
+	local TMPFILE=tmp.$$
+	[ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
+	[ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
+	[ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
+	mv "$1" $TMPFILE
+	mv "$2" "$1"
+	mv $TMPFILE "$2"
 }
 
 

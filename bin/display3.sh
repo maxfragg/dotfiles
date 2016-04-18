@@ -62,7 +62,7 @@ auto"
 
 ex(){
 	if [[ $DRYRUN == "1" ]]; then
-		echo "$@"
+		echo "$*"
 	else
 		$( "$@" )
 	fi
