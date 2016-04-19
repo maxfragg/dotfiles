@@ -18,7 +18,7 @@ alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias FUCK='fuck'
 
 # some more ls aliases
-if [ -f `which exa` ]; then 
+if hash exa 2>/dev/null; then 
 	alias ls='exa --group-directories-first'
 	alias l='exa --group-directories-first'
 	alias ll='exa -l -h --git --group-directories-first'
@@ -30,8 +30,6 @@ else
 	alias l='ls -CF'
 	alias .sh='ls | grep ".sh"'
 fi
-
-
 
 #alias ack=ack-grep
 #alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
@@ -45,6 +43,8 @@ alias valgrind='valgrind --leak-check=full'
 alias install='sudo apt-get install'
 alias add='sudo apt-add-repository'
 alias svnpng='for i in *; do rsvg-convert $i -o `echo $i | sed -e 's/svg$/png/'`; done'
+
+alias bitlbee='bitlbee -c ~/.toast/armed/etc/bitlbee/bitlbee.conf -d ~/.bitlbee/'
 
 alias flatten='find . -type f -exec mv '{}' . \;'
 alias nano='nano -cmiF'
