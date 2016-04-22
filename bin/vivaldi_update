@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# this script updates a local vivaldi-install by downloading and extracting the 
+# most recent debian package from the rss-feed and placing it in $HOME/bin
+
+TMPDIR=`mktemp -d`
+wget -O "$TMPDIR/feed.xml" "https://vivaldi.net/?format=feed&type=rss"
+URL1=`grep 'deb">64-bit</a>' "$TMPDIR/feed.xml" | head -n1 | cut -f2 -d'"'`
+curl -L "$URL1" > "$TMPDIR/vivaldi-snapshot.deb" 
+ar p "$TMPDIR/vivaldi-snapshot.deb" data.tar.xz | tar -C"$HOME/bin" -xJf- --strip 2 ./opt
+rm -rf $TMPDIR
