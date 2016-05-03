@@ -4,6 +4,10 @@ Host *
 	ForwardX11 no
 	UseRoaming no
 
+Host ma_vm
+	HostName 127.0.0.1
+	User root
+	Port 5022
 
 Host gitlab.cs.fau.de
 	ForwardX11 no
