@@ -187,6 +187,6 @@ function bash_prompt() {
 }
 
 trap 'timer_start' DEBUG
-PROMPT_COMMAND=bash_prompt_command
+PROMPT_COMMAND='history -a;history -n;bash_prompt_command'
 bash_prompt
 unset bash_prompt
