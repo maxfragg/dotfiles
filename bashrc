@@ -77,8 +77,25 @@ fi
 #setxkbmap  -layout us -variant altgr-intl
 export PATH=$HOME/bin:$PATH
 
+
+#sp-tutor stuff
 if [ -d $HOME/git/sp_svn/bin ]; then
     export PATH=$HOME/git/sp_svn/bin/:$PATH
+
+    export _SP_SVN_PATH=$HOME/git/sp_svn
+    export _SP_HOST=el79irih@cip
+
+
+    sp-init-testsuite() {
+        if [ -e "${_SP_SVN_PATH}/aufgaben/$1/testcase/" ]; then
+            export TESTBASE="${_SP_SVN_PATH}/aufgaben/$1/testcase/"
+            source "${TESTBASE}/setup.sh"
+        else
+            echo >&2 "sp-init-testsuite: no testcases found for exercie '$1'"
+            return 1
+        fi
+    }
+    complete -W "$(echo ${_SP_SVN_PATH}/aufgaben/*/testcase | xargs -n1 dirname | xargs -n1 basename)" sp-init-testsuite
 fi
 
 if [ -d $HOME/lib ]; then
