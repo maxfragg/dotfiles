@@ -3,11 +3,11 @@
 ##	BASH PROMPT	##
 ##################
 
-function timer_start {
+function timer_start() {
   timer=${timer:-$SECONDS}
 }
 
-function timer_stop {
+function timer_stop() {
   timer_show=$(($SECONDS - $timer))
   unset timer
 }
@@ -19,7 +19,7 @@ function timer_stop {
 #
 # License: MIT, unless the authors of those two gists object :)
 
-git_branch() {
+function git_branch() {
     # -- Finds and outputs the current branch name by parsing the list of
     #    all branches
     # -- Current branch is identified by an asterisk at the beginning
@@ -28,7 +28,7 @@ git_branch() {
     git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-git_status() {
+function git_status() {
     # Outputs a series of indicators based on the status of the
     # working directory:
     # ± changes are staged and ready to commit
@@ -47,7 +47,7 @@ git_status() {
     echo $output
 }
 
-git_color() {
+function git_color() {
     # Receives output of git_status as argument; produces appropriate color
     # code based on status of working directory:
     # - White if everything is clean
@@ -67,7 +67,7 @@ git_color() {
     fi
 }
 
-displaytime(){
+function displaytime(){
     T=$1
     D=$((T/60/60/24))
     H=$((T/60/60%24))
@@ -84,7 +84,7 @@ displaytime(){
     fi
 }
 
-git_prompt() {
+function git_prompt() {
     # First, get the branch name...
     local branch=$(git_branch)
     # Empty output? Then we're not in a Git repository, so bypass the rest
