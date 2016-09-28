@@ -3,14 +3,17 @@
 ##	BASH PROMPT	##
 ##################
 
-function timer_start() {
-  timer=${timer:-$SECONDS}
+
+function timer_start {
+    timer=${timer:-$SECONDS}
 }
 
-function timer_stop() {
-  timer_show=$(($SECONDS - $timer))
-  unset timer
+
+function timer_stop {
+    timer_show=$(($SECONDS - $timer))
+    unset timer
 }
+
 
 # Based upon the following gists:
 # <https://gist.github.com/henrik/31631>
@@ -18,8 +21,7 @@ function timer_stop() {
 # Modified by me, using ideas from comments on those gists.
 #
 # License: MIT, unless the authors of those two gists object :)
-
-function git_branch() {
+function git_branch {
     # -- Finds and outputs the current branch name by parsing the list of
     #    all branches
     # -- Current branch is identified by an asterisk at the beginning
@@ -28,7 +30,8 @@ function git_branch() {
     git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-function git_status() {
+
+function git_status {
     # Outputs a series of indicators based on the status of the
     # working directory:
     # ± changes are staged and ready to commit
@@ -47,11 +50,12 @@ function git_status() {
     echo $output
 }
 
-function git_color() {
+
+function git_color {
     # Receives output of git_status as argument; produces appropriate color
     # code based on status of working directory:
-    # - White if everything is clean
-    # - Green if all changes are staged
+    # - Green if everything is clean
+    # - Blue if all changes are staged
     # - Red if there are uncommitted changes with nothing staged
     # - Yellow if there are both staged and unstaged changes
     local staged=$([[ $1 =~ \± ]] && echo yes)
@@ -67,7 +71,8 @@ function git_color() {
     fi
 }
 
-function displaytime(){
+
+function displaytime {
     T=$1
     D=$((T/60/60/24))
     H=$((T/60/60%24))
@@ -84,7 +89,8 @@ function displaytime(){
     fi
 }
 
-function git_prompt() {
+
+function git_prompt {
     # First, get the branch name...
     local branch=$(git_branch)
     # Empty output? Then we're not in a Git repository, so bypass the rest
@@ -104,12 +110,12 @@ function git_prompt() {
 ## /usr/share/big_dir_name -> ../share/big_dir_name if pwdmaxlen=20
 
 #run each time
-function bash_prompt_command() {
+function bash_prompt_command {
     # set an error string for the prompt, if applicable
     if [ $? -eq 0 ]; then
         local ERRPROMPT=""
     else
-        local ERRPROMPT='➜ $[$?]\n\a'
+        local ERRPROMPT='→ $?\n\a'
     fi
 
     # echo a bell-character if execution took more than 3 seconds
@@ -139,12 +145,12 @@ function bash_prompt_command() {
     pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
     NEW_PWD=${PWD/#$HOME/\~}
     local pwdoffset=$(( ${#NEW_PWD} - pwdmaxlen ))
-    if [ ${pwdoffset} -gt "0" ]
-    then
+
+    if [ ${pwdoffset} -gt "0" ]; then
         NEW_PWD=${NEW_PWD:$pwdoffset:$pwdmaxlen}
         NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
     fi
-    
+
     PS1="${TITLEBAR}\
 ${R}${TIMES}${ERRPROMPT}\
 ${HC}❰\
@@ -158,15 +164,15 @@ $newline${UC}\
 }
 
 #run once per shell
-function bash_prompt() {
+function bash_prompt {
 
     case $TERM in
-     xterm*|rxvt*)
-         TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
-          ;;
-     *)
-         TITLEBAR=""
-          ;;
+        xterm*|rxvt*)
+            TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
+            ;;
+        *)
+            TITLEBAR=""
+            ;;
     esac
 
     source ~/.bash_config
@@ -177,11 +183,11 @@ function bash_prompt() {
     HOST_S="$config_prompt_hostname"
 
 
-	# LOCation
-	LOC="•"
-	[ -n "$SSH_CONNECTION" ] && LOC="✈"
+    # LOCation
+    LOC="•"
+    [ -n "$SSH_CONNECTION" ] && LOC="✈"
 
-	# root's color
+    # root's color
     [ $UID -eq "0" ] && UC=$EMR && HC=$EMW
 
 }

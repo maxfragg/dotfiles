@@ -2,7 +2,7 @@
 
 # this is a simple config for herbstluftwm
 
-function hc() {
+function hc {
     herbstclient "$@"
 }
 
@@ -28,26 +28,26 @@ TAG_KEYS=( {1..9} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
 for i in ${!TAG_NAMES[@]} ; do
-    hc add "${TAG_NAMES[$i]}"
-    key="${TAG_KEYS[$i]}"
-    if ! [ -z "$key" ] ; then
+	hc add "${TAG_NAMES[$i]}"
+	key="${TAG_KEYS[$i]}"
+	if ! [ -z "$key" ] ; then
 
 		case "$HOSTNAME" in
 			faui49man*)
 				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
-    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+				hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
 
-		    	;;
+				;;
 			faui0*)
 				hc keybind "$Mod-$key" 			spawn $FCMOUSE use "${TAG_NAMES[$i]}"
-    			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
+				hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move "${TAG_NAMES[$i]}"
 				;;
 			*)
 				hc keybind "$Mod-$key" 			spawn $FCMOUSE use_index "$i"
-        		hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
+			hc keybind "$Mod-Shift-$key" 	spawn $FCMOUSE move_index "$i"
 				;;
 			esac
-    fi
+	fi
 done
 
 hc rename_monitor 0 intern
@@ -213,7 +213,7 @@ done
 
 if [ -f ~/.xbindkeysrc ]; then
     hc spawn xbindkeys
-fi    
+fi
 
 xsetroot -name hlwm
 xset m 2 0 &
