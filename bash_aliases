@@ -31,6 +31,11 @@ else
 	alias .sh='ls | grep ".sh"'
 fi
 
+alias shutdown_i4='/usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop
+'
+
+alias ack='ack -k'
+
 #alias ack=ack-grep
 #alias battery="acpitool --battery | grep Remaining | cut -d' ' -f10 | cut -d',' -f1" 
 alias prompt_git='GIT=1'

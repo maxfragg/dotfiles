@@ -9,6 +9,11 @@ Host ma_vm
 	User root
 	Port 5022
 
+Host ma_vm_arm
+	HostName 127.0.0.1
+	User root
+	Port 5555
+
 Host gitlab.cs.fau.de
 	ForwardX11 no
 	User git

@@ -3,14 +3,17 @@
 ##	BASH PROMPT	##
 ##################
 
+
 function timer_start {
     timer=${timer:-$SECONDS}
 }
+
 
 function timer_stop {
     timer_show=$(($SECONDS - $timer))
     unset timer
 }
+
 
 # Based upon the following gists:
 # <https://gist.github.com/henrik/31631>
@@ -18,7 +21,6 @@ function timer_stop {
 # Modified by me, using ideas from comments on those gists.
 #
 # License: MIT, unless the authors of those two gists object :)
-
 function git_branch {
     # -- Finds and outputs the current branch name by parsing the list of
     #    all branches
@@ -27,6 +29,7 @@ function git_branch {
     #    no output is produced
     git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
+
 
 function git_status {
     # Outputs a series of indicators based on the status of the
@@ -46,6 +49,7 @@ function git_status {
     [[ -z $output ]] && output="✔"
     echo $output" "
 }
+
 
 function git_color {
     # Receives output of git_status as argument; produces appropriate color
@@ -67,6 +71,7 @@ function git_color {
     fi
 }
 
+
 function displaytime {
     T=$1
     D=$((T/60/60/24))
@@ -83,6 +88,7 @@ function displaytime {
         printf '%d days %02d:%02d:%02d' $D $H $M $S
     fi
 }
+
 
 function git_prompt {
     # First, get the branch name...

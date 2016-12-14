@@ -109,6 +109,8 @@ export LC_TIME=en_DK.UTF-8
 export LC_MESSAGES=POSIX
 #export LC_COLLATE=C
 
+us-int-gr
+
 export NO_AT_BRIDGE=1
 export EDITOR="nano"
 

@@ -5,6 +5,24 @@
 ##	added scripts and comfort-functions          #
 ##################################################
 
+#cd which does not always return to home, but stops at the basedir
+# of your project
+c(){
+	if [ $# -eq 0 ]; then
+    	local d=`pwd`
+		while [ "$d" != "" ]; do
+  			if [ -d "$d"/.git or -d "$d"/.projectbase ]; then
+  				command cd $d
+  				return
+  			fi
+  			d=${d%/*}
+		done
+		command cd
+    else
+    	command cd $@ 
+	fi
+}
+
 # script to add files to my dotfiles git repo and
 # replace them by a symlink
 dotfiles(){
