@@ -114,6 +114,11 @@ us-int-gr
 export NO_AT_BRIDGE=1
 export EDITOR="nano"
 
+#bare path cd and correct spelling in cd
+shopt -s cdspell
+shopt -s autocd
+shopt -s cmdhist
+
 if [ -f ~/.cipbash ]; then
 	source ~/.cipbash
 fi
